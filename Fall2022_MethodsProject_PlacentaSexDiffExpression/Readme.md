@@ -6,3 +6,4 @@ To add:
 4) Coding assignments with rubric
 5) Template and rubric for manuscript
 6) Rubric for peer review
+7) Progress report template
