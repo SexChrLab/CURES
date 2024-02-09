@@ -1,12 +1,21 @@
 To add: 
 
+For each course iteration, set up the following: 
+1) Readme that contains the syllabus/learning objects
+2) Subdirectory for each module, which contains
+a) pre/post learning assignment
+b) learning pages
+c) assignments
+d) (2nd cure) weekly quiz
+e) (2nd cure) journal club
+3) Subdirectory for Course Assessment: Analysis of course data (pre/post, weekly progress report semantics, slack activity)
+   
 Learning pages/resources: 
 1) Learning pages for all modules
 2) Biostar handbook-- version? Tell people which one we used
 
 Assessment/Grading:
 3) Pre/post learning assessment questions and key
-4) Code for analyzing learning gains
 5) Coding assignments with rubric
 6) Template and rubric for manuscript
 7) Rubric for peer review
