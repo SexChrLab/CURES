@@ -5,11 +5,11 @@ Changes/improvements from 2022 CURE:
 4) Peer Review-- Full Manuscript Review to Manuscript Excerpts
 
 Readme:
-Number of Students and Instructors
-Research Project
-How the work was divided
-Syllabus 
-Learning Objectives
+1) Number of Students and Instructors
+2) Research Project
+3) How the work was divided
+4) Syllabus 
+5) Learning Objectives
 
 To add: 
 
