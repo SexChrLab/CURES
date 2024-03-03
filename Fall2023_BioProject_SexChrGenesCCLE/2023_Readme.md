@@ -4,6 +4,13 @@ Changes/improvements from 2022 CURE:
 3) Scientific Writing Prompts (and new format to Progress Report)
 4) Peer Review-- Full Manuscript Review to Manuscript Excerpts
 
+Readme:
+Number of Students and Instructors
+Research Project
+How the work was divided
+Syllabus 
+Learning Objectives
+
 To add: 
 
 1) Learning pages for all modules
