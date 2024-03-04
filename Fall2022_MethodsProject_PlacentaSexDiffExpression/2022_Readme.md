@@ -5,12 +5,12 @@ Set Up Readme
 4) Syllabus (Include Biostar info -version?)
 5) Learning Objectives
 
-ADD Student Templates and Grading Rubrics Subdirectory
+ADD Student Assessment and Templates Subdirectory
 1) pre/post learning assignment (need instructor access)
 2) Weekly Project Report Template and Rubric
 3) Mini-manuscript Template and Rubric
 4) Peer Review Rubric
-5) Was there a rubric for coding assignments?
+5) ? Was there a rubric for coding assignments?
 
 ADD Module Subdirectories to include
 1) learning pages
