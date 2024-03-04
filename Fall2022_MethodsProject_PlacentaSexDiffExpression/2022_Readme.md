@@ -6,15 +6,15 @@ Set Up Readme
 5) Learning Objectives
 
 ADD Student Templates and Grading Rubrics Subdirectory
-a) pre/post learning assignment (need instructor access)
-b) Weekly Project Report Template and Rubric
-c) Mini-manuscript Template and Rubric
-d) Peer Review Rubric
-e) Was there a rubric for coding assignments?
+1) pre/post learning assignment (need instructor access)
+2) Weekly Project Report Template and Rubric
+3) Mini-manuscript Template and Rubric
+4) Peer Review Rubric
+5) Was there a rubric for coding assignments?
 
 ADD Module Subdirectories to include
-a) learning pages
-b) assignments (which RMDs/data/files for 2022?)
+1) learning pages
+2) assignments (which RMDs/data/files for 2022?)
 
 ADD Subdirectory for Course Assessment: Analysis of course data (pre/post, weekly progress report semantics, slack activity)
    
