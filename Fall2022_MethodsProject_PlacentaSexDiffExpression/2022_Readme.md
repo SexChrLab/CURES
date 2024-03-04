@@ -13,7 +13,7 @@ ADD Student Assessment and Templates Subdirectory
 5) ? Was there a rubric for coding assignments?
 
 ADD Module Subdirectories to include
-1) learning pages
+1) + Done learning pages
 2) assignments (which RMDs/data/files for 2022?)
 
 ADD Subdirectory for Course Assessment: Analysis of course data (pre/post, weekly progress report semantics, slack activity)
