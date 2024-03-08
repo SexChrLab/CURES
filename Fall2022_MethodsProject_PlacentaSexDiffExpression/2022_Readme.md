@@ -1,9 +1,20 @@
 Set Up Readme
 1) Number of Students and Instructors
 2) Research Project
-3) How the work was divided
-4) Syllabus (Include Biostar info -version?)
-5) Learning Objectives
+   Description:
+Please refer to https://github.com/SexChrLab/Genomics_CURE/tree/a5751231bd6b117b80dea0760e9dc0f40b957a03/Courses/Trimming_FallB_2022 to access files used in the research analysis pipeline including:
+data_generation
+Contains all snakefiles used to generate and process trimmed data so it can be passed into differential expression pipeline.
+
+cluster_submission
+Contains sbatch scripts used to run snakefiles on ASU Agave biocomputing cluster
+
+Differential_Expression
+Contains Rmd files of the limma-voom differential expression pipeline, modified to run analysis for the CURE. This includes code to do pairwise comparison of two differentially expressed gene lists and an upset comparing the entire range of data sets.
+
+4) How the work was divided
+5) Syllabus (Include Biostar info -version?)
+6) Learning Objectives
 
 ADD Student Assessment and Templates Subdirectory
 1) pre/post learning assignment (need instructor access)
