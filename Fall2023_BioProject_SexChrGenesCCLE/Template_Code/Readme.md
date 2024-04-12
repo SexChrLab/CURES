@@ -1,1 +1,1 @@
-
+The template code for this CURE allows students to load a matrix of gene expression data from the CCLE (Cancer Cell Line Encyclopedia), explore the samples in the data set, and visualize the expression of specific genes.  We have included a report with all the genes the students tried so can see that at minimum, all the student would have to do would be to change the path to their own directories and change the name of the gene of interest.
