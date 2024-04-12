@@ -67,6 +67,9 @@ In Perusall you can add your own comments and comment on other people's notes.
 # Rubric for grading
 
 70%: of the assignment is high quality comments (at least 4), not bunched up together, rather spread across the reading.
+
 10%: Opening the assignment at least once.
+
 10%: Reading to the end.
+
 10%: At least 15 minutes of active engagement time with the reading.
