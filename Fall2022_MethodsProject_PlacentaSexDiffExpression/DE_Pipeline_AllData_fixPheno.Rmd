@@ -1,0 +1,454 @@
+---
+title: "Differential Gene Expression Pipeline"
+author: "Seema Plaisier"
+date: "`r format(Sys.time(), '%m/%d/%y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+# Input data
+
+This version of limma voom differential expression pipeline works on a merged featureCounts data file. 
+
+Sex and replicate IDs are determined from the column headings: 
+1) any sample column heading that contains XX will be assigned female, XY will be assigned male
+2) directory name and file name suffix will be removed to assign the replicate ID (so that technical replicates can be summed)
+
+# Applying the DE Pipeline to the Placenta Dataset to Determine Sex Differences in Gene Expression
+
+This pipeline is adapted from the limma workflow vignette on Bioconductor:
+https://bioconductor.org/packages/release/workflows/vignettes/RNAseq123/inst/doc/limmaWorkflow.html
+
+```{r ReportingOptions, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load packages
+
+Install the necessary packages for our analysis.  The function 'require' returns a true value if it is already installed, so if it is not, we need to install before loading.  Certain packages are installed using install.packages, other packages are housed in the Bioconductor repository and required BiocManager::install from the BiocManager package to install.
+
+```{r Packages, warning=FALSE}
+
+if(!require(gplots)){
+    install.packages("gplots")
+}
+if(!require(ggplot2)){
+    install.packages("ggplot2")
+}
+if(!require(Polychrome)){
+    install.packages("Polychrome")
+}
+if(!require(RColorBrewer)){
+    install.packages("RColorBrewer")
+}
+if(!require(ggpubr)){
+    install.packages("ggpubr")
+}
+if (!require("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+if(!require(EnhancedVolcano)){
+  BiocManager::install("EnhancedVolcano")
+}
+if(!require(limma)){
+  BiocManager::install("limma")
+}
+
+if(!require(edgeR)){
+  BiocManager::install("edgeR")
+}
+
+library(gplots)
+library(ggplot2)
+library(limma)
+library(ggpubr)
+library(edgeR)
+library(Polychrome)
+library(RColorBrewer)
+library(EnhancedVolcano)
+
+```
+
+# Set working directory
+
+Your working directory is where all your output files are going to be saved.  Your input directory is where the gene counts matrix file is stored.
+
+``` {r WorkingDirectory, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+# you will need to change this to the directory you are working in
+# make sure to include the / at the end of the directory path
+working_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Week 4/"  # THIS WILL NEED TO BE CHANGED!!!
+setwd(working_directory)
+
+# see what's in your working directory
+# files:
+list.files(working_directory)
+# directories: 
+list.dirs(working_directory)
+
+# You can now change this to trimq_NONE_minlen_NONE or any of the trimmed data directories
+data_directory = "trimq_30_minlen_75/"
+
+# this creates the path to the gene counts directory for your data
+input_directory = paste0(working_directory,"geneCounts/",data_directory)
+
+# Label for output file will be the data directory that you enter
+#    without the /
+# Changed this so that no one mistakenly only changes the result file label
+#    without actually changing the input file directory
+result_file_label = gsub("/","",data_directory)
+
+```
+
+# Read in placenta data
+
+Read in file containing gene counts and file containing matching sample information/metadata.  We will be using DGEList objects for organizing our gene expression information and passing it into functions that process gene expression data.
+
+In our dataset there were two RNAseq samples per placenta tissue samples (technical replicates), labeled with -1 and -2 in the sample name.  We store the sample name without the -1 and -2 in a sample information column called 'rep'. This sets up the sumTechReps function to sum the counts from the technical replicates before moving forward.  This assures that we are not counting the technical replicates as individual samples.  
+
+```{r DataSetup, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+# Save imported data as variables
+counts <- read.delim(paste0(input_directory,"geneCounts_all.csv"), header=TRUE, sep=",", check.names = FALSE)
+#   NOTICE that we are no longer getting a pheno.csv file, we are going to get that info from the column headers
+
+# get the column headings for the samples in the counts data
+samples = colnames(counts)
+pheno_samples = samples[2:length(samples)] # remove Geneid column at the front
+
+# make a vector to serve as a place holder for the sex of the samples
+pheno_sex = pheno_samples
+
+# replace the sex with female/male based on if they contain XX/XY
+for (i in 1:length(pheno_samples)) {
+  if (grepl("XY", pheno_samples[i], fixed = TRUE)) {
+    pheno_sex[i] = "male"
+  } 
+  if (grepl("XX", pheno_samples[i], fixed = TRUE)) {
+    pheno_sex[i] = "female"
+  } 
+}
+
+# make a vector to serve as a place holder for the 'rep', the ID of the placenta tissue
+pheno_rep = pheno_samples
+
+# To get the replicate ID:
+# remove the untrimmed/trimmed and suffix of the alignment file passed into featureCounts
+#    depending on whether this is the untrimmed or trimmed data, can replace whatever is found
+pheno_rep = gsub("_trimmed.XX.sort.mkdup.rdgrp.bam","",pheno_rep) 
+pheno_rep = gsub("_trimmed.XY.sort.mkdup.rdgrp.bam","",pheno_rep)
+pheno_rep = gsub("_untrimmed.XX.sort.mkdup.rdgrp.bam","",pheno_rep)
+pheno_rep = gsub("_untrimmed.XY.sort.mkdup.rdgrp.bam","",pheno_rep)
+
+# remove the directory
+pheno_rep = gsub(paste0(data_directory,"processed_bams/"),"",pheno_rep) 
+
+# remove the -1 or -2 for the two samples taken from the same placenta
+pheno_rep = gsub('-1',"",pheno_rep,fixed = TRUE) 
+pheno_rep = gsub('-2',"",pheno_rep,fixed = TRUE) 
+
+# create a phenotype info table which we now know is in the right order
+pheno = as.data.frame(cbind(pheno_samples,pheno_sex,pheno_rep))
+colnames(pheno) = c("sample","sex","rep")
+
+# before working with the counts data, make sure it is in the right format
+# set row names with a unique version of those gene names
+row.names(counts)=make.unique(counts$Geneid) 
+counts[1] = NULL  # remove gene name column so that you can work with the data
+dim(counts) # check out how much you have in your counts file
+
+# Create a new DGElist object
+x <- DGEList(counts = counts, lib.size = colSums(counts), norm.factors = rep(1,ncol(counts)), samples = colnames(counts), group = pheno$sex, genes = row.names(counts), remove.zeros = TRUE)
+dim(x) # show how much is left after removing all-zero rows
+
+# set up the groups that are possible for sex and replicate 
+#    each sample has two technical replicates marked -1 and -2
+#    we will store the name of the sample in the rep column so we can sum technical replicates
+sex = factor(pheno$sex,levels=c("female","male"))
+rep = factor(pheno$rep, levels = c("OBG0158","OBG0116","OBG0166","OBG0126","OBG0132","OBG0112","OBG0130","OBG0111","OBG0118","OBG0120","OBG0156","OBG0115","OBG0068","OBG0170","OBG0178","OBG0133","OBG0123","YPOPS0006","OBG0117", "OBG0122","OBG0053","OBG0044"))
+
+# add sex and replicate to the samples info table
+x$samples$sex = sex
+x$samples$rep = rep
+
+# sum counts of technical replicates 
+x = sumTechReps(x, x$samples$rep)
+dim(x) # show how much is left after combining technical replicates
+
+samplenames = colnames(x) #save sample names for plotting below
+
+# store sample phenotypes that we are grouping samples by (sex)
+group = as.factor(x$samples$sex)
+
+
+```
+
+# Data Preprocessing
+
+For differential expression and related analyses, gene expression is rarely considered at the level of raw counts since libraries sequenced at a greater depth will result in higher counts. Rather, it is common practice to transform raw counts onto a scale that accounts for such library size differences. Popular transformations include counts per million (CPM), log2-counts per million (log-CPM), reads per kilobase of transcript per million (RPKM), and fragments per kilobase of transcript per million (FPKM).
+
+Here raw counts are converted to CPM and log-CPM values using the cpm function in edgeR. RPKM values are just as easily calculated as CPM values using the rpkm function in edgeR if gene lengths are available.
+
+CPM values adjust for the fact that some genes were sequenced more than others. A CPM value of 1 for a gene equates to having 20 counts in the sample with the lowest sequencing depth or 76 counts in the sample with the greatest sequencing depth 
+
+When the parameter 'log' is set to 'TRUE', the cpm function adds an offset to the CPM values before converting to the log2-scale. By default, the offset is 2/L where 2 is the “prior count” and L is the average library size in millions, so the log-CPM values are related to the CPM values by log2(CPM + 2/L). This calculation ensures that any two read counts with identical CPM values will also have identical log-CPM values. 
+
+```{r Preprocessing, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# convert raw counts to CPM and log-CPM values using cpm function in edgeR
+cpm <- cpm(x)
+lcpm <- cpm(x, log=TRUE) 
+head(lcpm, n = 3)  # peek at top of data after conversion to CPM
+summary(lcpm) # get an idea of the range of your data after transformation
+
+# calculate the mean and median of the counts
+#  (we multiply by 1e-6 to represent the mean and median in millions)
+L <- mean(x$samples$lib.size) * 1e-6
+M <- median(x$samples$lib.size) * 1e-6
+c(L, M)  # see what the mean and median are
+
+```
+
+# Removing genes that are lowly expressed 
+
+All datasets will include a mix of genes that are expressed and those that are not expressed. Whilst it is of interest to examine genes that are expressed in one condition but not in another, some genes are unexpressed throughout all samples.
+
+Genes that do not have a worthwhile number of reads in any sample should be filtered out of the downstream analyses. There are several reasons for this. From a biological point of view, genes that not expressed at a biologically meaningful level in any condition are not of interest and are therefore best ignored. From a statistical point of view, removing low count genes allows the mean-variance relationship in the data to be estimated with greater reliability and also reduces the number of statistical tests that need to be carried out in downstream analyses looking at differential expression.
+
+
+```{r FilterLowExpression, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# filter genes using the filterByExpr function in edgeR
+keep.exprs <- filterByExpr(x, group=group)
+x <- x[keep.exprs,, keep.lib.sizes=FALSE]
+dim(x) # see how much remains after filtering out low expression genes
+
+```
+
+# Normalising gene expression distributions
+
+During the sample preparation or sequencing process, external factors that are not of biological interest can affect the expression of individual samples. For example, the temperature in the sequencing center might have been a bit colder on one day than the next and so there might be slight differences in the sequencing data of samples run that day.  It is assumed that all samples should have a similar range and distribution of expression values. Any plot showing the per sample expression distributions, such as a density plot or box plot, is useful in determining whether any samples are dissimilar to others. 
+
+Normalization is required to ensure that the expression distributions of each sample are comparable across all the samples in the experiment. Normalization by the method of trimmed mean of M-values (TMM) (Robinson and Oshlack 2010) is performed using the calcNormFactors function in edgeR. The normalization factors calculated here are used as a scaling factor for the library sizes (the number of reads sequenced in the placenta sample). When working with DGEList objects, these normalization factors are automatically stored in norm.factors column of the sample information table. For this data set, the effect of TMM-normalization is mild.  You can see that when you plot the range of data for each sample using box plots before normalization and see that the range of values doesn't fluctuate very much.  You can also see this in the data alone because after normalization, the scaling factors are all pretty close to 1.  
+
+```{r Normalization, tidy=TRUE, tidy.opts=list(width.cutoff=60), fig.height=8}
+# use calcNormFactors function to calculate how much you want to multiply by to make sure the data are in comparable range to one another
+x_norm <- calcNormFactors(x, method = "TMM")
+x_norm$samples$norm.factors  # prints normalization factors
+
+#Show the expression distribution of samples unnormalized vs normalized using box plots
+ 
+# Custom color palette
+palette = createPalette(39,  c("#ff0000", "#00ff00", "#0000ff"))  
+
+# convert data without normalization to log CPM
+lcpm <- cpm(x, log=TRUE)
+
+# create a panel for two box plots to be displayed
+par(mfrow=c(2,1))
+
+# plot data without normalization (gene quantification)
+# ** run these next two lines together (highlight both lines, Run, Run selected lines)**
+boxplot(lcpm, las=2, cex.axis=0.5, col=as.vector(palette), main="")
+title(main="A. Unnormalized data",ylab="Log-cpm")
+
+# convert data with normalization to log CPM
+lcpm_norm <- cpm(x_norm, log=TRUE)
+
+# plot normalized CPM (gene quantification)
+# ** run these next two lines together (highlight both lines, Run, Run selected lines)**
+boxplot(lcpm_norm, las=2, cex.axis=0.5, col=as.vector(palette), main="")
+title(main="B. Normalized data",ylab="Log-cpm")
+
+```
+
+# Unsupervised clustering of samples (MDS plot)
+
+A great exploratory plot that quickly shows the main trends in your gene expression data is the multi-dimensional scaling (MDS) plot. An MDS plot uses linear combinations of genes with similar gene expression profiles to plot multidimensional data (gene expression profiles) in a 2D space, such that samples that are more close together have more similar gene expression profiles and points further apart have more distinct gene expression profiles.  The plot shows similarities and dissimilarities between samples in an unsupervised manner so that one can have an idea of the extent to which differential expression can be detected before carrying out formal tests. Ideally, samples would cluster well within the primary condition of interest, and any sample straying far from its group could be identified and followed up for sources of error or extra variation. Technical replicates should be very close to one another, though in our case we summed technical replicates before doing MDS plots.  
+
+With our data, we should see the female (XX) placenta samples cluster away from the male (XY) placenta samples, indicating that there are sex differences in gene expression in the placenta in full term pregnancies.  If we didn't see that the females and males separate 
+
+```{r MDSPlot, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# label and color sex
+col.group <- group # group variable is set to sex above
+levels(col.group) # to confirm that we have "female" and "male" samples
+levels(col.group) = c("purple","darkgreen") # map colors to sex
+
+# make MDS plot using normalized log CPM values
+col.group <- as.character(col.group) 
+plotMDS(lcpm_norm, labels=samplenames, col=col.group)
+title(main="Sample sex")
+
+```
+
+# Differential Expression Analysis
+
+In order to use linear modeling to determine which genes are differentially expressed, we first set up a design matrix relating our samples to our variable of interest (sex) and contrasts to make the comparisons we are interested in (female vs male).
+
+In the R package limma, linear modelling is carried and assumed to be normally distributed and the mean-variance relationship is accommodated using precision weights calculated by the voom function. When operating on a DGEList object, voom converts raw counts to log-CPM values by automatically extracting library sizes and normalization factors from x itself. Voom transformation corrects for the fact that more variance is observed in genes with lower average expression so that we can get equally precise results from genes with lower expression as we do from genes with higher expression. This is important because we want to catch sex differences throughout the range of gene expression.
+
+```{r DesignMatrixContrasts, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# Create the design matrix indicating sex as groups
+design <- model.matrix(~0+group) # the variable group was set to hold sample sex above
+colnames(design) <- gsub("group", "", colnames(design))
+
+# Set up the comparisons we are interested in to determine sex differences
+contr.matrix <- makeContrasts(
+   FemalevsMale = female - male, 
+   levels = colnames(design))
+
+# set up panel to show data pre and post voom
+par(mfrow=c(1,2))
+
+# apply weights because log CMP can vary more in genes with low counts
+#  and display data before voom transformation
+v <- voom(x_norm, design, plot=TRUE)
+
+# fit the variance to the groups (sex)
+vfit <- lmFit(v, design)
+vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
+efit <- eBayes(vfit)
+
+# plot fitted data post voom transformation
+plotSA(efit, main="Final: Mean-variance trend")
+
+# write out modeling data
+write.fit(efit, file=paste0(result_file_label,"_voom_results.txt"))
+
+```
+
+# Examining individual DE genes from top to bottom.
+
+```{r GeneStats, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# Apply modeling to get differential expression genes
+dt = decideTests(efit)
+summary(dt)
+dt_BH = decideTests(efit, adjust.method = "BH", p.value = 0.05, lfc = 1)
+summary(dt_BH)
+dt_BH = as.data.frame(dt_BH)
+
+upregulated_genes = subset(dt_BH,FemalevsMale == 1)
+downregulated_genes = subset(dt_BH,FemalevsMale == -1)
+
+# print out the number of genes that are differentially expressed
+write.csv(data.frame(summary(decideTests(efit))),file = paste0(result_file_label,"_num_significant_genes_standardvoom.csv"))
+write.csv(data.frame(summary(decideTests(efit, adjust.method = "BH", p.value = 0.05, lfc = 1))),file = paste0(result_file_label, "_num_significant_genes_BHcorrected_pv05_lfc1.csv"))
+
+# calculate stats for all genes' expression differences between females and males
+female.vs.male <- topTable(efit, coef=1, n=Inf)
+write.csv(female.vs.male, file=paste0(result_file_label,"_dge_femalevsmale_all_expressed_genes.csv"))
+
+
+```
+
+
+# Volcano plot
+
+A volcano plot shows log fold change on the x-axis and log p-value on the y axis. Log fold change is given a positive sign if average expression in females is higher or negative if average expression in males is higher. This brings genes that are significantly differentially expressed away from both axes.  The EnhancedVolcano function shown here does a lot of labeling and coloring automatically, which is pleasing to the eye and very convenient for making figures for papers and presentations.
+
+``` {r VolcanoPlot, tidy=TRUE, tidy.opts=list(width.cutoff=60), fig.height=8}
+
+# volcano plot
+EnhancedVolcano(female.vs.male, lab = female.vs.male$genes, x = 'logFC', y = 'adj.P.Val',labSize=3, FCcutoff = 1, pCutoff = 0.05, drawConnectors = TRUE)
+
+
+```
+
+# Expression box plots
+
+Here we will plot expression of specific genes in the female and male placentas so we can see to what extent they are differentially expressed.  You can do this for a single gene of interest, or loop through a list of genes.  You can comment out the code for a single gene or the code for a list of genes based on what you want to show.
+
+```{r PlotSpecific, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# boxplot of expression of single gene of interest
+
+# store the name of the gene you want to plot
+gene_of_interest = "KDM6A"
+
+# select the normalized lcpm expression values for that gene
+norm_data_gene = as.data.frame(lcpm_norm[rownames(lcpm_norm) == gene_of_interest])
+rownames(norm_data_gene) = colnames(lcpm_norm)
+# set the sex so we know which samples are female vs male
+norm_data_gene$sex = x_norm$samples$sex
+# set the column names for our data
+colnames(norm_data_gene) = c(gene_of_interest,"sex")
+
+# calculate the p-value of the expression of the gene in females vs males 
+#   so we can display it on our plot
+calc_pval = compare_means(as.formula(paste0(gene_of_interest, "~ sex")),norm_data_gene)
+adj_pval = calc_pval$p.adj
+
+# use ggplot to create a box plot with the gene name and adjusted p-value for differential expression in the title
+
+p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_boxplot() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")"))
+plot(p)
+
+# save the plot in a pdf so we can use it later on in papers or presentations
+ggsave(plot = p, filename = paste0(result_file_label,"_boxplot_",gene_of_interest,".pdf"))
+
+# use ggplot to create a violin plot with the gene name and adjusted p-value for differential expression in the title
+#  (same as above but with geom_violin)
+
+p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_violin() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")"))
+plot(p)
+
+# add a box plot to the middle to visualize the mean and quartiles more easily
+p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_violin() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")")) + geom_boxplot(width=0.1)
+plot(p)
+
+# save the violin plot in a pdf 
+ggsave(plot = p, filename = paste0(result_file_label,"_violinboxplot_",gene_of_interest,".pdf"))
+
+# use ggplot to create a jitter plot with the gene name and adjusted p-value for differential expression in the title
+#  (same as above but with geom_jitter)
+
+p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_jitter() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")"))
+plot(p)
+
+# to make it easier to read a jitter plot, it is often combined with a violin plot
+p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_violin() + geom_jitter() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")"))
+plot(p)
+
+# save the violin jitter plot in a pdf
+ggsave(plot = p, filename = paste0(result_file_label,"_violinjitterplot_",gene_of_interest,".pdf"))
+
+# we can add a box plot to the center too if we like
+p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_violin() + geom_jitter() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")")) + geom_boxplot(width=0.1)
+plot(p)
+
+# save the violin jitter box plot in a pdf
+ggsave(plot = p, filename = paste0(result_file_label,"_violinjitterboxplot_",gene_of_interest,".pdf"))
+
+
+# To make plots of list of genes of interest,
+# iterate through list of genes doing the same thing we did for one gene
+# using a loop in R
+
+# set the list of genes we are interested in looking at
+genes_of_interest = c("KDM6A","DDX3Y","USP9Y")
+
+# iterate over that list plotting expression as box plots (for example) by sex
+for (gene_of_interest in genes_of_interest) {
+  norm_data_gene = as.data.frame(lcpm_norm[rownames(lcpm_norm) == gene_of_interest])
+  rownames(norm_data_gene) = colnames(lcpm_norm)
+  norm_data_gene$sex = x_norm$samples$sex
+  colnames(norm_data_gene) = c(gene_of_interest,"sex")
+  
+  calc_pval = compare_means(as.formula(paste0(gene_of_interest, "~ sex")),norm_data_gene)
+  adj_pval = calc_pval$p.adj
+  
+  p = ggplot(norm_data_gene, aes(x=!!sym(gene_of_interest),y=sex)) + geom_boxplot() + coord_flip() + ggtitle(paste0(gene_of_interest," expression (Wilcoxen = ",adj_pval,")"))
+  plot(p)
+  ggsave(plot = p, filename = paste0(result_file_label,"_boxplot_",gene_of_interest,".pdf"))
+}
+
+```
+
+# List all the packages used for future reference
+```{r SessionInfo}
+sessionInfo()
+```
+
