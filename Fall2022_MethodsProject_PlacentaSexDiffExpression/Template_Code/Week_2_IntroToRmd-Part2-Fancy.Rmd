@@ -1,0 +1,218 @@
+---
+title: "Week_2_IntroToRmd-Part2-Fancy"
+author: "Seema Plaisier"
+date: "`r format(Sys.time(), '%m/%d/%y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+## Fancier data structures and plotting
+
+In this Rmd, we will take some more complicated tools in R and break them down so that you can see how they work.  
+
+
+## Things we will cover in this Rmd are: 
+
+1) installing packages: pull in publicly available code for your own use
+2) complex data structure DGEList: used in the differential expression pipeline you will be using
+3) detailed plots using 'ggplot': fancy plotting tool to compose really pretty figures
+
+
+## Installing packages
+
+One of the main reasons for learning to use R is that there is an enormous collection of developed and tested code written in R that you can use to do analysis.  Functions are included in bundles called packages and made available for use in the program by using the 'library' command in R.  This included code will extend the functionality of R beyond the basic structures.  In order to include a library, it has to be installed (code has to be downloaded to your local R environment).  In this next chunk, the 'require' function is used to check to see if specific packages are currently installed, returning TRUE if yes and FALSE if no.  If 'require' returns FALSE, the '!' ("not") operator returns the opposite value of TRUE and calls the 'install.packages' function to install the package. For packages in the large biology focused set of packages called Bioconductor, there is a special install function called 'BiocManager::install' which itself will be installed if you don't have it in your R environment.  
+
+```{r Libraries}
+if(!require(tidyverse)){
+    install.packages("tidyverse")
+}
+if(!require(BiocManager)){
+    install.packages("BiocManager")
+}
+if(!require(ggplot2)){
+    BiocManager::install("ggplot2")
+}
+if(!require(edgeR)){
+  BiocManager::install("edgeR")
+}
+
+library(tidyverse)
+library(BiocManager)
+library(ggplot2)
+library(edgeR)
+
+```
+
+## Custom data types: DGEList
+
+Using a combination of basic data types in R, specific packages use specialized data types as input for functions.  The construction of these data types should be covered in the documentation for the package. As an example, we will use the DGEList data structure from the package edgeR.  Here we will go over it in detail so you understand how to work with it since will use it to identify differentially expressed genes.
+
+There are two main elements of a DGEList object: 
+1) a matrix of counts 
+2) a data frame of sample information: 
+  a) row for each sample, columns for groups those samples belong to
+  b) lib.size (number of genes that have counts) 
+  c) normalization factors (which start as all 1, but we can fill in using the appropriate functions)
+
+
+```{r DGEList, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# ? or ?? can be used to look up documentation for classes and functions
+??edgeR::DGEList
+# first entry in the Help tab or in a newly opened browser is edgeR::DGEList-class, click on it to read
+
+# DGEList objects contains a matrix of read counts and other information that 
+# we will need to normalize and process the read count data
+
+# Read counts are the output from programs like featureCounts,
+# which take the sequences read that align to particular genes and count them up
+# as a measure of how much those genes are expressed
+
+# in this example, we are going to create a matrix of random numbers to 
+#   stand in for counts data and numbers 1 and 2 to represent groups for
+#   our fake samples
+fake_counts = matrix(rnbinom(10000,mu=5,size=2),ncol=4)
+fake_groups = rep(1:2,each=2)
+
+# now we are going to construct a DGEList object with our fake counts and groups as features
+#   and set the lib.size feature to the sum of all the counts in each column
+d <- DGEList(counts=fake_counts, group=fake_groups, lib.size = colSums(fake_counts))
+dim(d) # will show you the dimensions of the counts matrix
+colnames(d) # will show you the sample names (filled in by default since we did not specify here)
+d$samples # will show you the sample information data.frame created from the parameters we passed in
+
+# you should see that the norm.factors are 1 by default
+# we will use the calcNormFactors function to get factors that we can multiply by the counts to keep the range of counts comparable between samples
+
+# in our real data, we will also pass in some of the optional elements such as genes (name of rows)
+
+# once all this data is filled in, you can pass the DGEList variable d into functions from the edgeR package that are designed to take DGEList objects as input parameters, keeping the code short and tidy
+# using this data type allows the functions in edgeR to assume the name of the elements to be counts, samples, etc
+
+```
+
+## Set working directory and data directories
+
+Your working directory is where all your output files will be stored by default.  You can set it by copying the path of the directory from the explorer windows.  Make sure you change the slashes to forward slashes '/' if needed.  
+
+The 'setwd' function sets your working directory to the path you specify. The 'list.files' and 'list.dirs' functions can be used to print what's inside that directory.  
+
+``` {r SetDirectory}
+
+# store the path to the working directory in a variable 
+# make sure to include the / at the end of the directory path if you plan to put it together with the path to files inside the directory
+working_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Week 2/"  # THIS WILL NEED TO BE CHANGED!!!
+#working_directory = "/scratch/splaisie/test_CURE"  # example of path to working directory on Agave
+
+# set the working directory to where you want your output to go
+setwd(working_directory)
+
+# see what's currently in your working directory
+# files:
+list.files(working_directory)
+# directories: 
+list.dirs(working_directory)
+
+# set the path to other directories you might need to reference
+untrimmed_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Week 3/"
+print(untrimmed_directory)
+
+# don't need to set it to working directory
+
+# can instead use paste0 command to add the file path of a directory to the file name
+# make sure you have the / at the end to make sure the file name is not added to the deepest directory
+file_path = paste0(untrimmed_directory, "DE_Pipeline_UntrimmedData.Rmd")
+print (file_path)
+
+```
+
+
+## Fancier Data Plotting with ggplot
+
+In addition to basic plotting functions in R, there are a lot of awesome packages for making fancier plots. One of the most widely used is ggplot or newer version ggplot2.  
+
+Here is a gallery of examples to give you a taste of how many beautiful types of figures/plots you can make: 
+https://r-graph-gallery.com/
+
+The way that ggplot works is that you set the data you are wanting to plot to a ggplot variable and then add in all the features you would like to use to customize your plot.  There are a ton of options for plots and customization, you just have to go step by step figuring out how to get what you want.
+
+In this introductory example, we are adding features one at a time so you can get a better idea of what the different modifications do.  If you look at ggplot code other people have written, you will often see all the modifications added together in one line before plotting.  Either way works.  
+
+
+```{r PlotData, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# have to call library(ggplot2) which we did above
+
+# set up data to work with as an example
+emp.data <- data.frame(
+   emp_id = c (1:5), 
+   emp_name = c("Rick","Dan","Michelle","Ryan","Gary"),
+   salary = c(623.3,515.2,611.0,729.0,843.25)
+)
+print(emp.data) # show the contents of employee data frame
+
+# Initialize plot variable with data and basic type
+p = ggplot(data = emp.data, aes(x=emp_id, y=salary)) +  geom_bar(stat = "identity")
+
+# plot the ggplot variable p
+plot (p)  
+
+# let's say we wanted the plot to be going left to right
+p = p + coord_flip()
+plot (p)
+
+# add a title to the plot
+p = p + ggtitle("Employee Salary")
+plot(p)
+
+# change the axis labels
+p = p + xlab("Employee ID")
+plot(p)
+
+p = p + ylab("Salary")
+plot(p)
+
+# if you want to use specific colors, for the bars, you can use the fill parameter when setting your ggplot variable
+# setting the colors automatically adds a legend, I am showing how to remove it in our case
+
+# here I will show you how to use ggplot all in one line
+
+# specific colors for the bars
+colors = c("red","orange","green","blue","purple")
+
+# construct ggplot object all in one line
+p = ggplot(data = emp.data, aes(x=emp_id, y=salary,fill=colors)) +  geom_bar(stat = "identity") + coord_flip() + ggtitle("Employee Salary") + xlab("Employee ID") + ylab("Salary")
+plot(p)
+
+# remove the legend because it's not saying anything important
+p = ggplot(data = emp.data, aes(x=emp_id, y=salary,fill=colors)) +  geom_bar(stat = "identity") + coord_flip() + ggtitle("Employee Salary") + xlab("Employee ID") + ylab("Salary") + theme(legend.position = "none")
+plot(p)
+
+
+```
+
+## Save plot
+
+To save a figure, we use the 'ggsave' function.  The type of file saved is determined by the file type extension you give.  That is, if you give a file name ending in ".pdf", your output file will be saved as a PDF with the plot in it.  If you give it a file name ending in ".png", you will get the figure in a PNG image file.  The output file will be saved in your working directory by default.  
+
+```{r SaveFigure}
+
+ggsave("emp_salary_plot.pdf", plot = p)
+
+# check to make sure you can find your output file after it is saved
+# when you Knit a report, this save function will be run, so you 
+#    should see your output files and report in your working directory
+
+
+```
+
+
+## List all the packages used for future reference
+
+
+```{r SessionInfo}
+sessionInfo()
+```

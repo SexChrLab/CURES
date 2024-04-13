@@ -1,0 +1,532 @@
+---
+title: "Week_2_IntroToRmd"
+author: "Seema Plaisier"
+date: "`r format(Sys.time(), '%m/%d/%y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+## What you need to know about R for this course
+
+This research course will be taught using R statistal programming environment because the analysis used done in the research paper about sex differentially expressed genes in the placenta was done in R.  Like any programming language, experience is the key to proficiency, but we have designed this tutorial to give you some key concepts that you will need to understand in order to do the analysis required to achieve our research aims. General R tutorials are listed at the end if you are interested in learning more.  
+
+## Things we will cover in this Rmd are: 
+
+1) Basics of using R/Rmd in RStudio
+a) chunks
+b) code
+c) line numbers
+d) comments
+e) libraries/packages
+f) knitting
+
+2) Data types in R
+a) basic data types: string, int, float, boolean
+b) sets of data points: list, vector, matrix, data frame
+c) accessing data in lists (indices, subsetting)
+d) iterating over lists (for loop)
+
+3) Working with files and directories
+a) working directory
+b) other directories
+c) file reading into variables
+d) saving output files
+
+4) Specialty data types used in this course
+a) DEGList
+
+6) Fancier plotting (ggplot)
+
+
+## Rmd format
+
+This is an R Markdown document. Markdown is a simple formatting syntax that allows you to run and print R code into HTML, PDF, and MS Word documents using a tool called Knitr. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. It contains descriptive text with specific symbols that correspond to text formmatting options and R code in sensible pieces (called "chunks").  You can run each chunk individually in RStudio to develop and correct code and then run/print the whole Rmd into a report.
+
+Each Rmd has a header at the top.  This can be used to set the author of the document and the date it was written as well as specify the output format: html_document, pdf_document, word_document are the most commonly used, see https://rmarkdown.rstudio.com/lesson-9.html for the full list.
+
+In this Rmd, the 'date' field of the header is set to fill automatically with the date that the report is being run.  This is meant to serve as a time stamp to let people know when your report was run last to help in case there are multiple versions of the code out there run at different times in different stages of development.
+
+You will see in this document that there are headings for sections of the code marked with "##" at the beginning of the lines between the code.  These allow the creation of quick-link table of contents for the report that you can print out (explained more below).  The principle heading is marked with a "#" and using more hashtags indicates secondary subheadings.  So if you have one heading marked with "#" and the next marked "##", the "##" heading will be accessible as a pull-down in the table of contents under the first section marked with a "#".  You can play around with this if you are interested; this tutorial uses "##" for all the headings so the size of the header text is a smaller size and all headings are at equal level.
+
+## Chunks
+
+This is the first chunk in an Rmd file.  This chunk tells R to print out useful messages as it runs through the chunks of code you write.  You will see them in the Render tab down below as reports are printed. Each chunk is surrounded by two sets of three single quotes (the one that goes with the ~ symbol under the escape key of your keyboard).  Each chunk has a header which is surrounded in curly braces, starts with 'r' indicating that this is R code, a name which comes just after the r, and optional parameters you can pass in.  Some important ones to know are "include" which when set to FALSE prevents the display of this chunk in the report, "eval" which when TRUE (by default if not included) indicates to run the code and can be set to FALSE if you want to skip think chunk when generating a report (see next section).  You will see other outputting parameters to make the reports neater looking in code we will provide during this course.  You will notice that the chunk is not displayed in the report.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+An example of a simple R chunk:
+```{r SimpleCommand}
+print("Refreshing my memory with R")
+```
+
+If you run specific lines of code, the output will show in the Console and Plots tables (below and right).  If you run the whole chunk it will show up below the code in the Rmd tab.
+
+## Knitting a report
+
+You should see a **Knit** button in R Studio. If you don't, copy and paste this command into the Console or press the Play button on the right side which does exactly that.  'eval' is set to FALSE because we will only need to do this once (not regularly) and 'include' is set to true so the code shows up on the report.  After Knitr is installed, you should be able to click on the Knit button in RStudio and find a report document in the same directory as this code. The document generated should include both descriptive content as well as the output of any embedded R code chunks within the document.
+
+``` {r InstallKnitr, eval=FALSE, include=TRUE}
+
+# if you don't see a Knit button above, run this line
+install.packages('knitr', dependencies = TRUE)
+
+# if you get an error before your pdf is made, 
+# copy this line into your Console and press enter to run
+# answer yes ('y') to install any dependencies
+tinytex::install_tinytex()  # this installs drivers to write to a PDF
+
+# try to Knit to PDF and find your PDF file in the working directory
+
+# after the PDF is completed, RServer will automatically try to open 
+# the pdf for you to view
+
+# you may need to allow pop-ups in the browser window you are using
+# to run RStudio Server
+
+```
+
+
+## Things to notice in RStudio
+
+Look around at your coding environment in RStudio. 
+
+Notice that each line is numbered to the left.  These line numbers are referenced in error messages that appear in the Console or Render tabs if something goes wrong and can be used to help figure out what happened.
+
+Notice that this code is opened in a tab.  You can open multiple Rmd files so you can easily copy code from file to file for similar applications.
+
+The Console tab below is where you will see code that is run.  The Render tab is used for this purpose if you run the code during report generation using Knitr. You can write code directly into the console to test it out and then copy and paste it into your Rmd when you have it outputing what you want in the way you like.
+
+To the right, you should see an Environment tab.  This will contain all the variables you store data into.  Everything in the Data section of the Environment should be viewable by double clicking; the contents will be opened in a tab along side your Rmd tab.  
+
+This same section on the right contains a History tab which lists all the commands entered in the Console, as individual commands or by running a chunk of code. Click on any command and you can use the To **Console** button to send it to the Console tab to press enter and run or the **To Source** button to send it to wherever your cursor is currently in your Rmd.
+
+Notice below that is a panel where you can view the Files in your current working directory (see below for how to change that).  Plots is used to display any plots generated by your code (they will be displayed in the report if run with Knitr). Packages lists all the packages currently installed in your environment that you can load with the 'library' function. Help can be used to search for specific functions.
+
+## Code and comments
+
+Inside your chunks, you are writing R code and can describe that code using comments.  Comments are lines that have a hashtag symbol at the beginning.  These lines are not interpretted as code and basically ignored by the R engine.  To execute lines of code, you can copy and paste them into the Console, or selected using the Code menu option Run Selected Line(s) (or matching key commands that it will tell you) or use the Run button (see pull-down for specific options) both of which do exactly that.
+
+Code consists of creating variables and passing those variables into functions.  Variable names have to be a single word (no spaces or punctuation marks).  They can be set to have values using the arrow assignment operator '<-' or the equal sign '='.  You will see both on the internet; code from this class primarily uses the equal sign.
+
+```{r CodeComments}
+
+# this is a comment, indicated by a # symbol at the beginning of the line
+# comments are not interpreted as code
+# they are used to help explain code to others as they go through it
+
+# below this line is real code
+print ("This is code-- print is a function and this message is passed into it")
+
+# we can use variables to store information
+# here the variable called print_this_line is created and set to store specific test
+# variables in R can be set using the arrow operator '<-' or an equal sign '='
+print_this_line = "Hello World!"
+
+# the value of this variable can then be passed into a function
+# here we use the function 'print' that comes with R by default
+print (print_this_line)
+
+# you can change the value of variables
+print_this_line = "And now print this!"
+
+# and then pass those into a function
+print (print_this_line)
+
+```
+
+## Basic data types and structures in R
+
+The basic data types in R that you will work with in this course are: 
+1) character: single character such as "a" or string of characters such as "abc"
+2) double: numbers including whole numbers like 1 and numbers with fractions/decimals like 1.5
+3) logical: boolean values TRUE or FALSE
+
+The basic data structures you will work with in this course are:
+1) vector: 1-dimensional collection of elements of one type, usually character, logical, integer or numeric
+2) matrix: multi-dimensional collection of elements of one type (specify num rows and num cols)
+3) list: multi-dimensional collection of elements that can be multiple data types
+4) data frame: special type of list where every element has the same length ("rectangular" list)
+5) factors: data objects used to categorize and order repeated elements in a vector or list
+
+For multi-dimensional data structures, you can use indices to access and modify specific elements of the list.  Indices are noted with square braces, [ ]. Indices in R start at 1 (first value in list/vector) and end at the length of the list/vector (last index of a list of length 3 is 3 which holds the last value in the list/vector).
+
+The basic control structures you will work with in this course are:
+1) conditional: if, else statements to test if something is true before doing something
+2) loops: for loops to run through elements of a list
+
+TutorialsPoint is a great resource for more information on these topics:
+https://www.tutorialspoint.com/r/r_overview.htm
+Click on the topic on the left side of the page for whatever you'd like to see more examples of.
+
+```{r Basics}
+
+s = "this_is_a_string"  # set variable called s to a character string "this_is_a_string"
+typeof(s)  # print out what type of data structure s holds
+print(s) # prints the value stored in the variable s
+
+n = 1 # set variable n to 1
+print(n) # show the current value of the variable
+typeof(n) # displays data type of current value of variable n
+n = 1.5 # set same variable n to a new value overwriting the old one
+print(n) # look to see that it is a new value of 1.5
+typeof(n) # look to see what data type it is now with the new value
+
+b = TRUE # set variable b to a logical state TRUE
+typeof(b) # display data type of the value of variable b
+
+if (n == 1) { # use a conditional statement to see if the variable n is currently set to 1
+  b = TRUE  # if it is, set variable b equal to the logical value of TRUE
+  print (b) # print the value of b
+} else { # if the condition in the if statement above is not true, do the following code
+  b = FALSE # set the variable b to logical value of FALSE
+  print (b) # print the value of b
+}
+
+# this code does something very similar to the if statement above
+#   but in far fewer lines of code
+print (n == 1) # print whether it is true or false that n is equal to 1
+
+# this shows that you can do the same thing in multiple ways
+#   as long as you think through what you want to do 
+#   and know the coding tools available in R to do it
+
+v = c("this","is","a","vector","of","character","strings")  # set variable v to a vector of strings
+typeof(v) # shows the data type of a vector is the data type of its contents
+print(v) # print the contents of v
+length(v) # print the length of vector v
+
+v2 = c(1,2,3.4,5.1,8,10) # set the variable v2 to a vector of numbers
+typeof(v2) # shows the data type of the vector is the data type of its contents
+length(v2) # show the length of variable v2
+
+l = list("here","we","have","a","list","with",7,"elements") # set variable l to list of strings and number
+typeof(l) # shows the data type of a list is 'list' as it can have many data types inside
+print(l) # print contents of l
+length(l) # print length of list l
+
+m = matrix(v2,nrow=2,ncol=3) # set variable m to values of vector v2 filling rows and columns
+print(m) # print contents of variable m
+
+# create data.frame d containing the data from matrix m
+# dimensions of m conserved in data frame d
+# can set the row names at the same time as creating the data frame
+d = data.frame(mat = m, row.names = c("row1","row2")) 
+# can set the names outside of when you are creating the data frame too
+colnames(d) = c("col1","col2","col3") 
+print(d) # print contents of d
+dim(d) # show the dimensions of the data frame, length and width for 2 dimensional
+
+# can also set a data frame to hold differnt types of data, each given a name
+emp.data <- data.frame(
+   emp_id = c (1:5), 
+   emp_name = c("Rick","Dan","Michelle","Ryan","Gary"),
+   salary = c(623.3,515.2,611.0,729.0,843.25)
+)
+print(emp.data) # show the contents of employee data frame
+
+str(emp.data) # show the elements of the data frame with the first few entries
+summary(emp.data) # show the range of each element of the data frame
+
+# different ways to access the data in a data frame
+
+# can use the $ symbol to get all of a specific column/element
+print(emp.data$emp_name)
+
+# can use a conditional to set which row you are interested in
+# indices are given as column,row
+#    so indicating the column, comma, no row specified gives you the whole row
+emp.data[emp.data$emp_id == 1,]
+
+# if the row has multiple entries, you can use the index number to access a specific entry
+emp.data[emp.data$emp_id == 1,2]
+
+# you can also use the row name
+emp.data[emp.data$emp_id == 1,"emp_name"]
+
+# you can use index number for both row and column
+emp.data[1,2]
+
+# you can assign a specific position in the data frame to a value as long as you access it correctly
+emp.data[1,2] = "Morty"
+
+# you can print the contents after making changes to see if everything looks right
+print(emp.data)
+
+# if you make a mistake, you can also go back and run the original 
+# statement that filled the data frame to reset the data frame variable 
+# to its original contents and then try again
+
+# this for loop runs through all the values of vector v2 assigning to the variable 'value'
+for (value in v2) {
+  print(value) # print the value of the variable 'value'
+}
+
+# this for loop makes a list starting at 1 and continuing through the length of vector v2
+# then the variable 'i' is filled with the list generated
+for (i in 1:length(v2)) {
+  # can use 'i' to access a specific index of the vector v2
+  print (paste0(i,",",v2[i])) # paste0 function makes a string of what you pass it
+}
+
+```
+
+## Installing packages
+
+One of the main reasons for learning to use R is that there is an enormous collection of prewritten code written in R that you can use to do analysis.  Functions are included in bundles called packages and made available for use in the program by using the 'library' command in R.  This included code will extend the functionality of R beyond the basic structures.  In order to include a library, it has to be installed (code has to be downloaded to your local R environment).  In this next chunk, the 'require' function is used to check to see if the package 'tidyverse' is currently installed, returning TRUE if it is and FALSE if it is not.  If 'require' returns FALSE, the '!' ("not") operator returns the opposite value of TRUE and calls the 'install.packages' function to install the package 'tidyverse'. For packages in the large biology focused set of packages Bioconductor, there is a special install function called BiocManager::install.  
+
+```{r Libraries}
+if(!require(tidyverse)){
+    install.packages("tidyverse")
+}
+if(!require(BiocManager)){
+    install.packages("BiocManager")
+}
+if(!require(ggplot2)){
+    BiocManager::install("ggplot2")
+}
+if(!require(edgeR)){
+  BiocManager::install("edgeR")
+}
+
+library(tidyverse)
+library(BiocManager)
+library(ggplot2)
+library(edgeR)
+
+```
+
+## Custom data types: DGEList
+
+Using a combination of basic data types in R, specific packages use specialized data types to pass into functions.  The construction of these data types should be covered in the documentation for the package. As an example, we will use the DGEList data structure from the package edgeR which we included in the last chunk.  Here we will go over it in detail so you understand how to work with it since will use it to identify differentially expressed genes.
+
+```{r DGEList, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# ? or ?? can be used to look up documentation for classes and functions
+??edgeR::DGEList
+# first entry in the Help tab or browser tab is edgeR::DGEList-class, click on it to read
+
+# DGEList objects contains a matrix of read counts and other information that 
+# we wil need to normalize and process the read count data
+
+# You will recall that read counts are the output from programs like featureCounts,
+# which take the sequences read that align to particular genes and count them up
+# as a measure of how much those genes are expressed
+
+
+# there are two main element of a DGEList object: 
+# 1) a matrix of counts 
+# 2) a data frame of sample information: row for each sample, columns for groups
+#    those samples belong to, lib.size (number of genes that have counts), and 
+#    and normalization factors (which start as all 1, but we can fill in 
+#    using the appropriate functions)
+
+# in this example, we are going to create a matrix of random numbers to 
+#   stand in for counts data and numbers 1 and 2 to represent groups for
+#   our fake samples
+fake_counts = matrix(rnbinom(10000,mu=5,size=2),ncol=4)
+fake_groups = rep(1:2,each=2)
+
+# now we are going to construct a DGEList object with our fake counts and groups as features
+#   and set the lib.size feature to the sum of all the counts in each column
+d <- DGEList(counts=fake_counts, group=fake_groups, lib.size = colSums(fake_counts))
+dim(d) # will show you the dimensions of the counts matrix
+colnames(d) # will show you the sample names (filled in by default since we did not specify here)
+d$samples # will show you the sample information data.frame created from the parameters we passed in
+
+# you should see that the norm.factors are 1 by default
+# we will use the calcNormFactors function to get factors that we can multiply by the counts to keep the range of counts comparable between samples
+
+# in our real data, we will also pass in some of the optional elements such as genes (name of rows)
+
+# once all this data is filled in, you can pass the DGEList variable d into functions from the edgeR package that are designed to take DGEList objects as input parameters, keeping the code short and tidy
+# using this data type allows the functions in edgeR to assume the name of the elements to be counts, samples, etc
+
+```
+
+## Set working directory and data directories
+
+Your working directory is where all your output files will be stored by default.  You can set it by copying the path of the directory from the explorer windows.  Make sure you change the slashes to forward slashes '/' if needed.  
+
+The 'setwd' function sets your working directory to the path you specify. The 'list.files' and 'list.dirs' functions can be used to print what's inside that directory.  
+
+``` {r SetDirectory}
+
+# store the path to the working directory in a variable 
+# make sure to include the / at the end of the directory path if you plan to put it together with the path to files inside the directory
+working_directory = "/scratch/splaisie/test_CURE"
+
+# set the working directory to where you want your output to go
+setwd(working_directory)
+
+# see what's currently in your working directory
+# files:
+list.files(working_directory)
+# directories: 
+list.dirs(working_directory)
+
+# set the path to other directories you might need to reference
+untrimmed_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Week 3/"
+print(untrimmed_directory)
+
+# don't need to set it to working directory
+
+# can instead use paste0 command to add the file path of a directory to the file name
+# make sure you have the / at the end to make sure the file name is not added to the deepest directory
+file_path = paste0(untrimmed_directory, "DE_Pipeline_UntrimmedData.Rmd")
+print (file_path)
+
+```
+
+## Reading data files
+
+Reading data into variables is a very important task in R.  For most scientific problems, you will read a table of data commonly separated by commas or tabs.  The 'read.csv' function can be used to read tabular data from files; the delimiter is set to be a comma by default in this function.  If you have tab-delimited data, you can set the delimiter to a tab. Running these commands will put variables containing your data in the workspace.  
+
+```{r ReadData}
+
+variants = read.csv("subset.csv")
+
+variants2 = read.csv("subset.txt", sep = "\t")
+
+```
+
+## Ways to look at the data
+
+Once data is read in from a file (or created with code, see below), you can see them in the Environment tab and should be able to check if everything worked by clicking on the variable name.  You can also use the 'head' function to see the top rows of the data table or the 'summary' function to see a summary of the counts and ranges of the data variable or the 'str' function to show the structure of the data.
+
+```{r ViewData}
+
+head(variants)
+
+summary(variants)
+
+str(variants)
+
+```
+
+## Subset the data
+
+One major task in analyzing genome or transcriptome level data is to select specific information of interest for your research aims.  In this example, we are taking a subset of the variants data frame loaded in the previous chunk.  We are selecting specific columns containing specific information,  alternative alleles, which are points in the sequence that are different from the sequence in the reference genome.  We are dividing them up by what nucleotide is actually present and using basic plotting tools in R to make a bar graph so we can see which nucleotide is most often present in that position as an alternative allele.  Alternative alleles or SNPs (single nucleotide polymorphisms) are the first line of suspects for variations that cause different phenotypes in a cell or tissue.
+
+
+```{r Subset}
+
+# select specific columns and make a new data frame
+subset = data.frame(variants[,c(1:3,5)])
+
+# look at our data to make sure we got the columns we wanted
+head(subset) # look at the top rows
+str(subset) # look at the components and the first few elements of each
+
+alt_alleles = subset$ALT # select 1 specific column of the data
+
+# divide up the data
+# use a conditional statement to determine the indices of the data frame
+#   are have alleles that are a specific nucleotide
+#  those indices are used to subset the column you pulled 
+# put the 4 subsets of data together in a list with the c() command
+snps <- c(alt_alleles[alt_alleles=="A"],
+  alt_alleles[alt_alleles=="T"],
+  alt_alleles[alt_alleles=="G"],
+  alt_alleles[alt_alleles=="C"])
+
+factor_snps <- factor(snps) # tell R to treat this data as categories
+str(factor_snps)
+
+summary(factor_snps) # take a final look at what you got out to make sure it looks right
+plot(factor_snps) # basic plot of the number of each nucleotide
+
+```
+
+## Save data to a file
+
+The 'write.csv' function writes data to a file.  The file will be saved in the working directory unless otherwise specified.
+
+```{r SaveData}
+
+write.csv(subset, file = "subset.csv")
+
+```
+
+## Fancier Data Plotting with ggplot
+
+In addition to basic plotting functions in R, there are a lot of awesome packages for making fancier plots. One of the most widely used is ggplot or newer version ggplot2.  
+
+Here is a gallery of examples to give you a taste of how many beautiful types of figures/plots you can make: 
+https://r-graph-gallery.com/
+
+The way that ggplot works is that you set the data you are wanting to plot to a ggplot variable and then add in all the features you would like to use to customize your plot.  There are a ton of options for plots and customization, you just have to go step by step figuring out how to get what you want.
+
+In this introductory example, we are adding features one at a time so you can get a better idea of what the different modifications do.  If you look at ggplot code other people have written, you will often see all the modifications added together in one line before plotting.  Either way works.  
+
+
+```{r PlotData, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# have to call library(ggplot2) which we did above
+
+# Initialize plot variable with data and basic type
+p = ggplot(data = emp.data, aes(x=emp_id, y=salary)) +  geom_bar(stat = "identity")
+
+# plot the ggplot variable p
+plot (p)  
+
+# let's say we wanted the plot to be going left to right
+p = p + coord_flip()
+plot (p)
+
+# add a title to the plot
+p = p + ggtitle("Employee Salary")
+plot(p)
+
+# change the axis labels
+p = p + xlab("Employee ID")
+plot(p)
+
+p = p + ylab("Salary")
+plot(p)
+
+# if you want to use specific colors, for the bars, you can use the fill parameter when setting your ggplot variable
+# setting the colors automatically adds a legend, I am showing how to remove it in our case
+# here I will show you how to use ggplot all in one line
+
+# specific colors for the bars
+colors = c("red","orange","green","blue","purple")
+
+# construct ggplot object all in one line
+p = ggplot(data = emp.data, aes(x=emp_id, y=salary,fill=colors)) +  geom_bar(stat = "identity") + coord_flip() + ggtitle("Employee Salary") + xlab("Employee ID") + ylab("Salary")
+plot(p)
+
+# remove the legend because it's not saying anything important
+p = ggplot(data = emp.data, aes(x=emp_id, y=salary,fill=colors)) +  geom_bar(stat = "identity") + coord_flip() + ggtitle("Employee Salary") + xlab("Employee ID") + ylab("Salary") + theme(legend.position = "none")
+plot(p)
+
+
+```
+
+## Save plot
+
+To save a figure, we use the 'ggsave' function.  The type of file saved is determined by the file type extension you give.  That is, if you give a file name ending in ".pdf", your output file will be saved as a PDF with the plot in it.  If you give it a file name ending in ".png", you will get the figure in a PNG image file.  The output file will be saved in your working directory by default.  
+
+```{r SaveFigure}
+
+ggsave("emp_salary_plot.pdf", plot = p)
+
+# check to make sure you can find your output file after it is saved
+# when you Knit a report, this save function will be run, so you 
+#    should see your output files and report in your working directory
+
+
+```
+
+
+## List all the packages used for future reference
+
+It's good practice to include this chunk at the end of all of your Rmd files.  It lists out all the packages used in when this code was run including all the version numbers.  This type of information should be included in any publications or technical reports to ensure reproducibility. It can explain differences in output when installing packages after some time has passed and can be used to address problems involving specific versions of packages are listed as dependencies for other packages.
+
+```{r SessionInfo}
+sessionInfo()
+```

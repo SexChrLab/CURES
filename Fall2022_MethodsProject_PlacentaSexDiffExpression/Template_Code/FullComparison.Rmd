@@ -1,0 +1,359 @@
+---
+title: "Comparing Range of Differential Expression Profiles"
+author: "Seema Plaisier"
+date: "`r format(Sys.time(), '%m/%d/%y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+## Comparing untrimmed vs trimmed data results
+
+
+```{r ReportingOptions, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load packages
+
+Install the necessary packages for our analysis.  The function 'require' returns a true value if it is already installed, so if it is not, we need to install before loading
+
+```{r Packages, warning=FALSE}
+
+if(!require(ggplot2)){
+    install.packages("ggplot2")
+}
+if(!require(UpSetR)){
+    install.packages("UpSetR")
+}
+if(!require(grid)){
+    install.packages("grid")
+}
+if(!require(tidyverse)){
+    install.packages("tidyverse")
+}
+if(!require(ggrepel)){
+    install.packages("ggrepel")
+}
+
+library(ggplot2)
+library(UpSetR)
+library(grid)
+library(tidyverse)
+library()
+
+```
+
+## Set working directory and data directories
+
+In the SetDirectory chunk, you will set your working directory to where you want your reports and output files to be saved. You will set your untrimmed directory to where you have you data files for the untrimmed data. You will set your trimmed directory to where you will put your trimmed data.  See below for what is expected in the trimmed directory.
+
+
+``` {r SetDirectory, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+# you will need to change this to the directory you are working in
+# make sure to include the / at the end of the directory path
+working_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Week 5/"
+setwd(working_directory)
+
+# see what's in your working directory
+# files:
+list.files(working_directory)
+# directories: 
+list.dirs(working_directory)
+
+# paths to directory containing differential expression results
+
+# set untrimmed to where your Week_3 subdirectory that contains untrimmed_dge_femalevsmale_all_expressed_genes.csv
+untrimmed_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Week 4/female_vs_male/trimq_NONE_minlen_NONE/"
+
+# set to the directory containing trimmed results in class shared drive
+trimmed_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Week 4/female_vs_male/all_trimmed/"
+
+# this will be used to store full data tables for all of the data sets
+#   so we can iterate through them more easily
+all_data = list()
+
+```
+
+## Get sex differentially expressed genes in untrimmed placenta data
+
+We will load the untrimmed data and filter for differentially expressed genes just like we did in the pairwise comparison in Week 4.  
+
+```{r Untrimmeddeg, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# name of the data file that contains the untrimmed gene list with differential expression stats
+untrimmed_data_file = "trimq_NONE_minlen_NONE_dge_femalevsmale_all_expressed_genes.csv"
+
+# read data from untrimmed data file
+untrimmed_data <- read.delim(paste0(untrimmed_directory,untrimmed_data_file), header=TRUE, sep=",")
+
+# store data for reading later
+all_data$untrimmed = untrimmed_data
+
+# select and store genes where  p-value < 0.05 and absolute value of logFC is > 1 (> 1 or < -1)
+untrimmed_deg_list = untrimmed_data$genes[untrimmed_data$adj.P.Val < 0.05 & abs(untrimmed_data$logFC) > 1]
+
+# select and store genes where  p-value < 0.05 and log fold change female vs male is positive (> 1), 
+#    indicating that the average expression in females is higher than in males
+untrimmed_deg_list_highfemale = untrimmed_data$genes[untrimmed_data$adj.P.Val < 0.05 & untrimmed_data$logFC > 1]
+
+# select and store genes where  p-value < 0.05 and log fold change female vs male is negative (< -1)
+#    indicating that the average expression in males is higher than in females
+untrimmed_deg_list_highmale = untrimmed_data$genes[untrimmed_data$adj.P.Val < 0.05 & untrimmed_data$logFC < -1]
+
+# name these gene lists with the file they came from
+names(untrimmed_deg_list) = c(untrimmed_data_file)
+names(untrimmed_deg_list_highfemale) = c(untrimmed_data_file)
+names(untrimmed_deg_list_highmale) = c(untrimmed_data_file)
+
+```
+
+## Get sex differentially expressed genes in trimmed data sets
+
+We are trying to figure out which genes are differentially expressed specifically when certain trimming parameters are used and and which genes are differentially expressed regardless of which trimming parameters are used.  The idea is that we would trust results more if they are robust to changes in data processing steps like trimming.
+
+To do this, we will use result files from running the differential expression pipeline on the trimming data sets.  Your instructors will put the trimmed result tables for all expressed genes in the class shared drive on Agave in a subdirectory called female_vs_male.  The code below finds all files in the trimmed data directory you set above and stores the data from files containing "femalevsmale_all_expressed_genes" in the file name. 
+
+For testing purposes, we have provided three falsified data files in the Week_5 subdirectory to use as an example.  We did this by adding random numbers to the differential expression results from the untrimmed data. These falsified data files have 'fake' in the file name.  Now that we have run the actual data, let's see what genes are in common.
+
+
+```{r Trimmeddeg, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# create a list of lists that contain the lists of differentially expressed genes
+
+# create empty lists to hold everything we are interested in
+
+# list of DEGs (adj p < 0.05) for each trimmed data file
+trimmed_deg_list = list()
+
+# list of DEGs that have higher expression in females
+trimmed_deg_list_highfemale = list()
+
+# list of DEGs that have higher expression in males
+trimmed_deg_list_highmale = list()
+
+# list of trimmed file names
+data_file_names = list()
+
+# list all the files in the trimmed directory
+files = list.files(trimmed_directory)
+
+# iterate through all the files
+for (i in seq_along(files)) {
+  
+  # if the file has "femalevsmale_all_expressed_genes" in the name
+  if (grepl("femalevsmale_all_expressed_genes", files[i], fixed = TRUE)) {
+    # add this file name to the list of trimmed data files
+    data_file_names[i] = files[i]
+    
+    # read all the data in the file
+    trimmed_data <- read.delim(paste0(trimmed_directory,files[i]), header=TRUE, sep=",")
+    
+    # store the data for later
+    all_data[[files[i]]] = trimmed_data
+
+    # select genes where  p-value < 0.05
+    trimmed_deg = trimmed_data$genes[trimmed_data$adj.P.Val < 0.05 & abs(trimmed_data$logFC) > 1]
+    # store that gene list in the trimmed_deg_list list
+    trimmed_deg_list[[i]] = trimmed_deg
+    
+    # select genes where  p-value < 0.05 and log fold change is positive, 
+    #   which indicates that the average expression in females is higher than average
+    #   expression in males
+    trimmed_deg_highfemale = trimmed_data$genes[trimmed_data$adj.P.Val < 0.05 & trimmed_data$logFC > 1]
+    # store that gene list in the trimmed_deg_highfemale list
+    trimmed_deg_list_highfemale[[i]] = trimmed_deg_highfemale
+    
+    # select genes where  p-value < 0.05 and log fold change is negative, 
+    #   which indicates that the average expression in males is higher than average
+    #   expression in females
+    trimmed_deg_highmale = trimmed_data$genes[trimmed_data$adj.P.Val < 0.05 & trimmed_data$logFC < -1]
+    # store that gene list in the trimmed_deg_highmale list
+    trimmed_deg_list_highmale[[i]] = trimmed_deg_highmale
+  }
+}
+
+# set the names of all of our lists to the names of the data files
+#   upset plot function (below) takes named lists as input
+names(trimmed_deg_list) = data_file_names
+names(trimmed_deg_list_highfemale) = data_file_names
+names(trimmed_deg_list_highmale) = data_file_names
+
+```
+
+## Upset plot
+
+Create an upset plot of differentially expressed genes across range of trimming parameters
+
+```{r UpsetPlot, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# tack untrimmed to set trimmed data so we can view everything together
+
+# to add to the list, assign to the index one greater than the last index (its length)
+next_index = length(data_file_names)+1
+
+# add the untrimmed data file at the end of the trimmed data file list
+data_file_names[next_index] = untrimmed_data_file
+
+# add DEG list from the untrimmed results to the list of trimmed results
+trimmed_deg_list[[next_index]] = as.vector(untrimmed_deg_list)
+# name the list with file names so that you can pass a named list into  upset plot function
+names(trimmed_deg_list) = data_file_names
+# create upset plot to show the overlap
+upset(fromList(trimmed_deg_list),nsets = 10)
+grid.text("Diff expressed genes",x = 0.4, y=0.9, gp=gpar(fontsize=14))
+
+# repeat with DEGs with higher expression in female
+trimmed_deg_list_highfemale[[next_index]] = untrimmed_deg_list_highfemale
+names(trimmed_deg_list_highfemale) = data_file_names
+upset(fromList(trimmed_deg_list_highfemale),nsets = 10)
+grid.text("DEGs (high in female)",x = 0.4, y=0.9, gp=gpar(fontsize=14))
+
+# repeat with DEGs with higher expression in male
+trimmed_deg_list_highmale[[next_index]] = untrimmed_deg_list_highmale
+names(trimmed_deg_list_highmale) = data_file_names
+upset(fromList(trimmed_deg_list_highmale),nsets = 10)
+grid.text("DEGs (high in male)",x = 0.4, y=0.9, gp=gpar(fontsize=14))
+
+```
+
+## Membership
+
+The upset plot will tell you how many overlapping genes you have between the data sets, so now you can go in and ask what those genes are.  
+
+```{r Membership, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# get the overlapping genes after looking at the upset plot
+
+# if we look at the trimmed_deg_list objects, there is a NULL element
+#  that I don't fully know how it was inserted,  did a Google search to 
+#  find that the compact function from tidyverse removes it
+
+trimmed_deg_list = compact(trimmed_deg_list)
+trimmed_deg_list_highfemale = compact(trimmed_deg_list_highfemale)
+trimmed_deg_list_highmale = compact(trimmed_deg_list_highmale)
+data_file_names = compact(data_file_names)
+
+# we know from looking at the upset plot that we see that differntially expressed genes are completely overlapping in untrimmed and all 9 of the trimmed parameter cases
+# so now let's list out the genes that are differentially expressed in all the comparisons
+
+# we can use the Reduce function to get the intersect (overlap between lists)
+
+intersecting_elements = Reduce(intersect, list(trimmed_deg_list$trimq_NONE_minlen_NONE_dge_femalevsmale_all_expressed_genes.csv, trimmed_deg_list$trimq_0_minlen_10_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_0_minlen_30_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_0_minlen_75_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_10_minlen_10_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_10_minlen_30_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_10_minlen_75_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_30_minlen_10_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_30_minlen_30_dge_femalevsmale_all_expressed_genes.csv,trimmed_deg_list$trimq_30_minlen_75_dge_femalevsmale_all_expressed_genes.csv))
+
+# this just displays the intersecting list of genes in the report
+intersecting_elements
+
+# if the results were different between certain trimming parameters, 
+# we could have used this function to get the intersections between 
+# specific subgroups versus others
+
+
+```
+
+## Plotting features of overlapping gene lists
+
+Once you have a list of genes, you will want to plot them to see what features they have in common. We can use subsetting to extract data for these genes.  In this chunk, we will model the line graph visualization we used for looking at the log fold change in the untrimmed data compared to one trimmed data set, but this time get the results for multiple trimmed data sets. 
+
+```{r CharacterizingGenes, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+
+# we can use the FCchange chunk of CompareTwo.Rmd from Week_4 as a template to 
+#   look across multiple trimmed data sets
+
+# create an empty data frame to look up and store fold changes female vs male pre and post trimming
+df2 = data.frame(matrix(ncol = 3, nrow = 0))
+colnames(df2) = c("gene", "LogFC","TrimStatus")
+
+# for each intersecting gene, find its logFC in untrimmed and trimmed data 
+#    to see how it has changed
+
+for (i in 1:length(intersecting_elements)) {
+  current_gene = intersecting_elements[i]
+
+  # find the logFC of this gene in the untrimmed data
+  untrimmedFC = 0 # set Female:Male foldchange to 0 by default
+  untrimmedFC = untrimmed_data$logFC[untrimmed_data$genes == current_gene]
+  
+  # add untrimmed FC to the data frame we will use to plot
+  # sprintf sets the precision so we don't have long decimals on our y-axis
+  df2[nrow(df2)+1,] = c(current_gene,sprintf(untrimmedFC, fmt = '%#.3f'),"untrimmed")
+  
+  # instead of just doing one trimmed data set,
+  #   we will iterate through the rest of the trimmed data sets stored in all data
+  
+  # look at all the datasets in all_data
+  for (trim_set in names(all_data)) {
+  
+    # skip the untrimmed since we took care of that one indvidiually
+    if (trim_set != "untrimmed") {
+      
+      trimmed_data = all_data[[trim_set]]
+      
+      # find the logFC of this gene in the trimmed data
+      trimmedFC = 0 # set Female:Male foldchange to 0 by default
+      # replace with logFC in untrimmed data if found
+      trimmedFC = trimmed_data$logFC[trimmed_data$genes == current_gene]
+      # add trimmed FC to the data frame we will use to plot
+      df2[nrow(df2)+1,] = c(current_gene,sprintf(trimmedFC, fmt = '%#.3f'), trim_set)
+    }
+  }
+}
+
+# set order for plotting
+df2$TrimStatus <- factor(df2$TrimStatus, levels=names(all_data))
+
+# tell R that the LogFC values are numeric values (not strings)
+df2$LogFC = as.numeric(df2$LogFC)
+
+# do a paired scatter plot to see how the fold changes of 
+#    select genes change after trimming
+
+# tell ggplot that you are plotting which data set on the x-axis and the LogFC on the y-axis
+p2 = ggplot(data = df2, aes(x = TrimStatus, y = LogFC)) 
+
+# rotate the x-axis labels, make them smaller, and justify them so they are easier to read
+p2 = p2 + theme(axis.text.x = element_text(size = 3, angle = 90, vjust = 0.5, hjust=1))
+
+# add the lines that connect the same genes in the trimmed and untrimmed
+p2 = p2 + geom_line(aes(group=gene)) 
+
+# add the points for each gene
+p2 = p2 + geom_point()
+
+# make the plot in your report
+plot(p2)
+
+# label the genes so you know which one you are looking at
+#   used position=position_jitter to help separate the labels so they aren't overlapping
+#   * genes for which no LogFC was found will sit on top of each other 
+#     at 0 so you won't be able to see them all
+p2 = p2 + geom_label(aes(label = gene), size = 1, colour = "blue", position=position_jitter(width=0.3,height=0)) 
+
+# another way to deal with overlapping labels is the geom_label_repel function, 
+#    you can play around with that if you like by replacing the label line above 
+#    with this one
+#p2 = p2 + geom_label_repel(aes(label = gene), nudge_x = 0.3, size = 1, colour = "blue", force = 0.25) 
+
+# make the plot in your report
+plot(p2)
+
+# HD labelled the genes by color instead to help make it easier to distinguish
+#    the genes
+p2 = ggplot(data = df2, aes(x = TrimStatus, y = LogFC)) 
+p2 = p2 + theme(axis.text.x = element_text(size = 3, angle = 90, vjust = 0.5, hjust=1))
+p2 = p2 + geom_point()
+
+# this is what she changed -- give the lines unique color based on the gene
+p2 = p2 + geom_line(aes(group=gene, color=gene)) 
+
+# make the plot in your report
+plot(p2)
+
+
+```
+
+## List all the packages used for future reference
+```{r SessionInfo}
+sessionInfo()
+```
