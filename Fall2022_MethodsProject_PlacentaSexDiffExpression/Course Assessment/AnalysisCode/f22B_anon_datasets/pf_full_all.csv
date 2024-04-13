@@ -1,0 +1,27 @@
+﻿student,type,Q19,Q20,Q21,Q22,Q23,Q24
+S1,pre,Neutral,Very uncomfortable,Novice,Neutral,Comfortable,Comfortable
+S2,pre,Comfortable,Uncomfortable,Advanced beginner,Comfortable,Very comfortable,Comfortable
+S3,pre,Very comfortable,Neutral,"Proficient,Expert",Very comfortable,Very comfortable,Very comfortable
+S4,pre,Neutral,Neutral,Advanced beginner,Comfortable,Neutral,Uncomfortable
+S5,pre,Comfortable,Very uncomfortable,Novice,Neutral,Very comfortable,Comfortable
+S6,pre,Neutral,Neutral,Advanced beginner,Uncomfortable,Comfortable,Comfortable
+S7,pre,Very comfortable,Very comfortable,Proficient,Comfortable,Very comfortable,Neutral
+S8,pre,Neutral,Uncomfortable,Advanced beginner,Comfortable,Comfortable,Neutral
+S9,pre,Comfortable,Uncomfortable,Advanced beginner,Very comfortable,Very comfortable,Neutral
+S10,pre,Comfortable,Neutral,Advanced beginner,Comfortable,Comfortable,Neutral
+S11,pre,Neutral,Neutral,Advanced beginner,Comfortable,Comfortable,Neutral
+S12,pre,Neutral,Very uncomfortable,Novice,Comfortable,Comfortable,Very uncomfortable
+S13,pre,Comfortable,Neutral,Competent,Very comfortable,Very comfortable,Comfortable
+S1,post,Comfortable,Neutral,Advanced beginner,Neutral,Comfortable,Comfortable
+S2,post,Neutral,Comfortable,Novice,Very comfortable,Very comfortable,Very comfortable
+S3,post,Very comfortable,Comfortable,Expert,Very comfortable,Very comfortable,Very comfortable
+S4,post,Neutral,Neutral,Advanced beginner,Comfortable,Neutral,Neutral
+S5,post,Comfortable,Neutral,Competent,Neutral,Comfortable,Neutral
+S6,post,Neutral,Neutral,Competent,Neutral,Neutral,Neutral
+S7,post,Very comfortable,Very comfortable,Proficient,Very comfortable,Very comfortable,Neutral
+S8,post,Neutral,Uncomfortable,Competent,Neutral,Neutral,Uncomfortable
+S9,post,Neutral,Uncomfortable,Novice,Comfortable,Comfortable,Neutral
+S10,post,Comfortable,Neutral,Competent,Neutral,Uncomfortable,Uncomfortable
+S11,post,Neutral,Neutral,Advanced beginner,Neutral,Comfortable,Neutral
+S12,post,Neutral,Uncomfortable,Novice,Comfortable,Comfortable,Uncomfortable
+S13,post,Very comfortable,Comfortable,Competent,Very comfortable,Very comfortable,Neutral
