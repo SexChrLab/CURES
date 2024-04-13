@@ -1,0 +1,113 @@
+Type,Theme,Module,Count,Percent,Percentage,Count_SBP,Percentage_SBP,Percent_SBP,Proportion_SBP,Count_CCLE_SBP,Proportion_CCLE_SBP
+Adaptive,Problem solving,Average,123,35.65%,0.3565,78,0.241486068,24.15%,0.719927971,39.85714286,0.832628624
+Adaptive,Support seeking,Average,67,19.42%,0.1942,87,0.269349845,26.93%,0.81492597,40,0.837049096
+Adaptive,Information seeking,Average,30,8.70%,0.087,56,0.173374613,17.34%,0.51372549,29.57142857,0.614384872
+Adaptive,Self-reliance/emotional regulation,Average,12,3.48%,0.0348,18,0.055727554,5.57%,0.172188876,11.57142857,0.241802955
+Adaptive,Cognitive restructuring,Average,53,15.36%,0.1536,5,0.015479876,1.55%,0.046058423,10.57142857,0.219917045
+Adaptive or maladaptive,Accommodation,Average,12,3.48%,0.0348,25,0.077399381,7.74%,0.240216086,9.857142857,0.206487966
+Adaptive or maladaptive,Negotiation,Average,34,9.86%,0.0986,7,0.021671827,2.17%,0.06422569,5.142857143,0.106250779
+Maladaptive,Escape,Average,1,0.29%,0.0029,3,0.009287926,0.93%,0.029931973,1.142857143,0.02407883
+Adaptive or maladaptive,Distraction,Average,0,0.00%,0,8,0.024767802,2.48%,0.079831933,3,0.063623901
+Maladaptive,Isolation,Average,1,0.29%,0.0029,4,0.012383901,1.24%,0.039015606,2,0.041512754
+Maladaptive,Rumination,Average,6,1.74%,0.0174,0,0,0.00%,0,0.857142857,0.018377326
+Maladaptive,Helplessness,Average,5,1.45%,0.0145,24,0.074303406,7.43%,0.234293717,11.57142857,0.245188938
+Maladaptive,Delegation,Average,0,0.00%,0,6,0.018575851,1.86%,0.059863946,1.428571429,0.030039133
+Maladaptive,Opposition,Average,1,0.29%,0.0029,2,0.00619195,0.62%,0.020408163,0.142857143,0.00310559
+Adaptive,Problem solving,M1,35,59.32%,0.5932,16,0.271186441,27.12%,0.941176471,38,0.775510204
+Adaptive,Support seeking,M1,7,11.86%,0.1186,15,0.254237288,25.42%,0.882352941,35,0.714285714
+Adaptive,Information seeking,M1,12,20.34%,0.2034,13,0.220338983,22.03%,0.764705882,42,0.857142857
+Adaptive,Self-reliance/emotional regulation,M1,1,1.69%,0.0169,3,0.050847458,5.08%,0.176470588,22,0.448979592
+Adaptive,Cognitive restructuring,M1,2,3.39%,0.0339,2,0.033898305,3.39%,0.117647059,15,0.306122449
+Adaptive or maladaptive,Accommodation,M1,1,1.69%,0.0169,2,0.033898305,3.39%,0.117647059,10,0.204081633
+Adaptive or maladaptive,Negotiation,M1,0,0.00%,0,2,0.033898305,3.39%,0.117647059,10,0.204081633
+Maladaptive,Escape,M1,0,0.00%,0,0,0,0.00%,0,1,0.020408163
+Adaptive or maladaptive,Distraction,M1,0,0.00%,0,1,0.016949153,1.69%,0.058823529,1,0.020408163
+Maladaptive,Isolation,M1,1,1.69%,0.0169,1,0.016949153,1.69%,0.058823529,1,0.020408163
+Maladaptive,Rumination,M1,0,0.00%,0,0,0,0.00%,0,1,0.020408163
+Maladaptive,Helplessness,M1,0,0.00%,0,4,0.06779661,6.78%,0.235294118,7,0.142857143
+Maladaptive,Delegation,M1,0,0.00%,0,0,0,0.00%,0,4,0.081632653
+Maladaptive,Opposition,M1,0,0.00%,0,0,0,0.00%,0,0,0
+Adaptive,Problem solving,M2,19,34.55%,0.3455,16,0.296296296,29.63%,0.941176471,37,0.74
+Adaptive,Support seeking,M2,15,27.27%,0.2727,16,0.296296296,29.63%,0.941176471,40,0.8
+Adaptive,Information seeking,M2,7,12.73%,0.1273,13,0.240740741,24.07%,0.764705882,39,0.78
+Adaptive,Self-reliance/emotional regulation,M2,3,5.45%,0.0545,3,0.055555556,5.56%,0.176470588,10,0.2
+Adaptive,Cognitive restructuring,M2,9,16.36%,0.1636,0,0,0.00%,0,17,0.34
+Adaptive or maladaptive,Accommodation,M2,0,0.00%,0,4,0.074074074,7.41%,0.235294118,8,0.16
+Adaptive or maladaptive,Negotiation,M2,2,3.64%,0.0364,2,0.037037037,3.70%,0.117647059,9,0.18
+Maladaptive,Escape,M2,0,0.00%,0,0,0,0.00%,0,0,0
+Adaptive or maladaptive,Distraction,M2,0,0.00%,0,0,0,0.00%,0,3,0.06
+Maladaptive,Isolation,M2,0,0.00%,0,0,0,0.00%,0,3,0.06
+Maladaptive,Rumination,M2,0,0.00%,0,0,0,0.00%,0,0,0
+Maladaptive,Helplessness,M2,0,0.00%,0,0,0,0.00%,0,3,0.06
+Maladaptive,Delegation,M2,0,0.00%,0,0,0,0.00%,0,0,0
+Maladaptive,Opposition,M2,0,0.00%,0,0,0,0.00%,0,0,0
+Adaptive,Problem solving,M3,17,34.00%,0.34,13,0.295454545,29.55%,0.866666667,45,0.918367347
+Adaptive,Support seeking,M3,11,22.00%,0.22,11,0.25,25.00%,0.733333333,43,0.87755102
+Adaptive,Information seeking,M3,4,8.00%,0.08,9,0.204545455,20.45%,0.6,27,0.551020408
+Adaptive,Self-reliance/emotional regulation,M3,3,6.00%,0.06,1,0.022727273,2.27%,0.066666667,9,0.183673469
+Adaptive,Cognitive restructuring,M3,7,14.00%,0.14,0,0,0.00%,0,10,0.204081633
+Adaptive or maladaptive,Accommodation,M3,2,4.00%,0.04,4,0.090909091,9.09%,0.266666667,12,0.244897959
+Adaptive or maladaptive,Negotiation,M3,4,8.00%,0.08,0,0,0.00%,0,4,0.081632653
+Maladaptive,Escape,M3,1,2.00%,0.02,0,0,0.00%,0,2,0.040816327
+Adaptive or maladaptive,Distraction,M3,0,0.00%,0,0,0,0.00%,0,0,0
+Maladaptive,Isolation,M3,0,0.00%,0,0,0,0.00%,0,2,0.040816327
+Maladaptive,Rumination,M3,0,0.00%,0,0,0,0.00%,0,0,0
+Maladaptive,Helplessness,M3,0,0.00%,0,5,0.113636364,11.36%,0.333333333,5,0.102040816
+Maladaptive,Delegation,M3,0,0.00%,0,1,0.022727273,2.27%,0.066666667,1,0.020408163
+Maladaptive,Opposition,M3,1,2.00%,0.02,0,0,0.00%,0,0,0
+Adaptive,Problem solving,M4,18,38.30%,0.383,14,0.341463415,34.15%,0.933333333,47,0.979166667
+Adaptive,Support seeking,M4,9,19.15%,0.1915,14,0.341463415,34.15%,0.933333333,42,0.875
+Adaptive,Information seeking,M4,2,4.26%,0.0426,7,0.170731707,17.07%,0.466666667,31,0.645833333
+Adaptive,Self-reliance/emotional regulation,M4,0,0.00%,0,0,0,0.00%,0,6,0.125
+Adaptive,Cognitive restructuring,M4,13,27.66%,0.2766,2,0.048780488,4.88%,0.133333333,2,0.041666667
+Adaptive or maladaptive,Accommodation,M4,1,2.13%,0.0213,2,0.048780488,4.88%,0.133333333,9,0.1875
+Adaptive or maladaptive,Negotiation,M4,4,8.51%,0.0851,0,0,0.00%,0,3,0.0625
+Maladaptive,Escape,M4,0,0.00%,0,1,0.024390244,2.44%,0.066666667,1,0.020833333
+Adaptive or maladaptive,Distraction,M4,0,0.00%,0,0,0,0.00%,0,1,0.020833333
+Maladaptive,Isolation,M4,0,0.00%,0,0,0,0.00%,0,4,0.083333333
+Maladaptive,Rumination,M4,0,0.00%,0,0,0,0.00%,0,0,0
+Maladaptive,Helplessness,M4,0,0.00%,0,0,0,0.00%,0,12,0.25
+Maladaptive,Delegation,M4,0,0.00%,0,1,0.024390244,2.44%,0.066666667,0,0
+Maladaptive,Opposition,M4,0,0.00%,0,0,0,0.00%,0,0,0
+Adaptive,Problem solving,M5,14,25.93%,0.2593,11,0.244444444,24.44%,0.785714286,42,0.893617021
+Adaptive,Support seeking,M5,18,33.33%,0.3333,14,0.311111111,31.11%,1,35,0.744680851
+Adaptive,Information seeking,M5,4,7.41%,0.0741,3,0.066666667,6.67%,0.214285714,25,0.531914894
+Adaptive,Self-reliance/emotional regulation,M5,1,1.85%,0.0185,0,0,0.00%,0,9,0.191489362
+Adaptive,Cognitive restructuring,M5,5,9.26%,0.0926,0,0,0.00%,0,10,0.212765957
+Adaptive or maladaptive,Accommodation,M5,4,7.41%,0.0741,3,0.066666667,6.67%,0.214285714,7,0.14893617
+Adaptive or maladaptive,Negotiation,M5,7,12.96%,0.1296,2,0.044444444,4.44%,0.142857143,4,0.085106383
+Maladaptive,Escape,M5,0,0.00%,0,1,0.022222222,2.22%,0.071428571,1,0.021276596
+Adaptive or maladaptive,Distraction,M5,0,0.00%,0,2,0.044444444,4.44%,0.142857143,8,0.170212766
+Maladaptive,Isolation,M5,0,0.00%,0,1,0.022222222,2.22%,0.071428571,2,0.042553191
+Maladaptive,Rumination,M5,0,0.00%,0,0,0,0.00%,0,1,0.021276596
+Maladaptive,Helplessness,M5,1,1.85%,0.0185,6,0.133333333,13.33%,0.428571429,27,0.574468085
+Maladaptive,Delegation,M5,0,0.00%,0,1,0.022222222,2.22%,0.071428571,1,0.021276596
+Maladaptive,Opposition,M5,0,0.00%,0,1,0.022222222,2.22%,0.071428571,0,0
+Adaptive,Problem solving,M6,13,25.49%,0.2549,4,0.081632653,8.16%,0.285714286,44,0.956521739
+Adaptive,Support seeking,M6,5,9.80%,0.098,11,0.224489796,22.45%,0.785714286,40,0.869565217
+Adaptive,Information seeking,M6,1,1.96%,0.0196,6,0.12244898,12.24%,0.428571429,26,0.565217391
+Adaptive,Self-reliance/emotional regulation,M6,3,5.88%,0.0588,4,0.081632653,8.16%,0.285714286,14,0.304347826
+Adaptive,Cognitive restructuring,M6,6,11.76%,0.1176,1,0.020408163,2.04%,0.071428571,5,0.108695652
+Adaptive or maladaptive,Accommodation,M6,4,7.84%,0.0784,6,0.12244898,12.24%,0.428571429,13,0.282608696
+Adaptive or maladaptive,Negotiation,M6,12,23.53%,0.2353,0,0,0.00%,0,5,0.108695652
+Maladaptive,Escape,M6,0,0.00%,0,1,0.020408163,2.04%,0.071428571,3,0.065217391
+Adaptive or maladaptive,Distraction,M6,0,0.00%,0,5,0.102040816,10.20%,0.357142857,7,0.152173913
+Maladaptive,Isolation,M6,0,0.00%,0,2,0.040816327,4.08%,0.142857143,0,0
+Maladaptive,Rumination,M6,5,9.80%,0.098,0,0,0.00%,0,4,0.086956522
+Maladaptive,Helplessness,M6,2,3.92%,0.0392,6,0.12244898,12.24%,0.428571429,19,0.413043478
+Maladaptive,Delegation,M6,0,0.00%,0,2,0.040816327,4.08%,0.142857143,4,0.086956522
+Maladaptive,Opposition,M6,0,0.00%,0,1,0.020408163,2.04%,0.071428571,0,0
+Adaptive,Problem solving,M7,7,24.14%,0.2414,4,0.129032258,12.90%,0.285714286,26,0.565217391
+Adaptive,Support seeking,M7,2,6.90%,0.069,6,0.193548387,19.35%,0.428571429,45,0.97826087
+Adaptive,Information seeking,M7,0,0.00%,0,5,0.161290323,16.13%,0.357142857,17,0.369565217
+Adaptive,Self-reliance/emotional regulation,M7,1,3.45%,0.0345,7,0.225806452,22.58%,0.5,11,0.239130435
+Adaptive,Cognitive restructuring,M7,11,37.93%,0.3793,0,0,0.00%,0,15,0.326086957
+Adaptive or maladaptive,Accommodation,M7,0,0.00%,0,4,0.129032258,12.90%,0.285714286,10,0.217391304
+Adaptive or maladaptive,Negotiation,M7,5,17.24%,0.1724,1,0.032258065,3.23%,0.071428571,1,0.02173913
+Maladaptive,Escape,M7,0,0.00%,0,0,0,0.00%,0,0,0
+Adaptive or maladaptive,Distraction,M7,0,0.00%,0,0,0,0.00%,0,1,0.02173913
+Maladaptive,Isolation,M7,0,0.00%,0,0,0,0.00%,0,2,0.043478261
+Maladaptive,Rumination,M7,1,3.45%,0.0345,0,0,0.00%,0,0,0
+Maladaptive,Helplessness,M7,2,6.90%,0.069,3,0.096774194,9.68%,0.214285714,8,0.173913043
+Maladaptive,Delegation,M7,0,0.00%,0,1,0.032258065,3.23%,0.071428571,0,0
+Maladaptive,Opposition,M7,0,0.00%,0,0,0,0.00%,0,1,0.02173913
