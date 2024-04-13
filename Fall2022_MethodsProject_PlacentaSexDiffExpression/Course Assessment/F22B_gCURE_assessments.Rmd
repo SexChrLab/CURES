@@ -1,0 +1,1826 @@
+---
+title: "F22B GenomicsCURE Assessment"
+author: "Danielle Alarid"
+date: "3/4/2023"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+  html_document: default
+
+---
+
+# Assessing student outcomes of the fall 2022-B pilot genomics CURE
+## The pre- and post-asssement 
+The fall 2022-B pilot CURE required students to complete a pre- and post-examination to evaluate course outcomes. The pre-assessment acted as a baseline of individual student knowledge, and was divided into three learning submodules or topic areas:
+  - (1) Biology
+  - (2) Coding
+  - (3) Professional development (research)
+
+An additional section for self-reported student comfort and skill levels was included and evaluated independently:
+  - (4) Personal feelings
+
+## The Weekly Progress Report
+Students submitted weekly progress reports in open-repsonse format, and their organic feedback on challenges and how they addressed them (coping strategies), were also evaluated independently.
+
+Based on these datasets, the following questions were asked to evaluate the impact of an asynchrous online CURE on student ability to analyze and impact data:
+ - (1) Q1: Can a remote CURE increase student ability to interpret and analyze data? (quantitative)
+ - (2) Q2: How does a remote CURE affect student comfort levels in computational research? (quantitative)
+ - (3) Q3: What self-reported coping strategies did students use to overcome asynchronous challenges? (qualitative)
+
+### Install and load packages
+```{r installPackages, include=FALSE}
+# Install packages
+if(!require(tidyverse)){
+  install.packages("tidyverse")
+  }
+
+if(!require(fitdistrplus)){
+  install.packages("fitdistrplus")
+}
+
+if(!require(logspline)){
+  install.packages("logspline")
+}
+
+if(!require(effsize)){
+  install.packages("effsize")
+}
+
+if(!require(betareg)){
+  install.packages("betareg")
+}
+
+if(!require(ggplot2)){
+  install.packages("ggplot2")
+}
+
+if(!require(dplyr)){
+  install.packages("dplyr")
+}
+
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("kassambara/ggpubr")
+
+if(!require(ggpubr)){
+  install.packages("ggpubr")
+  }
+
+if(!require(PairedData)){
+install.packages("PairedData")
+}
+
+if(!require(ggpmisc)){
+install.packages("ggpmisc")
+}
+
+if(!require(matrixTests)){
+install.packages("matrixTests")
+}
+
+if(!require(ggrepel)){
+install.packages("ggrepel")
+}
+
+if(!require(likert)){
+  install.packages("likert")
+  }
+
+if(!require(psych)){
+  install.packages("psych")
+  }
+
+if(!require(tinytex)){
+  install.packages("tinytex")
+  }
+
+# Load libraries
+library(tidyverse)
+library(fitdistrplus)
+library(logspline)
+library(effsize)
+library(betareg)
+library(ggplot2)
+library(plyr)
+library(ggpubr)
+library(dplyr)
+library(PairedData)
+library(ggpmisc)
+library(matrixTests)
+library(ggrepel)
+library(data.table)
+library(likert)
+library(psych)
+library(gridExtra)
+library(RColorBrewer)
+
+# Set color palette for an extended number of samples
+mycolors = c(brewer.pal(name="Spectral", n = 11), brewer.pal(name="Dark2", n = 8))
+# Set theme using tidyverse
+theme_set(theme_bw())
+
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
+
+```
+
+### Input the data for the Fall 2022B pilot CURE
+```{r, DataInput}
+# Set your working directory to your path of choice
+# setwd("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/")
+
+overall_scores <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/overall_scores.csv")
+View(overall_scores)
+
+deltas_overall <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/deltas_overall.csv")
+View(overall_scores)
+
+# Reduce the number of decimal places as a global option
+options(digits = 4)
+
+# Input the results of both treatments
+combined_scores <- data.frame(deltas_overall)
+```
+## Section 1: Do exam scores differ significantly before and after the asychronous CURE?
+```{r PrePost}
+
+# Fitting the data to a distribution
+descdist(combined_scores$prescore, discrete = F) #beta distributionn
+descdist(combined_scores$postscore, discrete = F) #beta distribution
+fit.beta_pre <- fitdist(combined_scores$prescore, "beta", method = "mme")
+fit.beta_post <- fitdist(combined_scores$postscore, "beta", method = "mme")
+plot(fit.beta_pre)
+plot(fit.beta_post)
+```
+
+```{r overallLM}
+# Check the linear modeling of the prescores and postscores
+overall_lm <- lm(formula = prescore ~ postscore, data = deltas_overall)
+overall_lm
+plot(overall_lm)
+```
+
+### Exploratory data analysis
+Using the parametric paired t-test, we assume that the data are normally distributed for our dataset. 
+```{r, DistributionHistogram}
+
+# Create a dataframe of the pre- and post-scores
+histo_combined <- overall_scores
+
+# Separate by pre and post scores
+prescore <- histo_combined[1:13,]
+postscore <- histo_combined[14:26,]
+
+# summarize pre and post scores
+summary(prescore)
+summary(postscore)
+
+##===============================================
+
+# density plots with histograms per treatment to show distribution
+dp_pre <- ggplot(prescore, aes(x=score)) + 
+  geom_histogram(data = prescore, fill = "white", col = "darkgreen", alpha = 0.5, binwidth = 0.1, bins=30, position = "identity") + 
+  labs(title="Distribution of pre-test scores", y ="Number of students") +
+  geom_density(data = prescore, fill = "darkolivegreen", alpha=0.6) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.1))
+dp_pre + ylim(0,5)
+
+dp_post <- ggplot(postscore, aes(x=score)) + 
+  geom_histogram(data = postscore, fill = "white", alpha = 0.5, col = "darkorange2", binwidth = 0.1, bins=30, position = "dodge") + 
+  labs(title="Distribution of post-test scores", y ="Number of students")+
+  geom_density(data = postscore, fill = "darkorange1", alpha=0.6) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.1))
+dp_post + ylim(0,5)
+
+```
+
+#### Test for normal distribution using ShapiroWilk
+```{r ShapiroWilk}
+# The null hypothesis for the Wilk-Shapiro test of normality is that the data are normally distributed. 
+shapiro.test(prescore$score)
+## There is not enough evidence to reject the null hypothesis. Therefore, each group follows a normal distribution.
+
+shapiro.test(postscore$score)
+## There is not enough evidence to reject the null hypothesis. Therefore, each group follows a normal distribution.
+```
+
+### Apply beta regression models 
+```{r regression}
+#Beta regression models
+#Function to transform y values to be used on a betareg distribution
+y.transf.betareg <- function(y){
+  n.obs <- sum(!is.na(y))
+  (y * (n.obs - 1) + 0.5) / n.obs
+}
+
+#Are the post-recitation scores dependent on the pre-recitation scores?
+effect_test_overall <- betareg(y.transf.betareg(prescore) ~ postscore, data=deltas_overall, link = "logit")
+summary(effect_test_overall)
+
+```
+
+### Visualize paired outcomes data using box plots
+Use the boxplot to visualize differences in exam scores.
+```{r pairedData}
+# Create a dataframe that is separated by group, score, and student
+my_data <- data.frame(
+group = rep(c("prescore", "postscore"), each = 13),
+score = c(prescore$score,  postscore$score),
+student = c(prescore$student, postscore$student)
+)
+
+# Compute summary statistics by groups using dplyr:
+summary_overall <- group_by(my_data, group) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_overall
+
+```
+### Paired boxplots of average assessment scores pre vs post test
+```{r PairedBoxplotsOverall}
+pbp <- ggpaired(my_data, x = "group", y = "score",
+ color = "group", line.color = "gray", line.size = 0.4,
+ palette = "Dark2",
+  xlab = "Assessment",
+  ylab = "Overall score (%)") +
+  theme(legend.position = "none")
+pbp
+
+ggsave(filename = "overall_score.pdf", plot = pbp)
+```
+The change in scores is visually evident by the histograms and the boxplots, but is it significant?
+
+### Check for signficance
+#### Paired t-test
+Use the paired t-test on the dependent samples to test for significant differences in means between exam scores before and after the CURE
+```{r PairedTtest, include=TRUE}
+# Perform a paired samples t-test
+# x,y: numeric vectors
+# paired: a logical value specifying that we want to compute a paired t-test
+# alternative: the alternative hypothesis. Allowed value is one of “two.sided” (default), “greater” or “less”.
+
+overall_ttest_all <-t.test(postscore$score, prescore$score, paired = TRUE, alternative = "two.sided")
+overall_ttest_all
+```
+
+#### Check effect size using Cohen's d
+Since the t-test calculated a p-value of 0.003, which is < p = 0.05, the overall score differences by individuals are significant. Next, effect size will express the magnitude of the significance to the population at large.
+  - Small effect:   ≥ 0.2
+  - Medium effect:  ≥ 0.5
+  - Large effect:   ≥ 0.8
+```{r CohensD, eval=FALSE, include=FALSE}
+# Use the package effsize to determine the strength of the differences in scores 
+score_pre <- prescore$score
+score_post<- postscore$score
+effsize::cohen.d(score_post, score_pre)
+```
+
+### Scatter plot of overall scores and correlation
+```{r ScatterScores}
+
+# Scatter plot of overall scores
+p1 <- ggplot(combined_scores,
+             aes(x=prescore, y=postscore, color=student))+
+  geom_jitter()+
+  geom_smooth(method=lm , color="black",se=T) +
+  theme(plot.title=element_text(size=10))+
+  labs(title="Assessment prescores versus postscores all students", 
+       x="Pre-score", y="Post-score")
+
+p1
+
+summary(combined_scores)
+
+# Check Pearson Correlation and test for significance
+cor(combined_scores$prescore, combined_scores$postscore)
+cor.test(combined_scores$prescore, combined_scores$postscore)
+
+```
+### Do scores differ by question and topic?
+Biology, coding, professional development
+```{r ViolinPlots}
+# create the dataframes
+# Import data for prescores by question
+questions_pre <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/questions_pre.csv")
+View(questions_pre)
+
+# Import data for prescores by question
+questions_post <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/questions_post.csv")
+View(questions_post)
+
+# Alternative hypothesis accepted, true location shift is not = 0
+df_questions_pre <- data.frame(score = questions_pre$Score,
+                question = questions_pre$Question,
+                topic = questions_pre$Topic,
+                student = questions_pre$Student,
+                assessment = "1_pre"
+                ) 
+df_questions_pre
+
+df_questions_post <- data.frame(score = questions_post$Score,
+                question = questions_post$Question,
+                topic = questions_post$Topic,
+                student = questions_post$Student,
+                assessment = "2_post"
+                )
+df_questions_post
+
+# create the dataframe
+question_data <- data.frame(
+  group = c(df_questions_pre$assessment, df_questions_post$assessment),
+  score = c(df_questions_pre$score, df_questions_post$score),
+  question = c(df_questions_pre$question, df_questions_post$question),
+  topic = c(df_questions_pre$topic, df_questions_post$topic),
+  student = c(df_questions_pre$student, df_questions_post$student))
+
+# view the df
+question_data
+
+# Filter the data by topic using dplyr
+# Biology questions
+bio_pre_stats <- df_questions_pre %>%
+  filter(topic == "Biology") %>%
+  summary(bio_pre_stats)
+bio_pre_stats
+
+bio_post_stats <- df_questions_post %>%
+  filter(topic == "Biology") %>%
+  summary(bio_pre_stats)
+bio_post_stats
+
+# Coding questions
+coding_pre_stats <- df_questions_pre %>%
+  filter(topic == "Coding") %>%
+  summary(coding_pre_stats)
+coding_pre_stats
+
+coding_post_stats <- df_questions_post %>%
+  filter(topic == "Coding") %>%
+  summary(coding_post_stats)
+coding_post_stats
+
+# Professional development (pd) questions
+pd_pre_stats <- df_questions_pre %>%
+  filter(topic == "ProfDev") %>%
+  summary(pd_pre_stats)
+pd_pre_stats
+
+pd_post_stats <- df_questions_post %>%
+  filter(topic == "ProfDev") %>%
+  summary(pd_post_stats)
+pd_post_stats
+
+# Create a boxplot of scores by pre and post topics
+questions_pre_boxplot <- ggpaired(df_questions_pre, x = "topic", y = "score",
+ color = "topic", line.color = "gray", line.size = 0.4, position = "identity",
+ palette = "npg",   title = "Student performance by topic before the CURE",
+  xlab = "Assessment",
+  ylab = "Overall score (%)")
+
+questions_post_boxplot <- ggpaired(df_questions_post, x = "topic", y = "score",
+ color = "topic", line.color = "gray", line.size = 0.4, position = "identity",
+ palette = "npg",   title = "Student performance by topic after the CURE",
+  xlab = "Assessment",
+  ylab = "Overall score (%)")
+
+
+# paired sum plot
+
+questions_all = rbind(questions_pre,questions_post)
+
+questions_all_sum = aggregate(questions_all$Score, by = list(questions_all$Topic, questions_all$Type,questions_all$Student), FUN = sum)
+colnames(questions_all_sum) = c("Topic","Type","Student","SumScore")
+#write.csv(questions_all_sum, file = "SumCorrect_questions.csv")
+
+questions_all_sum$Type <- factor(questions_all_sum$Type , levels=c("prescore", "postscore"))
+pattern = c("darkcyan","red3")
+
+sum_by_topic = ggplot(questions_all_sum, aes(x = Type, y = SumScore)) + 
+  geom_boxplot(aes(fill = Topic), alpha = .2, color = c("darkcyan","red3","darkcyan","red3","darkcyan","red3"), fill = "white") +
+  scale_x_discrete(labels=c("prescore" = "pre", "postscore" = "post"), name = element_blank()) +
+  geom_line(aes(group = Student), color = "gray", size = 0.4, position = "identity") + 
+  geom_point(size = 1) +
+  facet_wrap(~ Topic) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
+
+ggsave(filename = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/sum_score_by_topic.pdf", plot = sum_by_topic)
+
+# cohen's score and ttest p-value by topic
+score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Topic == "Biology"]
+score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Topic == "Biology"]
+effsize::cohen.d(score_post, score_pre)
+t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided")
+
+score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Topic == "Coding"]
+score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Topic == "Coding"]
+effsize::cohen.d(score_post, score_pre)
+t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided")
+
+score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Topic == "ProfDev"]
+score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Topic == "ProfDev"]
+effsize::cohen.d(score_post, score_pre)
+t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided")
+
+
+# Question performance scores distribution overall
+v <- ggplot(question_data, aes(x = group, y = score, fill = group, fontface = "bold")) +
+  scale_fill_brewer(palette="Dark2") + 
+  geom_violin(trim=TRUE) + 
+  stat_summary(fun = "mean",
+               geom = "crossbar",
+               width = 0.2,
+               color = "black") +                                                                # Change font size
+  theme(strip.text.x = element_text(size = 12),
+        legend.position = "none",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12)) +
+  scale_x_discrete(labels=c("1_pre" = "Pre", "2_post" = "Post"), name = element_blank())
+v
+
+# Question performance scores by topic
+pv <- v + facet_grid(rows = vars(topic)) +
+  theme(strip.text.y = element_text(face= "bold", size = 12)) +
+  scale_x_discrete(labels=c("1_pre" = "Pre", "2_post" = "Post"), name = element_blank())
+
+#   labs(title = "Plot of individual question scores by topic")
+pv
+
+ggsave(filename = "violin_by_topic.pdf", plot = pv)
+
+# Filter the data using dplyr
+bio_pre <- df_questions_pre %>%
+  filter(topic == "Biology") 
+bio_pre
+
+bio_post <- df_questions_post %>%
+  filter(topic == "Biology") 
+bio_post
+
+coding_pre <- df_questions_pre %>%
+  filter(topic == "Coding")
+coding_pre
+
+coding_post <- df_questions_post %>%
+  filter(topic == "Coding")
+coding_post
+
+pd_pre <- df_questions_pre %>%
+  filter(topic == "ProfDev")
+pd_pre
+
+pd_post <- df_questions_post %>%
+  filter(topic == "ProfDev")
+pd_post
+
+
+# Summarize each stat
+summary_bio_pre<- group_by(bio_pre, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_bio_pre
+
+summary_bio_post <- group_by(bio_post, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_bio_post
+
+summary_coding_pre<- group_by(coding_pre, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_coding_pre
+
+summary_coding_post<- group_by(coding_post, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_coding_post
+
+summary_pd_pre<- group_by(pd_pre, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_pd_pre
+
+summary_pd_post<- group_by(pd_post, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_pd_post
+```
+#### Paired boxplots to show average question performance by topic
+```{r PairedBoxplotsTopic}
+# Import scores by question with questions as the column headers
+# and find the average
+
+questions_wide_pre <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/questions_wide_pre.csv")
+
+questions_wide_post <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/questions_wide_post.csv")
+
+# create a prescore dataframe
+qmu1_pre <- ddply(questions_pre, "Question", summarise, grp.mean=mean(Score))
+qmu1_pre
+
+#create a postscore dataframe
+qmu2_post<- ddply(questions_post, "Question", summarise, grp.mean=mean(Score))
+qmu2_post
+
+# merge the dataframes and find the mean
+qmu <- data.frame( 
+                group = rep(c("qmu1_pre", "qmu2_post"), each = 18),
+                score = c(qmu1_pre$grp.mean, qmu2_post$grp.mean),
+                question = c(qmu1_pre$Question, qmu2_post$Question)
+                )
+
+# set the order for the plot
+qmu$question <- factor(qmu$question , levels=c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q18"))
+
+# check the order
+qmu
+
+# Create the dataframe for bio
+bio_all <- data.frame(
+  score = c(bio_pre$score, bio_post$score),
+  question = c(bio_pre$question, bio_post$question),
+  topic = c(bio_pre$topic, bio_post$topic),
+  student = c(bio_pre$student, bio_post$student),
+  group = c(bio_pre$assessment, bio_post$assessment)
+)
+
+bio_qmu <- data.frame(qmu) %>%
+  filter(!question %in% c("Q8", "Q9", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q18"))
+bio_qmu
+
+# Create the paired boxplots for bio
+bio_paired <- ggpaired(bio_qmu, x = "group", y = "score",
+ color = "group", shape = "question", line.color = "gray", line.size = 0.4,
+ palette = "Dark2",   title = "Average student BIOLOGY performance before and after CURE",
+  xlab = "Assessment",
+  ylab = "Average score by question (%)") +
+  theme(legend.position = "none") +
+  scale_x_discrete(labels=c("qmu1_pre" = "Pre", "qmu2_post" = "Post"), name = element_blank())
+bio_paired
+
+# filter(qmu$question == "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7") %>%
+
+
+# Create the dataframe for coding
+coding_all <- data.frame(
+  score = c(coding_pre$score, coding_post$score),
+  question = c(coding_pre$question, coding_post$question),
+  topic = c(coding_pre$topic, coding_post$topic),
+  student = c(coding_pre$student, coding_post$student),
+  group = c(coding_pre$assessment, coding_post$assessment)
+)
+
+coding_qmu <- data.frame(qmu) %>%
+  filter(!question %in% c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7","Q15", "Q16", "Q17", "Q18"))
+coding_qmu
+
+# Create the paired boxplots for coding
+coding_paired <- ggpaired(coding_qmu, x = "group", y = "score",
+ color = "group", line.color = "gray", line.size = 0.4,
+ palette = "Dark2",   title = "Average student CODING questions performance before and after CURE",
+  xlab = "Assessment",
+  ylab = "Average score by question (%)") +
+  theme(legend.position = "none") +
+  scale_x_discrete(labels=c("qmu1_pre" = "Pre", "qmu2_post" = "Post"), name = element_blank())
+coding_paired
+
+
+# Create the dataframe for pd
+pd_all <- data.frame(
+  score = c(pd_pre$score, pd_post$score),
+  question = c(pd_pre$question, pd_post$question),
+  topic = c(pd_pre$topic, pd_post$topic),
+  student = c(pd_pre$student, pd_post$student),
+  group = c(pd_pre$assessment, pd_post$assessment)
+)
+
+pd_qmu <- data.frame(qmu) %>%
+  filter(!question %in% c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12", "Q13", "Q14"))
+pd_qmu
+
+# Create the paired boxplots for pd
+pd_paired <- ggpaired(pd_qmu, x = "group", y = "score",
+ color = "group", shape = "question", line.color = "gray", line.size = 0.4,
+ palette = "Dark2",   title = "Average student PROF DEV question performance before and after CURE",
+  xlab = "Assessment",
+  ylab = "Average score by question (%)") +
+  theme(legend.position = "none") +
+  scale_x_discrete(labels=c("qmu1_pre" = "Pre", "qmu2_post" = "Post"), name = element_blank())
+pd_paired
+
+```
+### T-test by topic
+```{r TtestTopic}
+
+# Shapiro-Wilk normality test
+shapiro.test(bio_post$score)
+shapiro.test(bio_pre$score)
+
+
+# Shapiro-Wilk normality test
+shapiro.test(coding_post$score)
+shapiro.test(coding_pre$score)
+
+
+# Shapiro-Wilk normality test
+shapiro.test(pd_post$score)
+shapiro.test(pd_pre$score)
+
+
+
+bio_ttest <-t.test(bio_post$score, bio_pre$score, paired = TRUE, alternative = "two.sided")
+bio_ttest
+
+coding_ttest <-t.test(coding_post$score, coding_pre$score, paired = TRUE, alternative = "two.sided")
+coding_ttest
+
+pd_ttest <-t.test(pd_post$score, pd_pre$score, paired = TRUE, alternative = "two.sided")
+pd_ttest
+
+```
+
+Question summaries
+```{r QuestionSummaries}
+# Create summaries of before and after score results of each question
+questions_wide_pre
+questions_wide_post
+
+question_summary_pre <- summary(questions_wide_pre) 
+question_summary_pre
+
+question_summary_post <- summary(questions_wide_post) 
+question_summary_post
+```
+
+### Barplot by question
+```{r QuestionBarplots}
+
+# Barplot option A
+# plot the questions
+questions_bar <- ggplot(data = qmu, aes(x = question, y = score, fill = group, palette = "Dark2")) +
+  geom_bar(width=0.4, stat="identity", position=position_dodge(0.5)) +
+  scale_fill_brewer(palette="Dark2") + 
+  xlab("Question") +
+  ylab("Scores") +
+  labs(fill = "Assessment") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  geom_vline(xintercept = 7.5, color = "gray47", linetype = 3) +
+  geom_vline(xintercept = 14.5, color = "gray47", linetype = 3) 
+
+
+questions_bar
+
+
+# Barplot option B
+# Add question categories to the qmu table
+qmu_topic <- data.frame(qmu)
+# Add additional 
+qmu_topic <- data.frame(qmu_topic,
+                        topic = as.character(qmu_topic$question))
+
+# Does not work.
+# qmu_topic$topic[qmu_topic$topic == c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7")] <- "Biology"
+
+# Replace question number with topic under the topic column one by one
+## Biology Q1 - Q7
+qmu_topic$topic[qmu_topic$topic == "Q1"] <- "Biology" 
+qmu_topic$topic[qmu_topic$topic == "Q2"] <- "Biology"
+qmu_topic$topic[qmu_topic$topic == "Q3"] <- "Biology"
+qmu_topic$topic[qmu_topic$topic == "Q4"] <- "Biology"
+qmu_topic$topic[qmu_topic$topic == "Q5"] <- "Biology"
+qmu_topic$topic[qmu_topic$topic == "Q6"] <- "Biology"
+qmu_topic$topic[qmu_topic$topic == "Q7"] <- "Biology"
+
+## Coding Q8 - Q14
+qmu_topic$topic[qmu_topic$topic == "Q8"] <- "Coding" 
+qmu_topic$topic[qmu_topic$topic == "Q9"] <- "Coding"
+qmu_topic$topic[qmu_topic$topic == "Q10"] <- "Coding"
+qmu_topic$topic[qmu_topic$topic == "Q11"] <- "Coding"
+qmu_topic$topic[qmu_topic$topic == "Q12"] <- "Coding"
+qmu_topic$topic[qmu_topic$topic == "Q13"] <- "Coding"
+qmu_topic$topic[qmu_topic$topic == "Q14"] <- "Coding"
+
+# Professional Development Q15 - Q18
+qmu_topic$topic[qmu_topic$topic == "Q15"] <- "ProfDev" 
+qmu_topic$topic[qmu_topic$topic == "Q16"] <- "ProfDev"
+qmu_topic$topic[qmu_topic$topic == "Q17"] <- "ProfDev"
+qmu_topic$topic[qmu_topic$topic == "Q18"] <- "ProfDev"
+
+qmu_topic
+
+# plot the questions
+questions_bar_grid <- ggplot(data = qmu_topic, aes(x = question, y = score, fill = group, palette = "Dark2")) +
+  geom_bar(width=0.4, stat="identity", position=position_dodge(0.5)) +
+  scale_fill_brewer(palette="Dark2", labels=c('pre', 'post')) + 
+  xlab("Question") +
+  ylab("Scores") +
+  labs(fill = "Assessment") +
+  theme(legend.position = "bottom",panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  facet_grid(. ~ topic, scales = 'free_x', space = 'free_x') +
+    theme(legend.text=element_text(size=12), strip.text.x = element_text(face="bold", size = 12),
+        legend.position = "bottom",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), 
+        plot.background = element_rect(color = "black"))
+
+
+
+# Plot the differences in average scores
+question_diff <- data.frame(diff = qmu2_post$grp.mean - qmu1_pre$grp.mean, question = qmu2_post$Question)
+question_diff
+
+# set the order for the plot
+question_diff$question <- factor(question_diff$question , levels=c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q18"))
+
+# check the order
+question_diff
+
+question_diff_bar <- ggplot(data = question_diff, aes(x = question, y = diff, fill = "cadetblue")) +
+  geom_bar(width=0.4, stat="identity", position=position_dodge(0.5)) +
+  scale_fill_brewer(palette="Dark2") + 
+  xlab("Question") +
+  ylab("Difference in average score per question") +
+  labs(fill = "Assessment") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+question_diff_bar
+
+
+# save the questions by difference
+questions_higher_average <- data.frame(question_diff) %>%
+  filter(question_diff$diff > 0)
+questions_higher_average
+
+questions_nodiff_average <- data.frame(question_diff) %>%
+  filter(question_diff$diff == 0)
+questions_nodiff_average
+
+questions_lower_average <- data.frame(question_diff) %>%
+  filter(question_diff$diff < 0)
+questions_lower_average
+```
+
+### Difference in scores by question
+The Bland - Altman plot to quantify agreement between two quantitative measurements by constructing limits of agreement. 
+
+```{r scoreDifferencesByQuestion}
+# sample t-test by question
+q1_ttest <- t.test(questions_wide_pre$Q1, questions_wide_post$Q1, paired = TRUE, alternative = "two.sided")
+q1_ttest
+
+# Matrix test to check gains for each question
+# Remove student info column
+pre_question_scores <- questions_wide_pre[,-1]
+post_question_scores  <- questions_wide_post[,-1]
+
+# Create a new table with the results of the t.test
+questions_all_summary <- col_t_paired(post_question_scores, pre_question_scores)
+questions_all_summary
+
+# Pull out with p ≤ 0.05 to identify questions with significant changes in score
+questions_sig_diff <- questions_all_summary %>%
+  filter(pvalue<=0.05)
+questions_sig_diff
+
+
+# Plot the questions by each answer by each student
+library(ggplot2)
+questions_data <- data.frame(questions_pre$Score, questions_post$Score)
+
+question_avg <- data.frame(pre=c(questions_pre$Score), 
+                           post=c(questions_post$Score)) 
+question_avg$avg <- rowMeans(question_avg)
+question_avg$diff <- question_avg$post - question_avg$pre
+question_avg
+
+question_avg$question <- questions_pre$Question
+question_avg
+
+# find average difference
+question_mean_diff <- mean(question_avg$diff)
+question_mean_diff
+
+# find lower and upper 95% confidence interval limits
+questions_lower <- question_mean_diff - 1.96*sd(question_avg$diff)
+
+questions_upper <- question_mean_diff + 1.96*sd(question_avg$diff)
+
+print(questions_lower)
+print(questions_upper)
+
+
+# Test for normality
+shapiro.test(questions_pre$Score)
+shapiro.test(questions_post$Score)
+## Both p-values were < 0.05; use KS paired test
+ks <- ks.test(questions_pre$Score, questions_post$Score)
+## P-value still accepting the null, non-normal distribution
+# Try Wilcoxon test
+wt_questions <- wilcox.test(question_avg$post, question_avg$pre)
+
+stat.test <- wilcox.test(question_avg$pre, question_avg$post)
+stat.test
+
+# Data for Bland-Altman plot
+# Plot the questions by each question mean of all the students
+
+question_avg_class <- data.frame(pre=c(qmu1_pre$grp.mean), 
+                           post=c(qmu2_post$grp.mean)) 
+question_avg_class$avg <- rowMeans(question_avg_class)
+question_avg_class$diff <- question_avg_class$post - question_avg_class$pre
+question_avg_class
+
+# add questions back in
+question_avg_class$question <- qmu1_pre$Question
+question_avg_class
+# find average difference
+question_mean_diff_class <- mean(question_avg_class$diff)
+question_mean_diff_class
+
+# find lower and upper 95% confidence interval limits
+questions_lower_class <- question_mean_diff_class - 1.96*sd(question_avg_class$diff)
+
+questions_upper_class <- question_mean_diff_class + 1.96*sd(question_avg$diff)
+
+print(questions_lower_class)
+print(questions_upper_class)
+
+# Plot Bland-Altman plot
+
+q <- ggplot(question_avg_class, aes(x = avg, y = diff)) +
+  geom_point(size=1, aes(color=question)) +
+  geom_hline(yintercept = question_mean_diff_class) +
+  geom_hline(yintercept = questions_lower_class, color = "red", linetype="dashed") +
+  geom_hline(yintercept = questions_upper_class, color = "red", linetype="dashed") +
+  ggtitle("Difference between average question scores against the mean") +
+  ylab("post-average - pre-average") +
+  xlab("Average")+theme_bw()
+ 
+
+q + geom_text(label = question_avg_class$question)
+
+
+```
+
+
+
+### Normalized Learning Gain per question
+NLG is the difference between post and pre scores divided by the difference between the maximum score possible and the pre-score. 
+
+[postscore - prescore]/[maximum score - prescore]
+
+```{r NLGquestion}
+# Create a dataframe with pre and post mean scores per question
+# Add back the question topic area
+qmu_stats <- data.frame(
+  pre_mean = qmu1_pre$grp.mean, 
+  post_mean = qmu2_post$grp.mean,
+  topic = c("BIOLOGY", "CODING", "CODING", "CODING", "CODING", "CODING", "PROFDEV", "PROFDEV", "PROFDEV", "PROFDEV", "BIOLOGY", "BIOLOGY", "BIOLOGY", "BIOLOGY", "BIOLOGY", "BIOLOGY", "CODING", "CODING"))
+qmu_stats
+
+# Calculate NLG
+# Add a row to the subtract the average score from the maximum (1pt) 
+qmu_stats$from_max <- 1 - qmu_stats[,1]
+# Find the difference between the average post-score and pre-score of every question
+# by subtracting column 1 from column 2
+qmu_stats$diff <- qmu_stats[,2] - qmu_stats[,1]
+
+# Divide the difference between pre and post scores by the maximum increase possible (100% - score)
+qmu_stats$nlg <-qmu_stats[,5]/qmu_stats[,4]
+qmu_stats
+
+# Add question labels back
+qmu_stats$question <- qmu1_pre$Question 
+qmu_stats
+
+# set the order for the plot
+qmu_stats$question <- factor(qmu_stats$question, levels=c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q18"))
+
+# check the order
+qmu_stats
+
+# title = "Difference in average normalized learning gain (NLG) per question",
+
+qmu_nlg_bar <- ggplot(data = qmu_stats, aes(x = question, y = nlg, fill = topic)) +
+  geom_bar(width=0.4, stat="identity", position=position_dodge(0.5)) +
+  scale_fill_brewer(palette="Set2") + 
+  xlab("") +
+  ylab("Average NLG") +
+  labs(fill = "Assessment") +
+  theme(legend.title=element_blank(), legend.position = "bottom", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) + 
+  theme(legend.text=element_text(size=12),
+        legend.position = "bottom",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12),
+        plot.background = element_rect(color = "black"))
+qmu_nlg_bar
+
+
+```
+Combine the plot with question scores and NLG.
+```{r questionScoresNLG}
+# Use ggarrange to create a panel for both A. and B.
+# library(ggpubr) #load in library for multi-panel figures
+# put all three plots together into one multipanel plot
+qmulti_plotq <- ggarrange(questions_bar_grid, qmu_nlg_bar, 
+                       labels = c("A", "B"), 
+                       ncol = 1, nrow = 2, widths = c(1, 1),
+                       common.legend = F,
+                       legend = "bottom") +
+  theme(plot.background = element_rect(color = "black"))
+#does the plot have a common legend
+#add titles and labels to the multi-panel graph
+qmulti_plotq <- annotate_figure(qmulti_plotq,
+                              top = text_grob("", color = "black", face = "bold", size = 11)) + scale_fill_hue(l=40) 
+qmulti_plotq 
+
+ggsave(filename = "nlg.pdf", plot=qmulti_plotq, height = 5, width = 7)
+
+# This plot works better stacked because the question numbers on the x-axis match up
+# Side by side is not as legible
+```
+
+#### Investigating individual question responses
+Use the NLG to evaluate where there were increases, losses, and no changes in answers.
+```{r NLG}
+# Rearrange columns so questions and topics are first
+nlg <- qmu_stats %>%
+  relocate(question, .before = pre_mean) %>%
+  relocate(topic, .after = question)
+nlg
+```
+
+Significant gains in questions 2, 3, 10 (Q12 had a p-value of 0.053)
+```{r PositiveGains}
+# Extract the question averages that showed positive normalized learning gain
+
+pos_gains <- nlg %>%
+  filter(nlg > '0.0')
+pos_gains
+
+
+```
+
+```{r NoGains}
+# Extract the question averages that showed no normalized learning gain
+no_gains <- nlg %>%
+  filter(nlg == '0')
+no_gains
+```
+
+#### Investigate responses for negative NLG questions using heatmaps
+```{r NegGains, eval=FALSE, echo=TRUE}
+# Extract the question averages that showed no normalized learning gain
+neg_gains <- nlg %>%
+  filter(nlg < '0')
+neg_gains
+
+# Investigate the answers and distractors of the negative gains to identify
+# common misconceptions or gaps in knowledge
+# There are two different formatting options for the check-all-that-apply format below
+
+# ==============================
+# Q4 analysis: Which are true about RNA and RNA sequencing experiments? (choose all true statements) 
+# ==============================
+
+# Hardcode the question content
+ans_post_per4_long <- data.frame(
+  type = 'post',
+  alpha = c('A', 'B', 'C', 'D', 'E'),
+  answer = c('RNA is more stable than DNA', 'RNA is reverse transcribed into cDNA prior to sequencing', 'In sequencing experiments the molecules (RNA or DNA) from the cell will be cut into shorter reads usually between 75 and 300 nucleotides', 'The sequencing reads of a gene in an RNA-seq experiment represent a relative quantification of RNA (e.g., relative to other genes sequenced in the sample)', 'The sequence reads of a gene in a RNA-seq experiment are a measure of the total number of RNA reads in the cells that were sequenced'),
+  percent = c('30.77', '84.62', '100.00', '69.23', '61.54'),
+  q_type = c('Distractor', 'Answer', 'Answer', 'Answer', 'Distractor')
+  )
+
+ans_pre_per4_long <- data.frame(
+  type = 'pre',
+  alpha = c('A', 'B', 'C', 'D', 'E'),
+  answer = c('RNA is more stable than DNA', 'RNA is reverse transcribed into cDNA prior to sequencing', 'In sequencing experiments the molecules (RNA or DNA) from the cell will be cut into shorter reads usually between 75 and 300 nucleotides', 'The sequencing reads of a gene in an RNA-seq experiment represent a relative quantification of RNA (e.g., relative to other genes sequenced in the sample)', 'The sequence reads of a gene in a RNA-seq experiment are a measure of the total number of RNA reads in the cells that were sequenced'),
+  percent = c('0.00', '53.85', '100.00', '30.77', '61.54'),
+  q_type = c('Distractor', 'Answer', 'Answer', 'Answer', 'Distractor')
+  )
+
+# combine the data frames vertically using rbind function 
+ans_per4_long <- ans_pre_per4_long %>%
+  rbind(ans_post_per4_long)
+view(ans_per4_long)
+
+# Add the full answers with breaks "/n"
+answer_labels4 <- c("RNA is more stable /nthan DNA", "*RNA is reverse transcribed /ninto cDNA prior to /nsequencing", "*In sequencing experiments the /nmolecules (RNA or DNA) /nfrom the cell /nwill be cut into /nshorter reads usually between /n75 and 300 nucleotides", "*The sequencing reads /nof a gene in an RNA-seq /nexperiment represent a /nrelative quantification /nof RNA (e.g., /nrelative to other genes /nsequenced in the sample)", "The sequence reads of /na gene in a RNA-seq /nexperiment are a /nmeasure of the total /nnumber of RNA reads in /nthe cells that were /nsequenced")
+
+# Use geom_tile to create the heatmap
+hm4 <- ggplot(ans_per4_long, aes(answer, type, fill = percent)) +
+  geom_tile(show.legend = FALSE) + 
+  scale_fill_brewer("RdYlGn") + 
+  geom_text(aes(label = paste0(percent, "%")), color = "black", fontface = "bold") +
+  theme(plot.margin = margin(1,1,1,1, "cm")) + facet_grid(cols = vars(q_type), space = "free", scales = "free")
+
+# Create the labels for the x-axis  
+hm4 <- hm4 + scale_x_discrete(labels = function(answer) str_wrap(answer, width = 20), position = "top")
+
+hm4 <- print(hm4 + labs(y = element_blank(), x = "Q4: Which are true about RNA and RNA sequencing experiments? (Check all that apply)"))
+
+# ==============================
+# Q8 analysis: Which are true about R? (choose all true statements) 
+# ==============================
+
+# Hardcode the question content
+ans_post_per8_long <- data.frame(
+  type = 'post',
+  alpha = c('A', 'B', 'C', 'D', 'E', 'F'),
+  answer = c('There are a lot of published statistics and algorithms for biological applications written in R', 'Code written in R is easy to read so you do not need to spend much time adding descriptive comments to your scripts', 'Saving R scripts with the data you produced or analyzed allows you to easily reproduce, modify, and share your protocols for future work', 'R is a coding environment, but not a language', 'R is a language, but not a coding environment', 'R is a language and an environment for statistical computing and graphing'),
+  percent = c('100.00', '38.46', '100.00',  '0.00', '30.77', '76.92'),
+  q_type = c('Answer', 'Distractor', 'Answer', 'Distractor', 'Distractor', 'Answer')
+  )
+
+ans_pre_per8_long <- data.frame(
+  type = 'pre',
+  alpha = c('A', 'B', 'C', 'D', 'E', 'F'),
+  answer = c('There are a lot of published statistics and algorithms for biological applications written in R', 'Code written in R is easy to read so you do not need to spend much time adding descriptive comments to your scripts', 'Saving R scripts with the data you produced or analyzed allows you to easily reproduce, modify, and share your protocols for future work', 'R is a coding environment, but not a language', 'R is a language, but not a coding environment', 'R is a language and an environment for statistical computing and graphing'),
+  percent = c('100.00', '15.38', '84.62', '0.00', '15.38', '84.62'),
+  q_type = c('Answer', 'Distractor', 'Answer', 'Distractor', 'Distractor', 'Answer')
+  )
+
+# combine the data frames vertically using rbind function 
+ans_per8_long <- ans_pre_per8_long %>%
+  rbind(ans_post_per8_long)
+view(ans_per4_long)
+
+hm8 <- ggplot(ans_per8_long, aes(answer, type, fill = percent)) +
+  geom_tile(show.legend = FALSE) +
+  scale_fill_brewer("Blues") + 
+  geom_text(aes(label = paste0(percent, "%")), color = "black", fontface = "bold") +
+  # theme(plot.margin = margin(1,1,1,1, "cm")) +
+  facet_grid(cols = vars(q_type), space = "free", scales = "free") +
+    theme(strip.text.x = element_text(size = 12), legend.title = element_blank(), legend.text=element_text(size=12),
+        legend.position = "none",
+        axis.text = element_text(face="bold", size = 9),
+        axis.text.y.left = element_text(size = 12))
+  
+hm8 <- hm8 + scale_x_discrete(labels = function(answer) str_wrap(answer, width = 20))
+
+
+hm8 <- print(hm8 + labs(y = element_blank(), x = element_blank(), title = "Q8: Which are true about R? Choose all true statements")) 
+
+```
+
+
+## Section 2: How does a remote CURE affect student comfort levels in computational research?
+### Likert analysis
+- R programming
+- Command line
+- Self-reported skill level
+- Expertise levels in computational research
+
+> 19.  How would you describe your comfort level with using a command line interface to interact with a Linux/Unix command-line style environment?
+
+> 20. How would you describe your comfort level with programming in R?
+
+> 22. How comfortable are you asking your peers coding questions in an open class forum?
+
+> 23. How comfortable are you reading and interpreting a scientific paper?
+
+> 24. How comfortable are you writing a scientific paper?
+
+Scale for questions Q19, Q20, Q22, Q23, Q24
+- Very uncomfortable | 1
+- Uncomfortable | 2
+- neutral | 3
+- comfortable | 4
+- Very comfortable | 5
+
+- *If multiple were indicated by the student, the lowest level was selected.*
+
+
+
+> 21. How would you describe your level of coding expertise using any programming language?
+
+Scale for question Q21
+- Novice | 1
+- Advanced beginner | 2
+- Competent | 3
+- Proficient | 4
+- Expert | 5
+
+- *If multiple were indicated by the student, the lowest level was selected.*
+
+
+
+> 25. What is your experience level doing computational research up until this point?
+
+Scale for question Q25
+- I’ve had little to no research experience | 1
+- I have completed a course-based research experience (CURE) | 2
+- I currently do computational research | 3
+- I have done non-computational research | 4
+- I have co-authored published research | 5
+- I don’t want to do research | 0
+
+
+- *If multiple were indicated by the student, the lowest level was selected.*
+
+```{r likertStats}
+# Upload likert datasets on personal feelings
+
+pf <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/personalfeelings.csv")
+View(pf)
+
+pf_pre <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/pf_pre.csv")
+View(pf_pre)
+
+pf_post <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/pf_post.csv")
+View(pf_post)
+
+# Create a summary of pre and post personal feeling scores
+sum_pf_pre <- summary(pf_pre)
+sum_pf_post <- summary(pf_post)
+
+# Separate the pre and post scores
+pf_pre_topic <- pf %>%
+  filter(pf$type == "pre")
+pf_pre_topic
+
+pf_post_topic <- pf %>%
+  filter(pf$type == "post")
+pf_pre_topic
+
+# Summarize the mean and the standard deviation of pre and post scores
+summary_pf_pre <- group_by(pf_pre_topic, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+write.csv(summary_pf_pre, file="q_sum_pre.csv", row.names=FALSE)
+
+
+summary_pf_post <- group_by(pf_post_topic, question) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_pf_post
+
+```
+
+```{r LikertPlots}
+# Create density plots to see a brief summary of the Likert scores
+# Set up the data for the pretest
+pf_pre$Q19 = factor(pf_pre$Q19,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_pre$Q20 = factor(pf_pre$Q20,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_pre$Q22 = factor(pf_pre$Q22,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_pre$Q23 = factor(pf_pre$Q23,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_pre$Q24 = factor(pf_pre$Q24,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+# Set up the data for the post-test
+pf_post$Q19 = factor(pf_post$Q19,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_post$Q20 = factor(pf_post$Q20,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_post$Q22 = factor(pf_post$Q22,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_post$Q23 = factor(pf_post$Q23,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+pf_post$Q24 = factor(pf_post$Q24,
+                       levels = c("1", "2", "3", "4", "5"),
+                       ordered = TRUE)
+
+# Remove the columns with non-Likert data
+drop <- c("student","Q21")
+pf_pre_density <- pf_pre[,!(names(pf_pre) %in% drop)]
+pf_post_density <- pf_post[,!(names(pf_post) %in% drop)]
+
+# Rename columns to question descriptions
+setnames(pf_pre_density, old = c('Q19','Q20','Q22', 'Q23', 'Q24'), 
+         new = c('Linux','R Programming','Online collaboration', 'Reading papers', 'Writing papers'))
+pf_pre_density
+
+setnames(pf_post_density, old = c('Q19','Q20','Q22', 'Q23', 'Q24'), 
+         new = c('Linux','R Programming','Online collaboration', 'Reading papers', 'Writing papers'))
+pf_post_density
+
+# psych library to use head/tails function to view data
+headTail(pf_pre_density)
+str(pf_pre_density)
+summary(pf_pre_density)
+
+headTail(pf_post_density)
+str(pf_post_density)
+summary(pf_post_density)
+
+
+# Using the likert package
+# Create the pre likert density plot
+Result_pre = likert(pf_pre_density)
+
+pf_plot_pre <- plot(Result_pre,
+     type="density",
+     facet=TRUE,
+     bw=0.5) +
+    labs(title="Comfort levels before the CURE", y ="Number of students", x = "Comfort rating") +
+  scale_fill_brewer(palette="Dark2") 
+
+
+# Create the post likert density plot
+Result_post = likert(pf_post_density)
+
+pf_plot_post <- plot(Result_post,
+     type="density",
+     facet=TRUE,
+     bw=0.5) +
+    labs(title="Comfort levels after the CURE", y ="Number of students", x = "Comfort rating") +
+  scale_fill_brewer(palette="Dark2")
+pf_plot_post
+
+
+# Use gridExtra to put pre post side by side
+grid.arrange(pf_plot_pre, pf_plot_post, ncol=2)
+
+mylevels <- c('Very uncomfortable', 'Uncomfortable', 'Neutral', 'Comfortable', 'Very comfortable')
+
+
+# ========================================================== #
+#  Q21: Self-rated skill level in coding expertise
+# ========================================================== #
+# Filter for Q21: Coding expertise
+pf21 <- pf %>%
+  filter(pf$question == "Q21")
+
+pf_new <- pf
+pf_new$type <- factor(pf_new$type, c("pre", "post"))
+pf_new <- pf_new %>%
+  filter(pf_new$question != "Q21")
+pf_new 
+
+# Optional: Linear modeling of SRSL scores
+# my_mod <- lm(score ~ type, pf)
+# summary(my_mod)
+# plot(my_mod)
+# 
+# my_mod2 <- lm(score ~ type + topic, pf)
+# summary(my_mod2)
+# plot(my_mod)
+
+pf_21 <- pf %>%
+  filter(pf$question == "Q21")
+pf_21 <- data.frame(pf_21,
+                    expertise = pf_21$score)
+pf_21
+
+# Replace numeric under Expertise col to the full string of the skill level
+pf_21$expertise[pf_21$expertise == '1'] <- 'Novice'
+pf_21$expertise[pf_21$expertise == '2'] <- 'Advanced Beginner'
+pf_21$expertise[pf_21$expertise == '3'] <- 'Competent'
+pf_21$expertise[pf_21$expertise == '4'] <- 'Proficient'
+pf_21$expertise[pf_21$expertise == '5'] <- 'Expert'
+pf_21
+
+pf_21_sorted <- pf_21 %>% 
+  arrange(student, expertise)
+
+posdod <- position_dodge(0.1)
+
+srsl <- ggplot(pf_21_sorted, aes(x = factor(type, level=c('pre', 'post')), y = factor(score), col = student, group = student)) +
+  geom_line(show.legend = F,  position=posdod, size = 0.5) + 
+  geom_point(data= pf_21_sorted, size=2, position=posdod, alpha = 0.5) +
+  ylab("Self-reported skill level") +
+  xlab("") +
+  theme(strip.text.x = element_text(size = 12),
+        legend.position = "none",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12)) 
+
+srsl + scale_y_discrete(breaks = c("1", "2", "3", "4", "5"), labels = c("Novice", "AdvBeginner", "Competent", "Proficient", "Expert"))
+
+
+pf_21_pre <- pf_21 %>%
+  filter(pf_21$type == 'pre')
+pf_21_pre
+
+pf_21_post <- pf_21 %>%
+  filter(pf_21$type == 'post')
+pf_21_post
+
+
+describe(pf_21_pre$score)
+describe(pf_21_post$score)
+
+t.test(pf_21_post$score, pf_21_pre$score, paired = TRUE)
+```
+
+
+```{r likertFULL}
+# Create the Likert horizontal bar graph for question 19. 20, 22, 23, 24
+
+# # Adjust likert datasets to show personal feelings
+# # - Very uncomfortable | 1
+# # - Uncomfortable | 2
+# # - neutral | 3
+# # - comfortable | 4
+# # - Very comfortable | 5
+# 
+
+pf_all <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/pf_full_all.csv")
+View(pf_all)
+
+# Remove q21
+pf_all_full <- subset(pf_all, select = c(Q19, Q20, Q22, Q23, Q24))
+pf_all_full
+require(likert)
+
+# mylevels <- c('Very uncomfortable', 'Uncomfortable', 'Neutral', 'Comfortable', 'Very comfortable')
+
+pf_all_full$Q19 = factor(pf_all_full$Q19,
+                       levels = c("Very uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very comfortable"),
+                       ordered = TRUE)
+
+pf_all_full$Q20 = factor(pf_all_full$Q20,
+                       levels = c("Very uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very comfortable"),
+                       ordered = TRUE)
+
+pf_all_full$Q22 = factor(pf_all_full$Q22,
+                       levels = c("Very uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very comfortable"),
+                       ordered = TRUE)
+
+pf_all_full$Q23 = factor(pf_all_full$Q23,
+                       levels = c("Very uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very comfortable"),
+                       ordered = TRUE)
+
+pf_all_full$Q24 = factor(pf_all_full$Q24,
+                       levels = c("Very uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very comfortable"),
+                       ordered = TRUE)
+pf_all_full
+
+##### Item 24: Reading Attitudes
+items2 <- pf_all_full[,substr(names(pf_all), 1,5) == 'Q']
+items2 <- rename(pf_all_full, c(
+            Q19="Linux",
+            Q20="Online collaboration",
+            Q22="R Programming",
+            Q23="Reading scientific papers",
+            Q24="Writing scientific papers"
+            ))
+
+
+
+l2g <- likert(items2[,1:5], grouping=pf_all$type)
+l2g_p <- plot(l2g, as.percent = TRUE, col=c("#E94E1B", "#F7AA4E", "#BEBEBE", "#6193CE", "#00508C"), text.size = 4) +
+  theme(strip.text.x = element_text(size = 12),
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12))
+
+l2g_p
+
+# Likert histograms
+
+
+
+```
+
+## Section 3: What self-reported coping strategies did students use to overcome asynchronous challenges?
+### Self-reported challenges
+```{r challengesBarchart, eval=FALSE}
+# Identify the self-reported challenges
+# Create a donut chart to view self-reported challenges at a glance
+
+# Upload the counts from each module's self-reported challenges
+challenges <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/challenges.csv", na.strings = "0.00%")
+View(challenges)
+
+# Remove totals
+challenges_mods <- challenges %>%
+  filter(challenges$Module != "Total")
+
+# Copy percent column
+challenges_mods = cbind(challenges_mods, replicate(1, challenges_mods$Percent))
+
+# Rename columns
+colnames(challenges_mods)[4] = "Percentage"
+colnames(challenges_mods)[5] = "Percent"
+
+# Remove "%" from the percent column
+# challenges_mods %>% 
+#   mutate(Percent = str_replace(Percent, "%", ""))
+
+challenges_mods$Percent <- gsub("%","",as.character(challenges_mods$Percent))
+
+# Set to numeric
+challenges_mods$Percent <- as.numeric(challenges_mods$Percent)
+
+# add the global option for ggrepel to overlap infinity
+options(ggrepel.max.overlaps = Inf)
+
+# Donut chart
+# title="Self-reported challenges categorized by frequency and module", 
+
+chal <- ggplot(challenges_mods, aes(fill=Challenges, y=Percent, x=Module)) + 
+  # geom_bar(position="fill", stat="identity") +
+  geom_col(show.legend = TRUE, color = "white") + 
+  # scale_x_discrete(limits = c("M1", "M2", "M3", "M4", "M5", "M6", "M7")) +
+  coord_polar(theta = "y", direction = -1) + 
+  geom_text_repel(aes(label = Percentage),
+            position = position_stack(vjust = 0.5)) +
+  theme_bw() +
+  labs(y ="Percent reported", x = "") +
+  scale_fill_viridis_d() + 
+  scale_y_continuous(name="Percent reported (%)") +
+  # geom_vline(xintercept = 7.5, linetype = 3, color = "grey47") +
+  theme(legend.title = element_blank(), legend.text=element_text(size=12),
+        legend.position = "bottom",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12))
+chal 
+
+
+# scale_fill_hue(l=40) 
+
+#        Challenges Module Count Percent
+# 1             Bio  Total    20  10.64%
+# 2          Coding  Total   107  56.91%
+# 3              PD  Total    22  11.70%
+# 4           Other  Total     1   0.53%
+# 5   No challenges  Total     8   4.26%
+# 6        Personal  Total    24  12.77%
+# 7  Cognitive load  Total     6   3.19%
+
+```
+
+### Cognitive Themes
+```{r cogThemeBC}
+
+# Create a bar plot of reported coping themes and separate 
+# by adaptive, adaptive or maladaptive, or maladaptive
+
+# Upload the counts from each module's self-reported challenges
+#cog_themes <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/cogthemes.csv")
+cog_themes <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/cogthemes_SBP.csv")
+View(cog_themes)
+
+# # Optional: Remove totals
+# cog_themes <- cog_themes %>%
+#   filter(cog_themes$Module != "Total")
+
+# Expand the color palette to have 14 colors
+mycolors2 = c(brewer.pal(name="Spectral", n = 11), brewer.pal(name="Dark2", n = 3))
+
+# title="Cognitive themes categorized by coping type and frequency per module", 
+# Add levels to separate each them by coping type
+cog_themes$Theme = factor(cog_themes$Theme, levels=c("Problem solving", "Support seeking", "Information seeking", "Self-reliance/emotional regulation", "Cognitive restructuring", "Accommodation",
+"Negotiation", "Distraction", "Escape", "Isolation", "Rumination", "Helplessness", "Delegation", "Opposition"))
+
+cog_themes$Module = factor(cog_themes$Module, levels = c("M1","M2","M3","M4","M5","M6","M7","Average"))
+
+#ct <- ggplot(cog_themes, aes(fill=Theme, y=Percentage, x=Module), shape = Type) +
+#ct <- ggplot(cog_themes, aes(fill=Theme, y=Percentage_SBP, x=Module), shape = Type) +
+#ct <- ggplot(cog_themes, aes(fill=Theme, y=Proportion_SBP, x=Module), shape = Type) +
+ct <- ggplot(cog_themes, aes(fill=Theme, y=Proportion_CCLE_SBP, x=Module), shape = Type) +
+  geom_bar(position="dodge", stat="identity") + annotate("rect", fill = "grey47", alpha = 0.2,
+        xmin = 7.5, xmax = Inf,
+        ymin = -Inf, ymax = Inf) +
+  theme(legend.title = element_blank(), 
+        strip.text.x = element_text(face="bold", size = 12),
+        legend.text=element_text(size=12), 
+        legend.position = "none",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12)) +
+  labs(y ="Percent reported", x = "") +
+  scale_color_manual(values = mycolors2) +
+  scale_y_continuous(name="") +
+  geom_vline(xintercept = 7.5, linetype = 3, color = "grey47")
+ct
+
+ctc <- ct + facet_wrap(Type~., scales = "free_x") +
+  theme(legend.position = "bottom")
+ctc
+
+#ggsave (filename = "coping_strategies.pdf", plot = ctc, height = 5, width = 10)
+#ggsave (filename = "coping_strategies_SBP.pdf", plot = ctc, height = 5, width = 10)
+ggsave (filename = "coping_strategies_CCLE_SBP.pdf", plot = ctc, height = 5, width = 10)
+
+```
+## Slack analysis
+Slack administrators can export analytics that encapsulate the activity of channel members, including # of days active (reading measure) and # of days posting (posting measure). Are these correlated with learning gain? Here, we also investigate Slack engagement versus pre- and post-test scores. Were those with higher pre-test scores more likely to engage on Slack? Were those who had high engagement on Slack more likely to have higher post-test scores?
+
+```{r SlackParticipationPlots}
+
+slack <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Placenta_Fall2022/Analysis/f22B_anon_datasets/slack_contribution.csv")
+View(slack)
+
+# Normalized learning gain by number of days active on Slack
+slack_activity <- ggplot(slack, aes(x = X..active, y = NLG, color = Contribution)) +
+  geom_jitter() +
+  scale_fill_hue(l=40) +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Percent of Days Active (n = 51)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="NLG", x = "Percentage of Days Active (n = 51)", fill = "Engagement", color = "Engagement") +
+  scale_fill_brewer(palette="Dark2") + 
+  geom_vline(xintercept=0.5023, linetype=3) +
+  geom_hline(yintercept=0.2863, linetype = 3) + 
+  # annotate("text", x=0.30, y=0.8, label = "Theoretical x̅ =0.5023", size=3, color = "gray47") +
+  stat_regline_equation(label.x= 0.70, label.y = 0.15, aes(label = ..eq.label..), size = 3, color ="gray47") +
+  stat_regline_equation(label.x = 0.70, label.y = 0.1, aes(label = ..rr.label..), size = 3, color = "gray47")
+slack1 = slack_activity + ylim(0,1)
+
+# Normalized learning gain by percentage of channel contribution
+slack_convo <- ggplot(slack, aes(x = X..Convo, y = NLG, color = Contribution)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Percent of Days Active (n = 51)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="NLG", x = "Percentage of messages posted", fill = "Engagement", color = "Engagement") +
+  geom_vline(xintercept=0.0769, linetype=3) + 
+  geom_hline(yintercept=0.2863, linetype = 3) + 
+  # annotate("text", x=0.07, y=0.9, label = "Theoretical x̅ =0.0769", size=3, color = "gray47") +
+  stat_regline_equation(label.x= 0.2, label.y = 0.15, aes(label = ..eq.label..), size = 3, color ="gray47") +
+  stat_regline_equation(label.x = 0.2, label.y = 0.1, aes(label = ..rr.label..), size = 3, color = "gray47")
+slack2 = slack_convo + ylim(0,1) 
+
+# Check for significance between student NLGs
+cor.test(slack$X..active, slack$NLG, method = "pearson")
+cor.test(slack$X..Convo, slack$NLG, method = "pearson")
+
+# Check correlation between Slack analytics and pre-scores/post-scores
+# add pre and post scores to the slack dataframe
+slack_all <- data.frame(slack, 
+                        prescore = prescore$score,
+                        postscore = postscore$score)
+
+# Pre-scores by number of days active on Slack
+slack_activity_pre <- ggplot(slack_all, aes(y = X..active, x = prescore, color = Contribution)) +
+  geom_jitter() +
+  scale_fill_hue(l=40) +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Percent of Days Active (n = 51)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", x ="Pre-score", y = "Percentage of Days Active (n = 51)", fill = "Engagement", color = "Engagement") +
+  scale_fill_brewer(palette="Dark2") + 
+  geom_vline(xintercept=0.5023, linetype=3) +
+  geom_hline(yintercept=0.2863, linetype = 3) + 
+  # annotate("text", x=0.30, y=0.8, label = "Theoretical x̅ =0.5023", size=3, color = "gray47") +
+  stat_regline_equation(label.x= 0.70, label.y = 0.15, aes(label = ..eq.label..), size = 3, color ="gray47") +
+  stat_regline_equation(label.x = 0.70, label.y = 0.1, aes(label = ..rr.label..), size = 3, color = "gray47")
+slack3 = slack_activity_pre + ylim(0,1) 
+
+
+# Pre-scores by percentage of channel contribution
+slack_convo_pre <- ggplot(slack_all, aes(y = X..Convo, x = prescore, color = Contribution)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Percent of Days Active (n = 51)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", x ="Pre-score", y = "Percentage of messages posted", fill = "Engagement", color = "Engagement") +
+  geom_vline(xintercept=0.0769, linetype=3) + 
+  geom_hline(yintercept=0.2863, linetype = 3) + 
+  # annotate("text", x=0.07, y=0.9, label = "Theoretical x̅ =0.0769", size=3, color = "gray47") +
+  stat_regline_equation(label.x= 0.2, label.y = 0.15, aes(label = ..eq.label..), size = 3, color ="gray47") +
+  stat_regline_equation(label.x = 0.2, label.y = 0.1, aes(label = ..rr.label..), size = 3, color = "gray47")
+slack4 = slack_convo_pre + ylim(0,1) 
+
+
+# Check correlation of pretest scores for significance
+cor.test(slack$X..active, prescore$score, method = "pearson")
+cor.test(slack$X..Convo, prescore$score, method = "pearson")
+
+
+# Post-scores by number of days active on Slack
+slack_activity_post <- ggplot(slack_all, aes(x = X..active, y = NLG, color = Contribution)) +
+  geom_jitter() +
+  scale_fill_hue(l=40) +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Percent of Days Active (n = 51)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="Post-score", x = "Percentage of Days Active (n = 51)", fill = "Engagement", color = "Engagement") +
+  scale_fill_brewer(palette="Dark2") + 
+  geom_vline(xintercept=0.5023, linetype=3) +
+  geom_hline(yintercept=0.2863, linetype = 3) + 
+  # annotate("text", x=0.30, y=0.8, label = "Theoretical x̅ =0.5023", size=3, color = "gray47") +
+  stat_regline_equation(label.x= 0.70, label.y = 0.15, aes(label = ..eq.label..), size = 3, color ="gray47") +
+  stat_regline_equation(label.x = 0.70, label.y = 0.1, aes(label = ..rr.label..), size = 3, color = "gray47")
+slack5 = slack_activity_post + ylim(0,1)
+
+# Post-scores by percentage of channel contribution
+slack_convo_post <- ggplot(slack_all, aes(x = X..Convo, y = postscore, color = Contribution)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Percent of Days Active (n = 51)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="Post-score", x = "Percentage of messages posted", fill = "Engagement", color = "Engagement") +
+  geom_vline(xintercept=0.0769, linetype=3) + 
+  geom_hline(yintercept=0.2863, linetype = 3) + 
+  # annotate("text", x=0.07, y=0.9, label = "Theoretical x̅ =0.0769", size=3, color = "gray47") +
+  stat_regline_equation(label.x= 0.2, label.y = 0.15, aes(label = ..eq.label..), size = 3, color ="gray47") +
+  stat_regline_equation(label.x = 0.2, label.y = 0.1, aes(label = ..rr.label..), size = 3, color = "gray47")
+slack6 = slack_convo_post + ylim(0,1) 
+
+# Check posttest scores
+cor.test(slack$X..active, postscore$score, method = "pearson")
+cor.test(slack$X..Convo, postscore$score, method = "pearson")
+
+
+# Use ggarrange to create a panel for both A. and B.
+# library(ggpubr) #load in library for multi-panel figures
+# put all three plots together into one multipanel plot
+multi_plot_NLG <- ggarrange(slack1, slack2, #plots that are going to be included in this multipanel figure
+                       labels = c("A", "B"), #labels given each panel 
+                       ncol = 2, nrow = 1, #adjust plot space 
+                       common.legend = T,
+                       legend = "bottom") 
+#does the plot have a common legend
+#add titles and labels to the multi-panel graph
+multi_plot_NLG <- annotate_figure(multi_plot_NLG,
+                              top = text_grob("", color = "black", face = "bold", size = 11)) + scale_fill_hue(l=40) 
+multi_plot_NLG 
+
+ggsave(filename = "Slack_NLG.pdf", plot = multi_plot_NLG, height = 4, width = 8)
+
+# Check for Pearson's correlation coefficient
+cor.test(slack$X..active,slack$NLG)
+# [1] 0.3468
+cor.test(slack$X..Convo,slack$NLG)
+# [1] 0.8062
+
+
+# Use ggarrange to create a panel for both A. and B.
+# library(ggpubr) #load in library for multi-panel figures
+# put all three plots together into one multipanel plot
+multi_plot_pre <- ggarrange(slack3, slack4, #plots that are going to be included in this multipanel figure
+                       labels = c("A", "B"), #labels given each panel 
+                       ncol = 2, nrow = 1, #adjust plot space 
+                       common.legend = T,
+                       legend = "bottom") 
+# does the plot have a common legend
+# add titles and labels to the multi-panel graph
+multi_plot_pre <- annotate_figure(multi_plot_pre,
+                              top = text_grob("", color = "black", face = "bold", size = 11)) + scale_fill_hue(l=40) 
+multi_plot_pre
+
+
+# Use ggarrange to create a panel for both A. and B.
+# library(ggpubr) #load in library for multi-panel figures
+# put all three plots together into one multipanel plot
+multi_plot_post <- ggarrange(slack5, slack6, #plots that are going to be included in this multipanel figure
+                       labels = c("A", "B"), #labels given each panel 
+                       ncol = 2, nrow = 1, #adjust plot space 
+                       common.legend = T,
+                       legend = "bottom") 
+#does the plot have a common legend
+#add titles and labels to the multi-panel graph
+multi_plot_post <- annotate_figure(multi_plot_post,
+                              top = text_grob("", color = "black", face = "bold", size = 11)) + scale_fill_hue(l=40) 
+multi_plot_post
+
+# Days active vs Pre-Post score
+CURE1_daysactive = ggplot(slack, aes(x = Days.active, y = Score_change)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Days Active (Iteration 1)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="POST - PRE score", x = "Days active")
+  
+CURE1_messagesposted = ggplot(slack, aes(x = Messages.posted, y = Score_change)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Messages posted (Iteration 1)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="POST - PRE score", x = "Messages posted")
+
+
+CURE1_slack_multi <- ggarrange(CURE1_daysactive, CURE1_messagesposted, #plots that are going to be included in this multipanel figure
+                       labels = c("A", "B"), #labels given each panel 
+                       ncol = 2, nrow = 1, #adjust plot space 
+                       common.legend = T,
+                       legend = "bottom") 
+
+ggsave("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/slack_analytics/slack_prepost_scatter_CURE1.pdf", plot = CURE1_slack_multi, width = 8, height = 4)
+
+
+slack_CCLE <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/slack_analytics/2023FallB-X-BIO498-BIO598-91120-91121 Member Analytics Oct 1, 2023 - Dec 31, 2023.csv")
+
+CURE2_daysactive = ggplot(slack_CCLE, aes(x = Days.active, y = Post.Pre)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Days Active (Iteration 2)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="POST - PRE score", x = "Days active")
+  
+CURE2_messagesposted = ggplot(slack_CCLE, aes(x = Messages.posted, y = Post.Pre)) +
+  geom_jitter() +
+  geom_smooth(method=lm , color="black",se=T) +
+  xlab("Messages posted (Iteration 2)") +
+  theme(legend.text=element_text(size=12),
+        legend.position = "right",
+        axis.text = element_text(face="bold", size = 12),
+        axis.text.y.left = element_text(size = 12), plot.background = element_rect(color = "black")) +
+  labs(title="", y ="POST - PRE score", x = "Messages posted") 
+
+CURE2_slack_multi <- ggarrange(CURE2_daysactive, CURE2_messagesposted, #plots that are going to be included in this multipanel figure
+                       labels = c("A", "B"), #labels given each panel 
+                       ncol = 2, nrow = 1, #adjust plot space 
+                       common.legend = T,
+                       legend = "bottom") 
+
+ggsave("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/slack_analytics/slack_prepost_scatter_CURE2.pdf", plot = CURE2_slack_multi, width = 8, height = 4)
+
+```
+
+
+```{r SessionInfo}
+
+session_info()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
