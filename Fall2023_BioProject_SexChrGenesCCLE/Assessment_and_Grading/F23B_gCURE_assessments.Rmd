@@ -1,0 +1,729 @@
+---
+title: "F23B GenomicsCURE Assessment"
+author: "Seema Plaisier (from Dani Alarid)"
+date: "1/5/2024"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+  html_document: default
+
+---
+
+# Assessing student outcomes of the fall 2022-B pilot genomics CURE
+## The pre- and post-asssement 
+The fall 2023-B pilot CURE required students to complete a pre- and post-examination to evaluate course outcomes. The pre-assessment acted as a baseline of individual student knowledge, and was divided into three learning submodules or topic areas:
+  - (1) Biology
+  - (2) Coding
+  - (3) Professional development (research)
+
+An additional section for self-reported student comfort and skill levels was included and evaluated independently:
+  - (4) Personal feelings
+
+## The Weekly Progress Report
+Students submitted weekly progress reports in open-repsonse format, and their organic feedback on challenges and how they addressed them (coping strategies), were also evaluated independently.
+
+Based on these datasets, the following questions were asked to evaluate the impact of an asynchrous online CURE on student ability to analyze and impact data:
+ - (1) Q1: Can a remote CURE increase student ability to interpret and analyze data? (quantitative)
+ - (2) Q2: How does a remote CURE affect student comfort levels in computational research? (quantitative)
+ - (3) Q3: What self-reported coping strategies did students use to overcome asynchronous challenges? (qualitative)
+
+### Install and load packages
+```{r installPackages, include=FALSE}
+
+# Install packages
+if(!require(tidyverse)){
+  install.packages("tidyverse")
+  }
+
+if(!require(fitdistrplus)){
+  install.packages("fitdistrplus")
+}
+
+if(!require(logspline)){
+  install.packages("logspline")
+}
+
+if(!require(effsize)){
+  install.packages("effsize")
+}
+
+if(!require(betareg)){
+  install.packages("betareg")
+}
+
+if(!require(ggplot2)){
+  install.packages("ggplot2")
+}
+
+if(!require(dplyr)){
+  install.packages("dplyr")
+}
+
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("kassambara/ggpubr")
+
+if(!require(ggpubr)){
+  install.packages("ggpubr")
+  }
+
+if(!require(PairedData)){
+install.packages("PairedData")
+}
+
+if(!require(ggpmisc)){
+install.packages("ggpmisc")
+}
+
+if(!require(matrixTests)){
+install.packages("matrixTests")
+}
+
+if(!require(ggrepel)){
+install.packages("ggrepel")
+}
+
+if(!require(likert)){
+  install.packages("likert")
+  }
+
+if(!require(psych)){
+  install.packages("psych")
+  }
+
+if(!require(tinytex)){
+  install.packages("tinytex")
+  }
+
+# Load libraries
+library(tidyverse)
+library(fitdistrplus)
+library(logspline)
+library(effsize)
+library(betareg)
+library(ggplot2)
+library(plyr)
+library(ggpubr)
+library(dplyr)
+library(PairedData)
+library(ggpmisc)
+library(matrixTests)
+library(ggrepel)
+library(data.table)
+library(likert)
+library(psych)
+library(gridExtra)
+library(RColorBrewer)
+
+# Set color palette for an extended number of samples
+mycolors = c(brewer.pal(name="Spectral", n = 11), brewer.pal(name="Dark2", n = 8))
+# Set theme using tidyverse
+theme_set(theme_bw())
+
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
+
+```
+
+### Input the data for the Fall 2022B pilot CURE
+```{r, DataInput}
+
+overall_scores <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/2024-02-09T0919_Grades-2023FallB-X-BIO498-BIO598-91120-91121.csv")
+
+deltas_overall <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/deltas_overall.csv")
+
+# Reduce the number of decimal places as a global option
+options(digits = 4)
+
+# Input the results of both treatments
+combined_scores <- data.frame(deltas_overall)
+
+prescore = data.frame(cbind(overall_scores$ID,overall_scores$Module.0..Pre.Test...4362118.))
+colnames(prescore) = c("student","score")
+
+postscore = data.frame(cbind(overall_scores$ID,overall_scores$Module.7..Post.Test..4549646.))
+colnames(postscore) = c("student","score")
+
+# remove students with 0 for pre or post test scores
+#check_pre_zero = prescore_table$student[prescore_table$score == 0]
+#check_post_zero = postscore_table$student[postscore_table$score == 0]
+#students_with_zeros = c(check_pre_zero,check_post_zero)
+
+#prescore = prescore_table %>% filter(!(student %in% students_with_zeros))
+#postscore = postscore_table %>% filter(!(student %in% students_with_zeros))
+
+# summarize pre and post scores
+summary(prescore)
+summary(postscore)
+
+
+```
+## Section 1: Do exam scores differ significantly before and after the asychronous CURE?
+```{r PrePost, eval=TRUE}
+
+# Fitting the data to a distribution
+descdist(combined_scores$prescore, discrete = F) #beta distributionn
+descdist(combined_scores$postscore, discrete = F) #beta distribution
+fit.beta_pre <- fitdist(combined_scores$prescore, "beta", method = "mme")
+fit.beta_post <- fitdist(combined_scores$postscore, "beta", method = "mme")
+plot(fit.beta_pre)
+plot(fit.beta_post)
+```
+### Exploratory data analysis
+Using the parametric paired t-test, we assume that the data are normally distributed for our dataset. 
+```{r, DistributionHistogram,eval=TRUE}
+
+# Create a dataframe of the pre- and post-scores
+#histo_combined <- overall_scores
+
+
+##===============================================
+
+# density plots with histograms per treatment to show distribution
+dp_pre <- ggplot(prescore, aes(x=score)) + 
+  geom_histogram(data = prescore, fill = "white", col = "darkgreen", alpha = 0.5, binwidth = 0.1, bins=30, position = "identity") + 
+  labs(title="Distribution of pre-test scores", y ="Number of students") +
+  geom_density(data = prescore, fill = "darkolivegreen", alpha=0.6) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.1))
+dp_pre + ylim(0,5)
+
+dp_post <- ggplot(postscore, aes(x=score)) + 
+  geom_histogram(data = postscore, fill = "white", alpha = 0.5, col = "darkorange2", binwidth = 0.1, bins=30, position = "dodge") + 
+  labs(title="Distribution of post-test scores", y ="Number of students")+
+  geom_density(data = postscore, fill = "darkorange1", alpha=0.6) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.1))
+dp_post + ylim(0,5)
+
+```
+
+#### Test for normal distribution using ShapiroWilk
+```{r ShapiroWilk, eval=TRUE}
+# The null hypothesis for the Wilk-Shapiro test of normality is that the data are normally distributed. 
+shapiro.test(prescore$score)
+## There is not enough evidence to reject the null hypothesis. Therefore, each group follows a normal distribution.
+
+shapiro.test(postscore$score)
+## There is not enough evidence to reject the null hypothesis. Therefore, each group follows a normal distribution.
+```
+
+### Visualize paired outcomes data using box plots
+Use the boxplot to visualize differences in exam scores.
+```{r pairedData}
+
+# Create a dataframe that is separated by group, score, and student
+my_data <- data.frame(
+group = rep(c("prescore", "postscore"), each = nrow(prescore)),
+score = c(prescore$score,  postscore$score),
+student = c(prescore$student, postscore$student)
+)
+
+# Compute summary statistics by groups using dplyr:
+summary_overall <- group_by(my_data, group) %>%
+  dplyr::summarize(
+    count = n(),
+    mean = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE)
+  )
+summary_overall
+
+```
+### Paired boxplots of average assessment scores pre vs post test
+```{r PairedBoxplotsOverall}
+pbp <- ggpaired(my_data, x = "group", y = "score",
+ color = "group", line.color = "gray", line.size = 0.4,
+ palette = "Dark2",
+  xlab = "Assessment",
+  ylab = "Overall score (%)") +
+  theme(legend.position = "none")
+pbp
+
+ggsave(filename = "overall_score.pdf", plot = pbp)
+```
+The change in scores is visually evident by the histograms and the boxplots, but is it significant?
+
+### Check for signficance
+#### Paired t-test
+Use the paired t-test on the dependent samples to test for significant differences in means between exam scores before and after the CURE
+```{r PairedTtest, include=TRUE}
+# Perform a paired samples t-test
+# x,y: numeric vectors
+# paired: a logical value specifying that we want to compute a paired t-test
+# alternative: the alternative hypothesis. Allowed value is one of “two.sided” (default), “greater” or “less”.
+
+overall_ttest_all <-t.test(postscore$score, prescore$score, paired = TRUE, alternative = "two.sided")
+overall_ttest_all
+```
+
+#### Check effect size using Cohen's d
+Since the t-test calculated a p-value of 0.003, which is < p = 0.05, the overall score differences by individuals are significant. Next, effect size will express the magnitude of the significance to the population at large.
+  - Small effect:   ≥ 0.2
+  - Medium effect:  ≥ 0.5
+  - Large effect:   ≥ 0.8
+```{r CohensD}
+# Use the package effsize to determine the strength of the differences in scores 
+score_pre <- prescore$score
+score_post<- postscore$score
+effsize::cohen.d(score_post, score_pre)
+```
+
+### Scatter plot of overall scores and correlation
+```{r ScatterScores}
+
+# Scatter plot of overall scores
+p1 <- ggplot(combined_scores,
+             aes(x=prescore, y=postscore, color=student))+
+  geom_jitter()+
+  geom_smooth(method=lm , color="black",se=T) +
+  theme(plot.title=element_text(size=10))+
+  labs(title="Assessment prescores versus postscores all students", 
+       x="Pre-score", y="Post-score")
+
+p1
+
+summary(combined_scores)
+
+# Check Pearson Correlation and test for significance
+cor(combined_scores$prescore, combined_scores$postscore)
+cor.test(combined_scores$prescore, combined_scores$postscore)
+
+```
+
+### Do scores differ by question and topic?
+Biology, coding, professional development
+```{r ViolinPlots}
+# create the dataframes
+# Import data for prescores by question
+questions_pre <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/pretest_correct_table.csv")
+
+# Import data for prescores by question
+questions_post <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/posttest_correct_table.csv")
+
+questions_all = rbind(questions_pre,questions_post)
+
+# paired box plot by topic
+# -- sum of scores by topic per student, pre vs pos
+#questions_all_sum = aggregate(questions_all$Score, by = list(questions_all$Topic, questions_all$Type), FUN = sum)
+questions_all_sum = aggregate(questions_all$Score, by = list(questions_all$Topic, questions_all$Type,questions_all$Student), FUN = sum)
+colnames(questions_all_sum) = c("Topic","Type","Student","SumScore")
+write.csv(questions_all_sum, file = "SumCorrect_questions.csv")
+
+questions_all_sum$Type <- factor(questions_all_sum$Type , levels=c("prescore", "postscore"))
+pattern = c("darkcyan","red3")
+
+# ----- by topic ---------
+sum_by_topic = ggplot(questions_all_sum, aes(x = Type, y = SumScore)) + 
+  geom_boxplot(aes(fill = Topic), alpha = .2, color = c("darkcyan","red3","darkcyan","red3","darkcyan","red3"), fill = "white") +
+  scale_x_discrete(labels=c("prescore" = "pre", "postscore" = "post"), name = element_blank()) +
+  geom_line(aes(group = Student), color = "gray", size = 0.4, position = "identity") + 
+  geom_point(size = 1) +
+  facet_wrap(~ Topic) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
+
+ggsave(filename = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/sum_score_by_topic.pdf", plot = sum_by_topic)
+
+# cohen's score and ttest p-value by topic
+score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Topic == "Biology"]
+score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Topic == "Biology"]
+effsize::cohen.d(score_post, score_pre)
+t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided")
+
+score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Topic == "Coding"]
+score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Topic == "Coding"]
+effsize::cohen.d(score_post, score_pre)
+t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided")
+
+score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Topic == "ProfDev"]
+score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Topic == "ProfDev"]
+effsize::cohen.d(score_post, score_pre)
+t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided")
+
+# ----- by subtopic ---------
+questions_all_sum = aggregate(questions_all$Score, by = list(questions_all$Subtopic, questions_all$Type,questions_all$Student), FUN = sum)
+colnames(questions_all_sum) = c("Subtopic","Type","Student","SumScore")
+
+questions_all_sum$Type <- factor(questions_all_sum$Type , levels=c("prescore", "postscore"))
+
+subtopic_order = unique(questions_all$Subtopic, fromLast = FALSE)
+questions_all_sum$Subtopic <- factor(questions_all_sum$Subtopic , levels= subtopic_order)
+
+pattern = c("darkcyan","red3")
+
+sum_by_subtopic = ggplot(questions_all_sum, aes(x = Type, y = SumScore)) + 
+  geom_violin(aes(fill = Subtopic), alpha = .2, fill = "white") +
+  scale_x_discrete(labels=c("prescore" = "pre", "postscore" = "post"), name = element_blank()) +
+  geom_line(aes(group = Student), color = "gray", size = 0.4, position = "identity") + 
+  geom_point(size = 1) +
+  facet_wrap(~ Subtopic, ncol = 5) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.text = element_text(size = 7)) 
+
+ggsave(filename = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/sum_score_by_subtopic.pdf", plot = sum_by_subtopic)
+
+for (subt in subtopic_order) {
+  print (subt)
+  score_post = questions_all_sum$SumScore[questions_all_sum$Type == "postscore" & questions_all_sum$Subtopic == subt]
+  score_pre = questions_all_sum$SumScore[questions_all_sum$Type == "prescore" & questions_all_sum$Subtopic == subt]
+  print(effsize::cohen.d(score_post, score_pre))
+  print(t.test(score_post, score_pre, paired = TRUE, alternative = "two.sided"))
+}
+
+```
+
+```{r ComfortLevels}
+
+comfort_pre <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/pretest_likert_comfort.csv")
+
+comfort_post <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/posttest_likert_comfort.csv")
+
+comfort_all = rbind(comfort_pre,comfort_post)
+
+comfort_all$Type <- factor(comfort_all$Type , levels=c("prescore", "postscore"))
+pattern = c("darkcyan","red3")
+colors = rep(pattern,times = 5)
+
+# by question
+comfort_plot_by_question = ggplot(comfort_all, aes(x = Type, y = Score)) + 
+  geom_boxplot(aes(fill = Question), alpha = .2, color = colors, fill = "white") +
+  scale_x_discrete(labels=c("prescore" = "pre", "postscore" = "post"), name = element_blank()) +
+  geom_line(aes(group = Student), color = "gray", size = 0.4, position = "identity") + 
+  geom_point(size = 1) +
+  facet_wrap(~ Question, ncol = 5) +
+  ylim (-3.5,3.5) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
+
+ggsave(filename = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/Likert_comfort_by_question.pdf", plot = comfort_plot_by_question, width = 8, height = 4)
+
+# overall
+comfort_plot = ggplot(comfort_all, aes(x = Type, y = Score)) + 
+  geom_boxplot(aes(fill = Question), alpha = .2, color = pattern, fill = "white") +
+  scale_x_discrete(labels=c("prescore" = "pre", "postscore" = "post"), name = element_blank()) +
+  geom_line(aes(group = Student), color = "gray", size = 0.4, position = "identity") + 
+  geom_point(size = 1) +
+  ylim (-3.5,3.5) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
+
+ggsave(filename = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/Likert_comfort_overall.pdf", plot = comfort_plot)
+
+# cohen's score and ttest p-value by topic
+comfort_post = comfort_all$Score[comfort_all$Type == "postscore"]
+comfort_pre = comfort_all$Score[comfort_all$Type == "prescore"]
+t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
+summary(comfort_pre)
+summary(comfort_post)
+
+comfort_post = comfort_all$Score[comfort_all$Type == "postscore" & comfort_all$Question == "CodingQuestion"]
+comfort_pre = comfort_all$Score[comfort_all$Type == "prescore" & comfort_all$Question == "CodingQuestion"]
+t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
+
+comfort_post = comfort_all$Score[comfort_all$Type == "postscore" & comfort_all$Question == "CommandLine_Linux"]
+comfort_pre = comfort_all$Score[comfort_all$Type == "prescore" & comfort_all$Question == "CommandLine_Linux"]
+t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
+
+comfort_post = comfort_all$Score[comfort_all$Type == "postscore" & comfort_all$Question == "ProgrammingR"]
+comfort_pre = comfort_all$Score[comfort_all$Type == "prescore" & comfort_all$Question == "ProgrammingR"]
+t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
+table(sign(comfort_pre))
+table(sign(comfort_post))
+
+comfort_post = comfort_all$Score[comfort_all$Type == "postscore" & comfort_all$Question == "ReadingPaper"]
+comfort_pre = comfort_all$Score[comfort_all$Type == "prescore" & comfort_all$Question == "ReadingPaper"]
+t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
+
+comfort_post = comfort_all$Score[comfort_all$Type == "postscore" & comfort_all$Question == "WritingPaper"]
+comfort_pre = comfort_all$Score[comfort_all$Type == "prescore" & comfort_all$Question == "WritingPaper"]
+t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
+
+comfort_deltas <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/delta_likert_comfort.csv")
+
+info = data.frame(table(comfort_deltas$Trend))
+lbls = info$Var1
+slices = info$Freq
+pct = round(slices/sum(info$Freq)*100)
+lbls <- paste(lbls, pct)
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie (info$Freq, labels = lbls)
+title("All Likert Questions with All Students")
+
+pdf("piechart_comfort_delta_ProgrammingR.pdf", height = 3.5, width = 3)
+filter_df = comfort_deltas %>% filter(Question == "ProgrammingR")
+info = data.frame(table(filter_df$Trend))
+lbls = info$Var1
+slices = info$Freq
+pct = round(slices/sum(info$Freq)*100)
+lbls <- paste(lbls, pct)
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie (info$Freq, labels = lbls)
+title("ProgrammingR with All Students")
+dev.off()
+pie (info$Freq, labels = lbls)
+title("ProgrammingR with All Students")
+
+filter_df = comfort_deltas %>% filter(Question == "CodingQuestion")
+info = data.frame(table(filter_df$Trend))
+lbls = info$Var1
+slices = info$Freq
+pct = round(slices/sum(info$Freq)*100)
+lbls <- paste(lbls, pct)
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie (info$Freq, labels = lbls)
+title("CodingQuestion  with All Students")
+
+filter_df = comfort_deltas %>% filter(Question == "CommandLine_Linux")
+info = data.frame(table(filter_df$Trend))
+lbls = info$Var1
+slices = info$Freq
+pct = round(slices/sum(info$Freq)*100)
+lbls <- paste(lbls, pct)
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie (info$Freq, labels = lbls)
+title("CommandLine_Linux  with All Students")
+
+pdf("piechart_comfort_delta_ReadingPaper.pdf", height = 3.5, width = 3)
+filter_df = comfort_deltas %>% filter(Question == "ReadingPaper")
+info = data.frame(table(filter_df$Trend))
+lbls = info$Var1
+slices = info$Freq
+pct = round(slices/sum(info$Freq)*100)
+lbls <- paste(lbls, pct)
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie (info$Freq, labels = lbls)
+title("ReadingPaper  with All Students")
+dev.off()
+pie (info$Freq, labels = lbls)
+title("ReadingPaper  with All Students")
+
+
+pdf("piechart_comfort_delta_WritingPaper.pdf", height = 3.5, width = 3)
+filter_df = comfort_deltas %>% filter(Question == "WritingPaper")
+info = data.frame(table(filter_df$Trend))
+lbls = info$Var1
+slices = info$Freq
+pct = round(slices/sum(info$Freq)*100)
+lbls <- paste(lbls, pct)
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie (info$Freq, labels = lbls)
+title("WritingPaper  with All Students")
+dev.off()
+pie (info$Freq, labels = lbls)
+title("WritingPaper  with All Students")
+
+```
+
+```{r QualmetrixSurveys}
+
+qualsurvey_pre = read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_pre.csv")
+qualsurvey_post = read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_post.csv")
+
+# do iteration 1 pre
+pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/pie_charts/iteration1/"
+
+qualsurvey_pre_iteration1 = qualsurvey_pre[qualsurvey_pre$Iteration == 1,]
+colnames(qualsurvey_pre_iteration1)
+
+for (i in 19:60) {
+  info = data.frame(table(qualsurvey_pre_iteration1[i]))
+  if(nrow(info) > 0) {
+    pdf(paste0(pie_chart_directory,"pre",i,".pdf"))
+    lbls = info[,1]
+    slices = info$Freq
+    if (length(slices) <= 10) {
+      pct = round(slices/sum(info$Freq)*100)
+      lbls <- paste(lbls, pct)
+      lbls <- paste(lbls,"%",sep="") # ad % to labels
+      pie (info$Freq, labels = lbls)
+      title(colnames(qualsurvey_pre_iteration1)[i], cex.main = 0.5)
+    }
+    dev.off()
+  }
+}
+
+# do iteration 2 pre
+pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/pie_charts/iteration2/"
+
+qualsurvey_pre_iteration2 = qualsurvey_pre[qualsurvey_pre$Iteration == 2,]
+colnames(qualsurvey_pre_iteration2)
+
+for (i in 19:60) {
+  info = data.frame(table(qualsurvey_pre_iteration2[i]))
+  if(nrow(info) > 0) {
+    pdf(paste0(pie_chart_directory,"pre",i,".pdf"))
+    lbls = info[,1]
+    slices = info$Freq
+    if (length(slices) <= 10) {
+      pct = round(slices/sum(info$Freq)*100)
+      lbls <- paste(lbls, pct)
+      lbls <- paste(lbls,"%",sep="") # ad % to labels
+      pie (info$Freq, labels = lbls)
+      title(colnames(qualsurvey_pre_iteration2)[i], cex.main = 0.5)
+    }
+    dev.off()
+  }
+}
+
+# do iteration 1 post
+pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/pie_charts/iteration1/"
+
+qualsurvey_post_iteration1 = qualsurvey_post[qualsurvey_post$Iteration == 1,]
+colnames(qualsurvey_post_iteration1)
+
+for (i in 19:60) {
+  info = data.frame(table(qualsurvey_post_iteration1[i]))
+  if(nrow(info) > 0) {
+    pdf(paste0(pie_chart_directory,"post",i,".pdf"))
+    lbls = info[,1]
+    slices = info$Freq
+    if (length(slices) <= 10) {
+      pct = round(slices/sum(info$Freq)*100)
+      lbls <- paste(lbls, pct)
+      lbls <- paste(lbls,"%",sep="") # ad % to labels
+      pie (info$Freq, labels = lbls)
+      title(colnames(qualsurvey_post_iteration1)[i], cex.main = 0.5)
+    }
+    dev.off()
+  }
+}
+
+# do iteration 2 post
+pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/pie_charts/iteration2/"
+
+qualsurvey_post_iteration2 = qualsurvey_post[qualsurvey_post$Iteration == 2,]
+colnames(qualsurvey_post_iteration2)
+
+for (i in 19:60) {
+  info = data.frame(table(qualsurvey_post_iteration2[i]))
+  if(nrow(info) > 0) {
+    pdf(paste0(pie_chart_directory,"post",i,".pdf"))
+    lbls = info[,1]
+    slices = info$Freq
+    if (length(slices) <= 10) {
+      pct = round(slices/sum(info$Freq)*100)
+      lbls <- paste(lbls, pct)
+      lbls <- paste(lbls,"%",sep="") # ad % to labels
+      pie (info$Freq, labels = lbls)
+      title(colnames(qualsurvey_post_iteration2)[i], cex.main = 0.5)
+    }
+    dev.off()
+  }
+}
+
+```
+
+```{r ClassMakeupTable}
+
+class_makeup_data = read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_class_makeup_table.csv", check.names = FALSE)
+
+class_makeup_df = data.frame(class_makeup_data)
+
+library(grid)
+library(gridExtra)
+
+pdf("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/table_class_makeup.pdf", height = 8, width = 12)
+tt2 <- ttheme_default(core=list(fg_params=list(hjust=1)),
+                      rowhead=list(fg_params=list(hjust=1)),
+                      colhead = list(fg_params = list(hjust=1, fontsize=12, fontface="bold")))
+class_makeup_table = tableGrob(class_makeup_df, theme = tt2)
+class_makeup_table$gp = gpar(fontsize = 12)
+grid.draw(class_makeup_table)
+
+dev.off()
+
+```
+
+
+```{r NLG}
+
+questions_mean_pre = aggregate(questions_pre$Score, by = list(questions_pre$Type,questions_pre$Question), FUN = mean)
+colnames(questions_mean_pre) = c("Type","Question","MeanScore")
+
+questions_mean_post = aggregate(questions_post$Score, by = list(questions_post$Type,questions_post$Question), FUN = mean)
+colnames(questions_mean_post) = c("Type","Question","MeanScore")
+
+questions_mean_pre$Question == questions_mean_post$Question
+
+question_mean = data.frame(rbind(questions_mean_pre,questions_mean_post))
+
+question_mean_diff = data.frame(questions_mean_pre$Question, questions_mean_post$MeanScore - questions_mean_pre$MeanScore)
+colnames(question_mean_diff) = c("Question","DiffMeanScore")
+
+barplot(question_mean_diff$DiffMeanScore)
+
+ggplot(question_mean, aes(x = Question, y = MeanScore, fill = Type)) + 
+  geom_bar(stat = "identity",position=position_dodge()) 
+  #+ facet_wrap(~ Topic)
+
+question_mean_2 = data.frame(questions_mean_pre$Question,questions_mean_pre$MeanScore,questions_mean_post$MeanScore)
+colnames(question_mean_2) = c("Question","MeanScore_pre","MeanScore_post")
+
+question_mean_2$NLG = (question_mean_2$MeanScore_post - question_mean_2$MeanScore_pre) / (100 - question_mean_2$MeanScore_pre)
+
+# get the correct order of questions
+number_range = c(1:60)
+number_range = as.character(number_range)
+q_range = rep("Q",60)
+q_num_range = paste0(q_range,number_range)
+
+question_mean_2$Question <- factor(question_mean_2$Question , levels= q_num_range)
+
+ggplot(question_mean_2, aes(x = Question, y = NLG)) + 
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+nrow(question_mean_diff)
+nrow(question_mean_diff[question_mean_diff$DiffMeanScore > 0,])
+nrow(question_mean_diff[question_mean_diff$DiffMeanScore <= 0,])
+
+#---------
+
+# how many students got the right answer pre-test
+questions_sum_pre = aggregate(questions_pre$Score, by = list(questions_pre$Type,questions_pre$Question), FUN = sum)
+colnames(questions_sum_pre) = c("Type","Question","SumScore")
+
+# how many students got the right answer post-test
+questions_sum_post = aggregate(questions_post$Score, by = list(questions_post$Type,questions_post$Question), FUN = sum)
+colnames(questions_sum_post) = c("Type","Question","SumScore")
+
+question_sum_prepost = data.frame(questions_sum_pre$Question,questions_sum_pre$SumScore,questions_sum_post$SumScore)
+colnames(question_sum_prepost) = c("Question","SumScore_pre","SumScore_post")
+
+question_sum_prepost$NLG = (question_sum_prepost$SumScore_post - question_sum_prepost$SumScore_pre) / (100 - question_sum_prepost$SumScore_pre)
+
+write.csv(question_sum_prepost, file = "Questions_Sum_prepost.csv")
+
+question_sum_prepost$Question <- factor(question_sum_prepost$Question , levels= q_num_range)
+
+
+ggplot(question_sum_prepost, aes(x = Question, y = NLG)) + 
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+nrow(question_sum_prepost)
+nrow(question_sum_prepost[question_sum_prepost$NLG > 0,])
+nrow(question_sum_prepost[question_sum_prepost$NLG == 0,])
+nrow(question_sum_prepost[question_sum_prepost$NLG < 0,])
+
+
+```
+
+```{r SessionInfo}
+
+session_info()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
