@@ -12,7 +12,7 @@ Although there is a known sex bias in cancer, sex chromosomes are typically excl
 
 # Data used
 
-For the second iteration of the CURE, RNA sequencing gene expression for the Cancer Cell Line Encyclopedia (CCLE) was downloaded from the project’s public data portal ((https://depmap.org/portal/download/all/), CCLE 2019 dataset, CCLE_RNAseq_genes_counts_20180929.gct.gz) (8).  The data table was converted to a comma-separated value (csv) table by removing the first two rows for easy loading into data frames in R.
+For the second iteration of the CURE, RNA sequencing gene expression for the Cancer Cell Line Encyclopedia (CCLE) was downloaded from the project’s public data portal (https://depmap.org/portal/download/all/, CCLE 2019 dataset, CCLE_RNAseq_genes_counts_20180929.gct.gz) (8).  The data table was converted to a comma-separated value (csv) table by removing the first two rows for easy loading into data frames in R.
 
 # Directory Structure
 
