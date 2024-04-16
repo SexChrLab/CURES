@@ -13,3 +13,9 @@ In this iteration of the online genomics CURE, we implemented an asynchronous jo
 4) Syllabus 
 5) Learning Objectives
 
+# Directory Structure
+
+In the Fall2023_BioProject_SexChrGenes_CCLE folder, you will find: 
+1. 'Module' folders for each module containing the Learn Bio/Stats, Learn Coding, and Learn Professional Development pages given to the students on Canvas
+2. 'Journal Club' folder that shows the publications we distributed to the students using Perusall assignments on Canvas
+3. 
