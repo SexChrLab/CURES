@@ -1,4 +1,4 @@
-# Iteration 2 of genomics CURE
+# Iteration 2 of online genomics course-based undergraduate research experience (CURE)
 
 In this iteration of the online genomics CURE, we implemented an asynchronous journal club, added scientific writing prompts, changed the format of peer review for Module 7, and added short weekly quizzes as formative assessments for the students.
 
@@ -21,3 +21,8 @@ In the Fall2023_BioProject_SexChrGenes_CCLE directory, you will find:
 2. 'Journal Club' directory describes the publications we distributed to the students using Perusall assignments on Canvas
 3. 'Template_Code' directory includes the code distributed to students to help them do the analysis with examples of results
 4. 'Assessment_and_Grading' includes pre- and post- learning assessments and code that was used to analyze learning gains
+
+# Contact information
+
+If you would like more information about our online genomics research course, please feel free to reach out to Dr. Melissa Wilson (mwilsons at asu dot edu).
+
