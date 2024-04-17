@@ -1,8 +1,6 @@
 # Online genomics course-based undergraduate research experiences (CUREs)
 This GitHub repository will hold all course materials for the asynchronous online genomics CUREs taught by Dr.Melissa Wilson in the Arizona State University School of Life Sciences.  Directories will be created for each iteration of the CURE so other instructors can use these materials to aide in the creation of their own research courses.  
 
-This repository is home to code and learning materials used for the course-based research experiences we have designed and implemented. Below we summarize each iteration of the CURE.
-
 ## Fall 2022 Genomics Research Experience: Placenta Transcriptomics
 In this pilot iteration of the CURE, we investigated the whether the list of sex differentially expressed genes identified in the human placenta was sensitive to changes in sequence quality trimming.  
 
