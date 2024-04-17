@@ -1,5 +1,5 @@
-# CURES
-Course based research experiences
+# Online genomics course-based undergraduate research experiences (CUREs)
+This GitHub repository will hold all course materials for the asynchronous online genomics CUREs taught by Dr.Melissa Wilson in the Arizona State University School of Life Sciences.  Directories will be created for each iteration of the CURE so other instructors can use these materials to aide in the creation of their own research courses.  
 
 This repository is home to code and learning materials used for the course-based research experiences we have designed and implemented. Below we summarize each iteration of the CURE.
 
@@ -8,3 +8,7 @@ In this pilot iteration of the CURE, we investigated the whether the list of sex
 
 ## Fall 2023 Genomics Research Experience: Sex Chromosomes in the CCLE (Cancer Cell Line Encyclopedia)
 In this CURE we inferred the sex chromosome complement in cancer cell lines using expression of a specific set sex chromosome genes.  
+
+# Contact information
+
+If you would like more information about our online genomics research course, please feel free to reach out to Dr. Melissa Wilson (mwilsons at asu dot edu).
