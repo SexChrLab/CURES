@@ -16,7 +16,7 @@ For the first iteration of the CURE, previously published RNA sequencing data fr
 
 # Directory Structure
 
-In the Fall2023_BioProject_SexChrGenes_CCLE directory, you will find: 
+In the Fall2022_MethodsProject_PlacentaSexDiffExpression directory, you will find: 
 1. 'Module' directories for each module containing the Learn Bio/Stats, Learn Coding, and Learn Professional Development pages given to the students on Canvas
 2. 'Template_Code' directory includes the code distributed to students to help them do the analysis with examples of results
 3. 'Student_Assessment and Templates' directory includes instructions and templates given to students to better understand the format for the manuscript, weekly progress reports, and assignments
