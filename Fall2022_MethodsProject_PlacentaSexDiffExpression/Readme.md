@@ -24,7 +24,7 @@ In the Fall2023_BioProject_SexChrGenes_CCLE directory, you will find:
 5. 'Troubleshooting' directory includes a walk-through of how a bug in the template code was identified and fixed during the CURE
 
 # Preprint 
-This course iteration of the course was presented in a preprint (available at [https://www.biorxiv.org/content/10.1101/2023.11.29.569298v1](url)].  Data from a second iteration of the CURE with higher student enrollment was used to ultimately publish this work, so stay tuned for that.  
+This course iteration of the course was presented in a preprint (available at [https://www.biorxiv.org/content/10.1101/2023.11.29.569298v1](url)].  After reviews of this preprint, the instructors decided to merge data from this iteration with a second iteration to include more students in the analysis.  We will include a citation for that manuscript here after it has been accepted.
 
 # Contact information
 
