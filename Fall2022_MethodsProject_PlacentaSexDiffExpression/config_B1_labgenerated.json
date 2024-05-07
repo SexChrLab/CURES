@@ -1,0 +1,469 @@
+{
+
+  "Comment_Transcriptome_Index": "The following section specified the location of the index file for Salmon",
+  "HG38_Transcriptome_Index_HISAT_Path_male": "/data/CEM/shared/public_data/references/GENCODE/GRCh38.p12.genome.XY/GRCh38.p12.genome.XY",
+  "HG38_Transcriptome_Index_HISAT_Path_female": "/data/CEM/shared/public_data/references/GENCODE/GRCh38.p12.genome.XXonly/GRCh38.p12.genome.XXonly",
+
+  "Comment_Sample_Info": "The following section lists the samples that are to be analyzed",
+  "sample_names": ["OBG0044-1", "OBG0044-2", "OBG0068-1", "OBG0068-2", "OBG0053-2","OBG0053-1", 
+                "OBG0111-1", "OBG0111-2", "OBG0112-1", "OBG0112-2", "OBG0115-1", "OBG0115-2", 
+                "OBG0116-1", "OBG0116-2", "OBG0117-1", "OBG0117-2", "OBG0118-1", "OBG0118-2", 
+                "OBG0120-1", "OBG0120-2", "OBG0122-1", "OBG0122-2", "OBG0123-1", "OBG0123-2", 
+                "OBG0126-1", "OBG0126-2", "OBG0130-1", "OBG0130-2", "OBG0132-1", "OBG0132-2", 
+                "OBG0133-1", "OBG0133-2", "OBG0156-1", "OBG0156-2", "OBG0158-1", "OBG0158-2", 
+                "OBG0166-1", "OBG0166-2", "OBG0170-1", "OBG0170-2", "OBG0178-1", "OBG0178-2", 
+                "YPOPS0006-1", "YPOPS0006-2"],
+  
+  "females": ["OBG0044-1", "OBG0044-2", "OBG0068-1", "OBG0068-2", "OBG0111-1", "OBG0111-2", 
+            "OBG0115-1", "OBG0115-2", "OBG0120-1", "OBG0120-2","OBG0133-1", "OBG0133-2",
+            "OBG0156-1", "OBG0156-2", "OBG0166-1", "OBG0166-2", "OBG0170-1", "OBG0170-2",
+            "OBG0178-1", "OBG0178-2"],
+  
+  "males": ["OBG0053-2", "OBG0053-1", "OBG0112-1","OBG0112-2", "OBG0116-1", "OBG0116-2", 
+            "OBG0117-1", "OBG0117-2", "OBG0118-1", "OBG0118-2", "OBG0122-1", "OBG0122-2", 
+            "OBG0123-1", "OBG0123-2", "OBG0126-1", "OBG0126-2", "OBG0130-1", "OBG0130-2",
+            "OBG0132-1", "OBG0132-2", "OBG0158-1", "OBG0158-2", "YPOPS0006-1", "YPOPS0006-2"],
+
+    "OBG0044-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0044-1-010_S37_L005_R1_001.fastq.gz",
+        "fq2": "OBG0044-1-010_S37_L005_R2_001.fastq.gz",
+        "ID": "OBG0044-1",
+        "SM": "OBG0044-1",
+        "LB": "OBG0044-1",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0044-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0044-2-011_S46_L006_R1_001.fastq.gz",
+        "fq2": "OBG0044-2-011_S46_L006_R2_001.fastq.gz",
+        "ID": "OBG0044-2",
+        "SM": "OBG0044-2",
+        "LB": "OBG0044-2",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0068-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0068-1-020_S23_L003_R1_001.fastq.gz",
+        "fq2": "OBG0068-1-020_S23_L003_R2_001.fastq.gz",
+        "ID": "OBG0068-1",
+        "SM": "OBG0068-1",
+        "LB": "OBG0068-1",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0068-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0068-2-021_S32_L004_R1_001.fastq.gz",
+        "fq2": "OBG0068-2-021_S32_L004_R2_001.fastq.gz",
+        "ID": "OBG0068-2",
+        "SM": "OBG0068-2",
+        "LB": "OBG0068-2",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "OBG0111-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0111-1-010_S5_L001_R1_001.fastq.gz",
+        "fq2": "OBG0111-1-010_S5_L001_R2_001.fastq.gz",
+        "ID": "OBG0111-1",
+        "SM": "OBG0111-1",
+        "LB": "OBG0111-1",
+        "PU": "HJC57BBXX.1",
+        "PL": "Illumina"
+    },
+    "OBG0111-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0111-2-011_S14_L002_R1_001.fastq.gz",
+        "fq2": "OBG0111-2-011_S14_L002_R2_001.fastq.gz",
+        "ID": "OBG0111-2",
+        "SM": "OBG0111-2",
+        "LB": "OBG0111-2",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0115-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0115-1-010_S21_L003_R1_001.fastq.gz",
+        "fq2": "OBG0115-1-010_S21_L003_R2_001.fastq.gz",
+        "ID": "OBG0115-1",
+        "SM": "OBG0115-1",
+        "LB": "OBG0115-1",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0115-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0115-2-011_S30_L004_R1_001.fastq.gz",
+        "fq2": "OBG0115-2-011_S30_L004_R2_001.fastq.gz",
+        "ID": "OBG0115-2",
+        "SM": "OBG0115-2",
+        "LB": "OBG0115-2",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "OBG0120-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0120-1-010_S29_L004_R1_001.fastq.gz",
+        "fq2": "OBG0120-1-010_S29_L004_R2_001.fastq.gz",
+        "ID": "OBG0120-1",
+        "SM": "OBG0120-1",
+        "LB": "OBG0120-1",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "OBG0120-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0120-2-011_S38_L005_R1_001.fastq.gz",
+        "fq2": "OBG0120-2-011_S38_L005_R2_001.fastq.gz",
+        "ID": "OBG0120-2",
+        "SM": "OBG0120-2",
+        "LB": "OBG0120-2",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0133-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0133-1-020_S31_L004_R1_001.fastq.gz",
+        "fq2": "OBG0133-1-020_S31_L004_R2_001.fastq.gz",
+        "ID": "OBG0133-1",
+        "SM": "OBG0133-1",
+        "LB": "OBG0133-1",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "OBG0133-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0133-2-021_S40_L005_R1_001.fastq.gz",
+        "fq2": "OBG0133-2-021_S40_L005_R2_001.fastq.gz",
+        "ID": "OBG0133-2",
+        "SM": "OBG0133-2",
+        "LB": "OBG0133-2",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0156-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0156-1-010_S45_L006_R1_001.fastq.gz",
+        "fq2": "OBG0156-1-010_S45_L006_R2_001.fastq.gz",
+        "ID": "OBG0156-1",
+        "SM": "OBG0156-1",
+        "LB": "OBG0156-1",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0156-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0156-2-021_S8_L001_R1_001.fastq.gz",
+        "fq2": "OBG0156-2-021_S8_L001_R2_001.fastq.gz",
+        "ID": "OBG0156-2",
+        "SM": "OBG0156-2",
+        "LB": "OBG0156-2",
+        "PU": "HJC57BBXX.1",
+        "PL": "Illumina"
+    },
+    "OBG0166-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0166-1-010_S13_L002_R1_001.fastq.gz",
+        "fq2": "OBG0166-1-010_S13_L002_R2_001.fastq.gz",
+        "ID": "OBG0166-1",
+        "SM": "OBG0166-1",
+        "LB": "OBG0166-1",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0166-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0166-2-011_S22_L003_R1_001.fastq.gz",
+        "fq2": "OBG0166-2-011_S22_L003_R2_001.fastq.gz",
+        "ID": "OBG0166-2",
+        "SM": "OBG0166-2",
+        "LB": "OBG0166-2",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0170-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0170-1-020_S39_L005_R1_001.fastq.gz",
+        "fq2": "OBG0170-1-020_S39_L005_R2_001.fastq.gz",
+        "ID": "OBG0170-1",
+        "SM": "OBG0170-1",
+        "LB": "OBG0170-1",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0170-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0170-2-021_S48_L006_R1_001.fastq.gz",
+        "fq2": "OBG0170-2-021_S48_L006_R2_001.fastq.gz",
+        "ID": "OBG0170-2",
+        "SM": "OBG0170-2",
+        "LB": "OBG0170-2",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0178-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0178-1-020_S15_L002_R1_001.fastq.gz",
+        "fq2": "OBG0178-1-020_S15_L002_R2_001.fastq.gz",
+        "ID": "OBG0178-1",
+        "SM": "OBG0178-1",
+        "LB": "OBG0178-1",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0178-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0178-2-021_S24_L003_R1_001.fastq.gz",
+        "fq2": "OBG0178-2-021_S24_L003_R2_001.fastq.gz",
+        "ID": "OBG0178-2",
+        "SM": "OBG0178-2",
+        "LB": "OBG0178-2",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0053-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0053-1-001_S1_L001_R1_001.fastq.gz",
+        "fq2": "OBG0053-1-001_S1_L001_R2_001.fastq.gz",
+        "ID": "OBG0053-1",
+        "SM": "OBG0053-1",
+        "LB": "OBG0053-1",
+        "PU": "HJC57BBXX.1",
+        "PL": "Illumina"
+    },
+    "OBG0053-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0053-2-003_S10_L002_R1_001.fastq.gz",
+        "fq2": "OBG0053-2-003_S10_L002_R2_001.fastq.gz",
+        "ID": "OBG0053-2",
+        "SM": "OBG0053-2",
+        "LB": "OBG0053-2",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0112-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0112-1-009_S36_L005_R1_001.fastq.gz",
+        "fq2": "OBG0112-1-009_S36_L005_R2_001.fastq.gz",
+        "ID": "OBG0112-1",
+        "SM": "OBG0112-1",
+        "LB": "OBG0112-1",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0112-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0112-2-009_S44_L006_R1_001.fastq.gz",
+        "fq2": "OBG0112-2-009_S44_L006_R2_001.fastq.gz",
+        "ID": "OBG0112-2",
+        "SM": "OBG0112-2",
+        "LB": "OBG0112-2",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0116-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0116-1-008_S19_L003_R1_001.fastq.gz",
+        "fq2": "OBG0116-1-008_S19_L003_R2_001.fastq.gz",
+        "ID": "OBG0116-1",
+        "SM": "OBG0116-1",
+        "LB": "OBG0116-1",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0116-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0116-2-009_S28_L004_R1_001.fastq.gz",
+        "fq2": "OBG0116-2-009_S28_L004_R2_001.fastq.gz",
+        "ID": "OBG0116-2",
+        "SM": "OBG0116-2",
+        "LB": "OBG0116-2",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "OBG0117-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0117-1-008_S43_L006_R1_001.fastq.gz",
+        "fq2": "OBG0117-1-008_S43_L006_R2_001.fastq.gz",
+        "ID": "OBG0117-1",
+        "SM": "OBG0117-1",
+        "LB": "OBG0117-1",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0117-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0117-2-009_S4_L001_R1_001.fastq.gz",
+        "fq2": "OBG0117-2-009_S4_L001_R2_001.fastq.gz",
+        "ID": "OBG0117-2",
+        "SM": "OBG0117-2",
+        "LB": "OBG0117-2",
+        "PU": "HJC57BBXX.1",
+        "PL": "Illumina"
+    },
+    "OBG0118-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0118-1-008_S3_L001_R1_001.fastq.gz",
+        "fq2": "OBG0118-1-008_S3_L001_R2_001.fastq.gz",
+        "ID": "OBG0118-1",
+        "SM": "OBG0118-1",
+        "LB": "OBG0118-1",
+        "PU": "HJC57BBXX.1",
+        "PL": "Illumina"
+    },
+    "OBG0118-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0118-2-009_S12_L002_R1_001.fastq.gz",
+        "fq2": "OBG0118-2-009_S12_L002_R2_001.fastq.gz",
+        "ID": "OBG0118-2",
+        "SM": "OBG0118-2",
+        "LB": "OBG0118-2",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0122-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0122-1-008_S11_L002_R1_001.fastq.gz",
+        "fq2": "OBG0122-1-008_S11_L002_R2_001.fastq.gz",
+        "ID": "OBG0122-1",
+        "SM": "OBG0122-1",
+        "LB": "OBG0122-1",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0122-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0122-2-009_S20_L003_R1_001.fastq.gz",
+        "fq2": "OBG0122-2-009_S20_L003_R2_001.fastq.gz",
+        "ID": "OBG0122-2",
+        "SM": "OBG0122-2",
+        "LB": "OBG0122-2",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0123-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0123-1-008_S27_L004_R1_001.fastq.gz",
+        "fq2": "OBG0123-1-008_S27_L004_R2_001.fastq.gz",
+        "ID": "OBG0123-1",
+        "SM": "OBG0123-1",
+        "LB": "OBG0123-1",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "OBG0123-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0123-2-008_S35_L005_R1_001.fastq.gz",
+        "fq2": "OBG0123-2-008_S35_L005_R2_001.fastq.gz",
+        "ID": "OBG0123-2",
+        "SM": "OBG0123-2",
+        "LB": "OBG0123-2",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0126-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0126-1-003_S34_L005_R1_001.fastq.gz",
+        "fq2": "OBG0126-1-003_S34_L005_R2_001.fastq.gz",
+        "ID": "OBG0126-1",
+        "SM": "OBG0126-1",
+        "LB": "OBG0126-1",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    },
+    "OBG0126-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0126-2-003_S42_L006_R1_001.fastq.gz",
+        "fq2": "OBG0126-2-003_S42_L006_R2_001.fastq.gz",
+        "ID": "OBG0126-2",
+        "SM": "OBG0126-2",
+        "LB": "OBG0126-2",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0130-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0130-1-001_S9_L002_R1_001.fastq.gz",
+        "fq2": "OBG0130-1-001_S9_L002_R2_001.fastq.gz",
+        "ID": "OBG0130-1",
+        "SM": "OBG0130-1",
+        "LB": "OBG0130-1",
+        "PU": "HJC57BBXX.2",
+        "PL": "Illumina"
+    },
+    "OBG0130-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0130-2-003_S18_L003_R1_001.fastq.gz",
+        "fq2": "OBG0130-2-003_S18_L003_R2_001.fastq.gz",
+        "ID": "OBG0130-2",
+        "SM": "OBG0130-2",
+        "LB": "OBG0130-2",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0132-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0132-1-001_S41_L006_R1_001.fastq.gz",
+        "fq2": "OBG0132-1-001_S41_L006_R2_001.fastq.gz",
+        "ID": "OBG0132-1",
+        "SM": "OBG0132-1",
+        "LB": "OBG0132-1",
+        "PU": "HJC57BBXX.6",
+        "PL": "Illumina"
+    },
+    "OBG0132-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0132-2-003_S2_L001_R1_001.fastq.gz",
+        "fq2": "OBG0132-2-003_S2_L001_R2_001.fastq.gz",
+        "ID": "OBG0132-2",
+        "SM": "OBG0132-2",
+        "LB": "OBG0132-2",
+        "PU": "HJC57BBXX.1",
+        "PL": "Illumina"
+    },
+    "OBG0158-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0158-1-001_S17_L003_R1_001.fastq.gz",
+        "fq2": "OBG0158-1-001_S17_L003_R2_001.fastq.gz",
+        "ID": "OBG0158-1",
+        "SM": "OBG0158-1",
+        "LB": "OBG0158-1",
+        "PU": "HJC57BBXX.3",
+        "PL": "Illumina"
+    },
+    "OBG0158-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "OBG0158-2-003_S26_L004_R1_001.fastq.gz",
+        "fq2": "OBG0158-2-003_S26_L004_R2_001.fastq.gz",
+        "ID": "OBG0158-2",
+        "SM": "OBG0158-2",
+        "LB": "OBG0158-2",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "YPOPS0006-1": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "YPOPS0006-1-001_S25_L004_R1_001.fastq.gz",
+        "fq2": "YPOPS0006-1-001_S25_L004_R2_001.fastq.gz",
+        "ID": "YPOPS0006-1",
+        "SM": "YPOPS0006-1",
+        "LB": "YPOPS0006-1",
+        "PU": "HJC57BBXX.4",
+        "PL": "Illumina"
+    },
+    "YPOPS0006-2": {
+        "fq_path": "/data/CEM/wilsonlab/lab_generated/placenta/fastqs/rna/",
+        "fq1": "YPOPS0006-2-001_S33_L005_R1_001.fastq.gz",
+        "fq2": "YPOPS0006-2-001_S33_L005_R2_001.fastq.gz",
+        "ID": "YPOPS0006-2",
+        "SM": "YPOPS0006-2",
+        "LB": "YPOPS0006-2",
+        "PU": "HJC57BBXX.5",
+        "PL": "Illumina"
+    }
+
+
+}

@@ -1,0 +1,1 @@
+featureCounts -T 8 --primary -p -s 2 -t exon -g gene_name -a /data/CEM/shared/public_data/references/GENCODE/gencode.v29.annotation.gtf -o trimq_0_minlen_30/featureCounts/OBG0116-1_trimmed.geneCounts_XY.txt trimq_0_minlen_30/processed_bams/OBG0116-1_trimmed.XY.sort.mkdup.rdgrp.bam
