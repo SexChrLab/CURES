@@ -6,11 +6,8 @@ General course learning objectives presented in the syllabus:
 >At the completion of this course, students will be able to:
 >
 >1. Understand, execute, and debug R code
->   
 >2. Work with data structures and packages in R related to identification, visualization, and interpretation of differentially expressed genes
->   
 >3. Critically evaluate scientific literature
->   
 >4. Draft a manuscript, including reproducible methods, background, results, and discussion
 
 A suggested weekly routine was provided for students in the course introduction: 
@@ -20,13 +17,9 @@ A suggested weekly routine was provided for students in the course introduction:
 >To be successful in this research course, we expect that you will: 
 >
 >1. Do the readings at the beginning of the week. 
->
 >2. Complete reading and comment on the journal article first.
->
 >3. Complete the quiz (based on the readings and journal article). 
->
 >4. Open your assignment at the beginning of the week, and complete after reading the journal article and completing the quiz.
- 
 
 ## Module Learning Objectives
 
@@ -64,6 +57,7 @@ Learning objectives for each module were listed in the module introduction page.
 ### Module 2
 
 >***Module Overview***
+>
 >In this module, we will be learning all about RNA sequencing, the method used to generate the gene expression data we will be analyzing in this research project.  You will be finishing up the R programming tutorial in preparation for working with the actual CCLE data in the next module.
 >
 >***Module Learning Objectives***
@@ -121,7 +115,7 @@ Learning objectives for each module were listed in the module introduction page.
 >***Module Learning Objectives***
 >By the end of this module, you'll be able to:  
 >
->***4.1 Biology/Stats (2 hours) ***
+>***4.1 Biology/Stats (2 hours)***
 >
 >1. Understand effect of Y chromosome loss in cancer
 >
