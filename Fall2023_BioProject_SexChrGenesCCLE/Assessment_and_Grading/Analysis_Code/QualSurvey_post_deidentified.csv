@@ -1,0 +1,706 @@
+Start Date,End Date,Progress,Duration (in seconds),Finished,Recorded Date,Iteration,Response ID,Recipient Last Name,Recipient First Name,Recipient Email,External Data Reference,Location Latitude,Location Longitude,Distribution Channel,User Language,"Q16_In the Genomics CURE, I was encouraged to discuss elements of my investigation with classmates or instructors.","Q18_In the Genomics CURE, I was encouraged to reflect on what I was learning.","Q20_In the Genomics CURE, I was encouraged to contribute my ideas and suggestions during class discussions.","Q22_In the Genomics CURE, I was encouraged to help other students collect or analyze data.","Q24_In the Genomics CURE, I was encouraged to provide constructive criticism to classmates and challenge each other's interpretations.","Q26_In the Genomics CURE, I was encouraged to share the problems I encountered during my investigation and seek input on how to address them.","Q28_In the Genomics CURE, I was expected to generate novel results that are unknown to the instructor and that could be of interest to the broader scientific community or others outside of the class.","Q30_In the Genomics CURE, I was expected to conduct an investigation to find something previously unknown to myself, other students, and the instructor.","Q32_In the Genomics CURE, I was expected to formulate my own research question or hypothesis to guide an investigation.","Q34_In the Genomics CURE, I was expected to develop new arguments based on data.","Q36_In the Genomics CURE, I was expected to explain how my work has resulted in new scientific knowledge.","Q38_In the Genomics CURE, I had time to revise or repeat work to account for errors or fix problems.","Q40_In the Genomics CURE, I had time to change the methods of the investigation if it was not unfolding as predicted.","Q42_In the Genomics CURE, I had time to share and compare data with other students.","Q44_In the Genomics CURE, I had time to collect and analyze additional data to address new questions or further test hypotheses that arose during the investigation.","Q46_In the Genomics CURE, I had time to revise or repeat analyses based on feedback.","Q48_In the Genomics CURE, I had time to revise drafts of my research poster about my investigation based on feedback.",Q115_1_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research makes me anxious.,Q115_2_Please respond to each of the following statements considering your experience in the Genomics CURE. - I feel insecure concerning the analysis of research data.,Q115_3_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research scares me.,Q115_4_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research is stressful.,Q115_5_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research makes me nervous.,Q115_6_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research is complicated.,Q115_7_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research is difficult.,Q115_8_Please respond to each of the following statements considering your experience in the Genomics CURE. - Research is a complex subject.,"Q33_Reflecting on your research experience, please describe any aspects of the Genomics CURE experience that increased your feelings of anxiousness.","Q35_Reflecting on your research experience, please describe any aspects of the Genomics CURE experience that decreased your feelings of anxiousness.",Q50_The work I did in the Genomics CURE will help to solve a problem in the world.,Q52_My findings in the Genomics CURE were important to the scientific community.,Q54_I faced challenges that I managed to overcome in completing the work I did in the Genomics CURE.,Q56_I was responsible for the outcomes of the work I did in the Genomics CURE.,Q58_The findings of the work I did in the Genomics CURE gave me a sense of personal achievement.,Q60_I had a personal reason for choosing what I worked on in the Genomics CURE course.,Q62_The work I did in the Genomics CURE was important to me.,"Q64_In conducting the work I did in the Genomics CURE, I actively sought advice and assistance.",Q66_The work I did in the Genomics CURE was interesting.,Q68_The work I did in the Genomics CURE was exciting.,Q70_To what extent does the word delighted describe your experience of the Genomics CURE?,Q72_To what extent does the word happy describe your experience of the Genomics CURE?,Q74_To what extent does the word joyful describe your experience of the Genomics CURE?,Q76_To what extent does the word astonished describe your experience of the Genomics CURE?,Q78_To what extent does the word surprised describe your experience of the Genomics CURE?,Q80_To what extent does the word amazed describe your experience of the Genomics CURE?,"Q135_Please indicate how confident you are in your ability to use technical science skills (use of tools, instruments, and/or techniques)",Q137_Please indicate how confident you are in your ability to generate a research question to answer,Q139_Please indicate how confident you are in your ability to figure out what data/observations to collect and how to collect them,Q141_Please indicate how confident you are in your ability to create explanations for the results of the study,Q143_Please indicate how confident you are in your ability to use scientific literature and/or reports to guide research,Q145_Please indicate how confident you are in your ability to develop theories (integrate and coordinate results from multiple studies),Q161_A person who thinks it is valuable to conduct research that builds on the world's scientific knowledge,Q163_A person who feels discovering something new in the sciences is thrilling,Q165_A person who thinks discussing new theories and ideas between scientists is important,Q167_A person who thinks that scientific research can solve many of today's world challenges,"Q149_""I have a strong sense of belonging to the community of scientists""","Q151_""I derive great personal satisfaction from working on a team that is doing important research""","Q153_""I have come to think of myself as a scientist""","Q155_""I feel like I belong in the field of science""","Q157_""The daily work of a scientist is appealing to me""","Q48_To what extent do you intend to pursue a career in science, but not medicine?",Q52_To what extent do you intend to pursue a science-related research career?,Q123_I most closely identify as - Selected Choice,"Q123_3_TEXT_I most closely identify as - a gender not listed, please describe - Text",Q125_I most closely identify as - Selected Choice,"Q125_8_TEXT_I most closely identify as - Other, please describe - Text","Q127_What is your parents' or your guardians' highest completed level of education? If you have more than one parent, and they have different levels of education, choose the higher of the two.",Q129_1_Please write in your parent or guardian's occupation - Parent or guardian 1,Q129_2_Please write in your parent or guardian's occupation - Parent or guardian 2,Q126_What is your current GPA?,Q131_What is your major?,Q133_What year are you in college?,Q135_Have you participated in an undergraduate research experience? (e.g. doing research in a faculty member's lab?),Q131_Please describe the main project that you worked on during your undergraduate research experience.,Q137_Do you plan to do research after you graduate?,Q176 - Date
+10/9/2022 15:26,10/9/2022 15:38,100,725,TRUE,10/9/2022 15:38,1,R_1DAstUevpbVQ2uE,,,,,37.6403,-122.0667,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,,,,,,,,,,,Neither agree nor disagree,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Strongly agree,Agree,Agree,Considerably,Moderate,Moderate,Considerably,Considerably,Considerably,3,3,3,2,2,2,Somewhat like me,Like me,Like me,Like me,3,3,2,3,4,"Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Transportation Dispatcher,Director of operations,3.5,Neuroscience,4th year,No,,Yes,9-Oct-22
+10/9/2022 17:09,10/9/2022 17:11,30,95,FALSE,10/16/2022 17:11,1,R_OkTQODHMlMUY5r3,,,,,,,anonymous,EN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10/9/2022
+10/9/2022 21:43,10/9/2022 21:47,4,291,FALSE,10/16/2022 21:47,1,R_21BRHe6qgBBSUpf,,,,,,,anonymous,EN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10/8/2022
+10/10/2022 1:38,10/11/2022 16:10,4,138700,FALSE,10/18/2022 16:10,1,R_DdyTITXUr9r4ctr,,,,,,,anonymous,EN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10/10/2022
+11/29/2022 16:23,11/29/2022 16:28,100,307,TRUE,11/29/2022 16:28,1,R_RsPkZJAmesgBTAl,,,,,33.4306,-111.9256,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Agree,Somewhat disagree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,,,,,,,,,,,Agree,Neither agree nor disagree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Moderate,Moderate,Moderate,Slightly,Slightly,Moderate,"absolutely confident
+5
+",4,3,4,"absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Master's degree (e.g. MA, MS)",Customer Service Representative,Deceased,4,Non degree,5th year or more,Yes,Investigating the effects of trimming on differential expression analysis,Yes,11/29/2022
+11/29/2022 17:11,11/29/2022 17:41,100,1788,TRUE,11/29/2022 17:41,1,R_tQbu87iiUsv6FLX,,,,,37.6403,-122.0667,anonymous,EN,Weekly,Weekly,Weekly,Monthly,Monthly,Weekly,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Agree,,,,,,,,,,,Neither agree nor disagree,Agree,Strongly agree,Agree,Agree,Neither agree nor disagree,Agree,Strongly agree,Agree,Agree,Moderate,Moderate,Moderate,Considerably,Considerably,Considerably,3,4,4,4,4,4,Like me,Like me,Like me,Somewhat like me,3,4,3,4,"Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Transportation Dispatcher,Director of Operations,3.56,Neuroscience,4th year,No,,Yes,11/29/2022
+11/30/2022 22:40,11/30/2022 22:55,100,862,TRUE,11/30/2022 22:55,1,R_3QWsUTtTQsZAKQH,,,,,26.3676,127.7574,anonymous,EN,Weekly,Weekly,Weekly,Weekly,One or two times,Weekly,Agree,Strongly agree,Disagree,Somewhat agree,Strongly agree,Strongly agree,Agree,Agree,Disagree,Somewhat agree,Somewhat agree,,,,,,,,,,,Neither agree nor disagree,Agree,Agree,Agree,Neither agree nor disagree,Disagree,Agree,Strongly agree,Agree,Neither agree nor disagree,Moderate,Very strongly,Slightly,Slightly,Considerably,Very slightly,3,3,3,4,"absolutely confident
+5
+",4,Very much like me,Like me,Very much like me,Somewhat like me,3,"Strongly agree
+
+5",3,4,3,6,6,a woman,,White/Caucasian,,Some college,Homemaker,Retired Military Officer,4,"Biological Science- Genetics, Cell and Developmental Biology",3rd year,No,,Yes,12/1/2022
+12/1/2022 18:00,12/1/2022 18:10,100,566,TRUE,12/1/2022 18:10,1,R_3s6PVgF8qGdPmPO,,,,,33.4917,-111.9837,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Agree,Agree,Agree,Agree,Agree,Somewhat agree,Agree,Somewhat agree,,,,,,,,,,,Strongly agree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Considerably,Considerably,Considerably,4,4,4,4,4,3,Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5",4,4,4,8,8,a man,,Asian,,"Professional degree (e.g. MD, DDS, DVM, JD)",Physician,I.T. professional,4,Health Informatics,5th year or more,No,,Yes,12/1/2022
+12/2/2022 5:21,12/2/2022 5:30,100,539,TRUE,12/2/2022 5:30,1,R_vIZNO8uQTRw6RnH,,,,,30.0524,-95.3707,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Somewhat agree,Strongly agree,Somewhat disagree,Agree,Agree,,,,,,,,,,,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Considerably,Very strongly,Considerably,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)","Sales, Oilfield",Auditing finances for healthcare professionals,3.79,Medicinal Chemistry and Neuroscience,5th year or more,Yes,"I work on developing automated physical properties analyses and implementing machine learning to quantify results and classify features associated with insufficient sampling in alchemical free energy molecular dynamics simulations that are used to determine water-solvent partition coefficients for small, drug-like molecules.",Yes,12/2/2022
+12/2/2022 13:30,12/2/2022 13:38,100,468,TRUE,12/2/2022 13:38,1,R_1mjUPne5qZrXGzr,,,,,33.6432,-83.9681,anonymous,EN,Weekly,Weekly,Weekly,Weekly,One or two times,Weekly,Strongly agree,Strongly agree,Somewhat agree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Strongly agree,Strongly agree,,,,,,,,,,,Agree,Agree,Agree,Neither agree nor disagree,Agree,Neither agree nor disagree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Considerably,Very strongly,Considerably,Very strongly,Very strongly,Very strongly,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",4,Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,Black or African American,,Some college,Receptionist ,Retired,3.8,Biology,5th year or more,Yes,Researched the water contaminates in the los Angeles rivers for a period of 4 weeks.,Yes,12/2/2022
+12/2/2022 14:44,12/2/2022 14:50,100,380,TRUE,12/2/2022 14:50,1,R_3R8g2hatCSohSJc,,,,,34.2497,-84.4894,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Agree,Agree,Agree,Strongly agree,Agree,Somewhat agree,Somewhat agree,Agree,Strongly agree,Agree,,,,,,,,,,,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,"absolutely confident
+5
+",4,"absolutely confident
+5
+",4,4,4,Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5",4,"Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,Some college,Retired manufacturing Engineer,Retired QA flight line inspector/ Veteran ,3.26,Biology,3rd year,No,,Yes,12/2/2022
+12/2/2022 15:29,12/2/2022 15:37,100,481,TRUE,12/2/2022 15:37,1,R_2U025FLxovJbccI,,,,,35.6828,-78.5977,anonymous,EN,Weekly,Weekly,Weekly,Weekly,One or two times,Weekly,Strongly agree,Strongly agree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,,,,,,,,,,,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5",6,7,a woman,,Black or African American,,Doctoral degree (e.g. PhD),Deceased,Deceased,3.7,Neuroscience,4th year,Yes,analyzing data to help understand whether there are sex differences in placenta gene expression after trimming ,Yes,12/2/2022
+12/2/2022 19:18,12/2/2022 19:21,100,201,TRUE,12/2/2022 19:21,1,R_3MLStA9OcYdX2dO,,,,,33.5093,-112.0563,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Agree,Agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,,,,,,,,,,,Neither agree nor disagree,Agree,Agree,Agree,Agree,Disagree,Agree,Agree,Agree,Agree,Moderate,Moderate,Moderate,Moderate,Considerably,Considerably,3,3,3,4,4,3,A little like me,Like me,Like me,Very much like me,2,4,2,3,4,"Definitely will
+10
+","Definitely will
+10
+",a woman,,"Hispanic, Latino, or Spanish origin",,High school graduate- high school diploma or the equivalent (e.g. GED),Technical,no idea,3.82,Biomedical sciences,4th year,Yes,,Yes,12/2/2022
+12/2/2022 23:12,12/2/2022 23:17,100,283,TRUE,12/2/2022 23:17,1,R_1FstoYRYIDAeZok,,,,,32.7776,-79.9413,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,,,,,,,,,,,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,4,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,White/Caucasian,,"Master's degree (e.g. MA, MS)",Insurance Management,Retired,4,Neuroscience,5th year or more,No,,Yes,12/2/2022
+12/2/2022 23:33,12/2/2022 23:40,100,436,TRUE,12/2/2022 23:40,1,R_1mzrtmturb22rgc,,,,,35.9806,-78.8426,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Somewhat disagree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Disagree,Agree,Somewhat agree,,,,,,,,,,,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Neither agree nor disagree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Very strongly,Very strongly,Considerably,"absolutely confident
+5
+",4,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+",8,non-binary,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Accountant,Antique Restoration Artist ,4,"Biological Sciences (Genetics, Cell, and Developmental Biology) ",5th year or more,Yes,I have been involved in 2 at ASU. I am an ACE Scholar researching coral cancer / gene expression in cancer. I also just completed the Genomics CURE course doing a project to evaluate the parameters used for RNAseq analysis. ,Yes,2-Dec-22
+12/3/2022 0:53,12/3/2022 0:58,100,305,TRUE,12/3/2022 0:58,1,R_3j2KfuiDTJ2aSJm,,,,,39.1526,-84.3869,anonymous,EN,Weekly,Weekly,Weekly,One or two times,Never,Weekly,Somewhat agree,Somewhat agree,Disagree,Somewhat disagree,Somewhat disagree,Agree,Somewhat agree,Agree,Somewhat disagree,Somewhat disagree,Somewhat disagree,,,,,,,,,,,Neither agree nor disagree,Neither agree nor disagree,Disagree,Agree,Neither agree nor disagree,Strongly disagree,Disagree,Disagree,Agree,Neither agree nor disagree,Slightly,Slightly,Slightly,Slightly,Slightly,Slightly,4,3,4,4,4,4,Like me,Like me,Like me,Like me,2,"Strongly agree
+
+5","Strongly agree
+5",4,4,8,8,a man,,Black or African American,,Doctoral degree (e.g. PhD),Journal Editor,Nurse,3.67,Computational Life Sciences,5th year or more,No,,Yes,12/2/2022
+12/4/2022 2:28,12/4/2022 2:33,100,339,TRUE,12/4/2022 2:33,1,R_3KOCGNrhqKge5wA,,,,,34.1979,-118.5371,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,,,,,,,,,,,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Neither agree nor disagree,Agree,Neither agree nor disagree,Agree,Agree,Moderate,Moderate,Moderate,Moderate,Moderate,Moderate,"absolutely confident
+5
+",3,4,4,4,4,A little like me,Like me,Somewhat like me,Very much like me,3,3,2,4,4,"Definitely will
+10
+",6,a woman,,Asian,,"Bachelor's degree (e.g. BA, BS)",Registered Nurse,Truck Driver,2.6,Biological Sciences,4th year,Yes,,Unsure,12/4/2022
+12/1/2022 15:52,12/1/2022 15:54,26,85,FALSE,12/8/2022 15:54,1,R_1n1TUw5ERO4UbcQ,,,,,,,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Strongly agree,Disagree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat disagree,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+11/27/2023 18:17,11/27/2023 18:20,100,233,TRUE,11/27/2023 18:20,2,R_R2zA2uK2KalBQSR,,,,,33.3825,-111.875,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Somewhat agree,Agree,Somewhat disagree,Disagree,Somewhat agree,Somewhat agree,Agree,Agree,Somewhat agree,Agree,6,6,6,"Strongly agree
+7","Strongly agree
+7","Strongly agree
+7",5,5,,,Neither agree nor disagree,Agree,Strongly agree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Strongly agree,Strongly agree,Very strongly,Considerably,Very strongly,Considerably,Considerably,Considerably,4,2,2,4,4,3,Somewhat like me,Somewhat like me,Like me,Like me,4,"Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5",8,7,a woman,,"Hispanic, Latino, or Spanish origin",,High school graduate- high school diploma or the equivalent (e.g. GED),Medical Assistant ,Garage Door Installer ,3,Biological Sciences ,4th year,No,,Unsure,11/27/2023
+11/29/2023 10:41,11/29/2023 10:54,100,808,TRUE,11/29/2023 10:54,2,R_2rDzQbHLrSC4FD2,,,,,38.6283,-121.3307,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Strongly agree,Somewhat agree,Somewhat agree,Somewhat agree,3,3,2,2,2,5,5,6,"There was a lack of clear expectations on some assignments, and some modules had instructions that contradicted what was in the assignment pages. The work is stressful enough without having to figure out what needed to be submitted. ","The organization of modules into biology, coding, etc., allowed me to know what to expect and prepare myself for each section. ",Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Neither agree nor disagree,Strongly agree,Agree,Strongly agree,Agree,Slightly,Slightly,Slightly,Moderate,Moderate,Moderate,4,3,3,4,4,4,Very much like me,Like me,Very much like me,Very much like me,4,4,4,4,4,"Definitely will
+10
+",7,a man,,"Hispanic, Latino, or Spanish origin",,Some college,Librarian,Airline mechanic,4,Biology,5th year or more,Yes,"Previously, cataloging the root microbiome of rice crops. 
+This time, analyzing gene expression to predict the sex chromosome complement of cell lines in the CCLE database. ",No,11/29/2023
+11/29/2023 15:07,11/29/2023 15:29,100,1312,TRUE,11/29/2023 15:29,2,R_1LSbALEzjVOrsGe,,,,,41.7166,-71.1431,anonymous,EN,Weekly,Weekly,Weekly,One or two times,Monthly,Weekly,Somewhat agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Agree,Somewhat agree,Strongly agree,Somewhat disagree,Somewhat agree,Strongly agree,3,2,"Strongly disagree
+1",4,3,4,5,6,"The thought of not being able to trust myself in generating meaningful findings increased my feelings of anxiousness at first, but this feeling slightly dropped bellow average after I have gone through the course and got my work done.","Realizing that the instructors' expectations of the study from us was not to provide definitive novel work, but rather to go through the investigation as a team and sharing what we find. This shared atmosphere of exploration and sharing of findings has significantly decreased my feelings of anxiousness. ",Strongly agree,Neither agree nor disagree,Agree,Agree,Strongly agree,Neither agree nor disagree,Agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Very strongly,Very strongly,Very strongly,"absolutely confident
+5
+",4,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Like me,4,"Strongly agree
+
+5",4,"Strongly agree
+5","Strongly agree
+5",6,"Definitely will
+10
+",a man,,White/Caucasian,,Some college,Real Estate Investor,House Wife,4,Masters in Computational Life Sciences,1st year,Yes,"I collaborated with a teammate to conduct research on ""Boundary Strength Assessment of Free Vibrating Beams: A Computational Approach."" We compiled reports, scripts, and simulations for a client from South Korea and presented our findings at a conference seminar held at the University of Massachusetts Amherst.",Yes,11/29/2023
+11/29/2023 22:25,11/29/2023 22:33,100,474,TRUE,11/29/2023 22:33,2,R_1mRcz4QKWutVi2i,,,,,33.2421,-111.6412,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Agree,Somewhat agree,Agree,Strongly agree,Somewhat disagree,Somewhat disagree,Disagree,Disagree,Disagree,Somewhat agree,2,2,2,6,2,5,2,5,"The tight timelines of turning around assignments. I did not have an easy class load, and having this only as a B session class is crazy, I defiantly recommend it to be changed to C session.
+Also, I was quite frustrated why the required class for this research experience only taught command, and then this experience required advance knowledge of R.","Flexibility with grading efforts. Dr. Plaisier, was defiantly reassuring to say it is based on effort and not being perfect. She helped explain alternative ways to perform the tasks to ensure I was able to participate.",Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Considerably,Moderate,Moderate,Considerably,Moderate,Moderate,4,4,4,4,4,4,Like me,Like me,Somewhat like me,Very much like me,4,4,"Strongly agree
+5","Strongly agree
+5",3,6,6,a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Executive Director at Clinical Research Organization,N/A,3.84,Biomedical Sciences,3rd year,No,,Yes,11/29/2023
+11/29/2023 23:39,11/29/2023 23:48,100,559,TRUE,11/29/2023 23:48,2,R_3CHF5YfxO4DQq6w,,,,,47.158,-122.5462,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Somewhat agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,3,2,3,6,2,6,6,6,Attempting to write my own novel code to come up with figures/graphs made me anxious at first. I did become more comfortable with this over time. Knowing what questions to ask that were relevant to the research gave me the most anxiety throughout this course.,Starting with a drafted R code really reduced my feelings of anxiety about writing my own code. ,Neither agree nor disagree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Strongly agree,Strongly agree,Strongly agree,Considerably,Considerably,Considerably,Considerably,Considerably,Considerably,4,2,2,"absolutely confident
+5
+","absolutely confident
+5
+",3,Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5",3,4,"Strongly agree
+5",7,8,a woman,,White/Caucasian,,"Master's degree (e.g. MA, MS)",Middle School Teacher,Deceased,3.5,Biological Sciences (Genetics and Cell Development),5th year or more,No,,Yes,29-Nov-23
+11/30/2023 0:18,11/30/2023 0:22,100,234,TRUE,11/30/2023 0:22,2,R_2SuGVHoyu40zpCm,,,,,32.7203,-117.1552,anonymous,EN,Never,Never,One or two times,One or two times,Never,Never,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,"Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7",,,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Neither agree nor disagree,Neither agree nor disagree,Slightly,Slightly,Very slightly,Very slightly,Very slightly,Very slightly,"not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+",Somewhat like me,Somewhat like me,Like me,Like me,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly agree
+5",4,2,Decline to state,,Decline to state,,Decline to state,,,,,5th year or more,No,,Unsure,11/29/2023
+11/30/2023 12:10,11/30/2023 12:17,100,390,TRUE,11/30/2023 12:17,2,R_3lypIFhveOv32cL,,,,,37.9935,-121.7015,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Agree,Agree,Agree,Somewhat agree,Somewhat agree,3,3,3,3,3,5,4,"Strongly agree
+7",The unfamiliarity with R programming while trying to overcome issues in the short time we had between modules.,The openness of the instructors and classmates made finding help easy.,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Neither agree nor disagree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Considerably,Considerably,Considerably,4,"absolutely confident
+5
+",4,4,4,4,Very much like me,Very much like me,Very much like me,Very much like me,2,"Strongly agree
+
+5",2,"Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,White/Caucasian,,High school graduate- high school diploma or the equivalent (e.g. GED),Army,Army,3.97,Biochemistry BS,4th year,No,,Yes,11/30/2023
+11/30/2023 14:10,11/30/2023 14:25,100,926,TRUE,11/30/2023 14:25,2,R_z8SGyFSJgFSoCZz,,,,,32.7404,-117.1355,anonymous,EN,Weekly,Weekly,Monthly,Weekly,Weekly,Weekly,Agree,Agree,Agree,Agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat disagree,Somewhat agree,4,5,4,4,4,4,4,4,,,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Neither agree nor disagree,Neither agree nor disagree,Agree,Neither agree nor disagree,Agree,Neither agree nor disagree,Considerably,Moderate,Moderate,Moderate,Moderate,Moderate,3,3,3,3,3,3,Like me,Somewhat like me,Somewhat like me,Somewhat like me,3,3,4,3,3,8,9,a woman,,Decline to state,,"Completed no school or some elementary, middle, or high school",Mechanic,Child Nutrition ,4,Biology,5th year or more,Yes,Malaria,Yes,11/30/2023
+11/30/2023 17:16,11/30/2023 17:30,100,837,TRUE,11/30/2023 17:30,2,R_3iycdG4q930UrYn,,,,,45.4501,-122.868,anonymous,EN,Weekly,Weekly,Weekly,Weekly,One or two times,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Agree,Agree,Agree,Agree,Agree,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1",5,"Strongly disagree
+1","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7",It felt like a big step between following along previously outlined code to writing our own code. I think it would have been less stressful if there was another in-between phase of having comments of what needed to be coded but not the code so at least there would be a guide. ,"Slack community, instructors (Dr. Wilson and Dr. Plaisier), and well defined expectations really decreased nervousness. I knew what was expected and felt comfortable asking for help and/or admitting when something was difficult. ",Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,"absolutely confident
+5
+",4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,3,"Strongly agree
+
+5",4,"Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+",8,a woman,,White/Caucasian,,High school graduate- high school diploma or the equivalent (e.g. GED),Stenographer,Bailiff ,3.5,Biomedical Science,4th year,No,,Yes,11/30/2023
+11/30/2023 18:07,11/30/2023 18:12,100,246,TRUE,11/30/2023 18:12,2,R_1KfNJZhbMPzAT4D,,,,,33.7485,-84.3871,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Agree,Agree,Strongly agree,Strongly agree,"Strongly disagree
+1",4,"Strongly disagree
+1",5,2,6,5,"Strongly agree
+7",,,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Considerably,Considerably,Moderate,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Like me,Like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Teacher,Salesman,4,Computational Life Scinece,5th year or more,No,,Yes,11/30/2023
+11/30/2023 18:02,11/30/2023 18:14,100,718,TRUE,11/30/2023 18:14,2,R_12uynayug1slKfH,,,,,34.1867,-118.3878,anonymous,EN,Weekly,Weekly,Monthly,Monthly,Monthly,Weekly,Strongly agree,Strongly agree,Somewhat disagree,Agree,Agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat disagree,Disagree,3,3,2,4,2,3,3,5,"This is no fault of the instructional team, however, the lack of lab meetings on weekends and outside of normal work hours made me feel a bit left out, and therefore a bit lost and anxious. 
+I also felt rushed at the end with our manuscripts. I understand that this is a 7 week course, and that the R Tutorials at the beginning were necessary for those who have no R experience, however, I felt that another week on the manuscripts would have been helpful.  ","The slack channel and the discord helped quite a lot. And the way that the weekly progress reports were graded based on efforts, and allowed students to communicate how they were doing took a lot of the stress away. It helped just to see that everyone was struggling a bit, and that just comes with the territory of learning a new skill.  ",Strongly agree,Agree,Strongly agree,Agree,Strongly agree,Agree,Agree,Agree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Very strongly,Very strongly,Very strongly,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,3,"Strongly agree
+
+5",4,4,"Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Small Business Owner,Sound Designer,4,"Biological Sciences (Genetics, Cell, and Dev Bio) and Anthropology ",4th year,Yes,Conducting an analysis of gene expressions within the CCLE database to comprehend the distinctive distribution of certain sex chromosome gene expression. This was done with the intention of establishing a methodology for predicting sex chromosome complements in cancer cell lines.,Yes,11/30/2023
+11/30/2023 19:24,11/30/2023 19:31,100,413,TRUE,11/30/2023 19:31,2,R_blJoQKGJ7ciY06d,,,,,42.4947,-70.8499,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Agree,Agree,Somewhat agree,Agree,Somewhat agree,Somewhat disagree,Agree,Somewhat disagree,Somewhat agree,Agree,4,3,3,5,3,5,5,5,,,Agree,Agree,Agree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Strongly agree,Agree,Very strongly,Considerably,Moderate,Considerably,Considerably,Very strongly,3,3,3,3,3,3,Very much like me,Very much like me,Very much like me,Very much like me,4,4,4,4,4,"Definitely will
+10
+","Definitely will
+10
+",a woman,,"Hispanic, Latino, or Spanish origin",,Some college,Deceased,Unknown,,Neuroscience,5th year or more,Yes,,Yes,11/30/2023
+11/30/2023 21:36,11/30/2023 21:46,100,570,TRUE,11/30/2023 21:46,2,R_1rfad2q4k0MtBs1,,,,,30.0516,-95.4707,anonymous,EN,Weekly,Weekly,Weekly,One or two times,One or two times,One or two times,Somewhat agree,Agree,Agree,Agree,Strongly agree,Somewhat agree,Strongly disagree,Strongly disagree,Agree,Agree,Agree,"Strongly disagree
+1",3,"Strongly disagree
+1",3,"Strongly disagree
+1","Strongly agree
+7","Strongly agree
+7",5,"During my research, I started feeling anxious as I was running short on time. I also felt that other students in the course had a better understanding of the material than I did. This made me feel like I didn't belong in the course, even though I love research and enjoy figuring things out. I think my lack of domain knowledge prevented me from conducting a deeper analysis.","When we began coding in R, it became more accessible to me. I know I am not the smartest person in the world, but when I attended lab meetings, read Slack messages, and found that many of my classmates had the same feelings of confusion as I did, it made me feel better about my report.",Strongly disagree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly disagree
+1","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,"Hispanic, Latino, or Spanish origin",,Some college,Funeral Home Director ,Realestate ,2.8,Data Sciences and Biological Sciences ,5th year or more,Yes,,Yes,11/30/2023
+12/1/2023 1:01,12/1/2023 1:09,100,482,TRUE,12/1/2023 1:09,2,R_2VIM5sUM4YEZXHM,,,,,34.4463,-118.5356,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,2,2,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1",4,4,"Strongly agree
+7",Uncertainty about how do code for certain things and create knitr reports because I’m new to coding.,The encouragement to ask questions and the slack making me feel less alone in my uncertainty.,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Considerably,Very strongly,Considerably,Very strongly,Very strongly,Very strongly,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,Some college,Registered Nurse,Insurance claims supervisor ,3.4,Biological sciences ,3rd year,Yes,The genomics research cure.,Yes,12/1/2023
+12/1/2023 2:07,12/1/2023 2:17,100,574,TRUE,12/1/2023 2:17,2,R_25GFBXT0pkwTyWI,,,,,33.508,-112.0995,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Agree,Agree,Agree,Somewhat agree,3,4,"Strongly disagree
+1",6,3,6,6,6,"As someone completely new to coding, I felt there could have been more guidance with generating code and troubleshooting. ",Instructors reaching out to provide clarification and grading based on effort to complete research rather than grading based on final results. ,Strongly agree,Strongly agree,Agree,Strongly agree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Considerably,Moderate,Moderate,Considerably,Very strongly,Very strongly,3,4,3,4,4,4,Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5",4,"Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,American Indian or Alaska Native,,High school graduate- high school diploma or the equivalent (e.g. GED),,,3.9,Biological Science,4th year,Yes,Analyzing sex linked genes to assess sex differences in cancer. ,Yes,12/1/2023
+12/1/2023 11:32,12/1/2023 11:44,100,724,TRUE,12/1/2023 11:44,2,R_1MKwwFQfCYOMI6g,,,,,52.6409,6.0753,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Somewhat agree,"Strongly disagree
+1",3,"Strongly disagree
+1",4,"Strongly disagree
+1",4,4,6,"The week where we had to deliver the manuscript was quite stressfull. I had to adjust part of my code to produce the results needed for the manuscript and therefore I became a bit anxious about the time remaining. In the end, I am happy with my manuscript that I delivered. ",The fantastic support by Dr. Wilson and Dr. Plaisier. Twice a week we had virtual meetings where we could literally ask anything that was bothering us.,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Considerably,Considerably,Very strongly,"absolutely confident
+5
+",4,"absolutely confident
+5
+",4,3,"absolutely confident
+5
+",Very much like me,Like me,Very much like me,Like me,"Strongly agree
+5","Strongly agree
+
+5",4,"Strongly agree
+5",4,9,9,a man,,White/Caucasian,,"Completed no school or some elementary, middle, or high school",Airline assistant,No occupation,4,"Genetics, Cell, and Developmental Biology",2nd year,No,,Yes,12/1/2023
+12/1/2023 13:59,12/1/2023 14:04,100,267,TRUE,12/1/2023 14:04,2,R_3pmwCsHCr1ToY18,,,,,36.8919,-76.2325,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Agree,Agree,2,2,3,3,2,3,3,3,,Having open communication available with instructors and peers alike and seeing more people with the same issue,Agree,Agree,Agree,Strongly agree,Agree,Neither agree nor disagree,Agree,Agree,Strongly agree,Strongly agree,Considerably,Considerably,Considerably,Very strongly,Considerably,Considerably,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",4,Like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5",3,"Strongly agree
+5","Strongly agree
+5",4,3,a woman,,White/Caucasian,,"Master's degree (e.g. MA, MS)",navy,n/a,3.1,biology,4th year,No,,Yes,12/1/2023
+12/1/2023 13:42,12/1/2023 14:07,100,1531,TRUE,12/1/2023 14:07,2,R_2YnfFSZ7o97K8L7,,,,,33.7485,-84.3871,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Agree,Agree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1",6,4,6,6,6,"The knowledge in biology is unfamiliar to me. So I normally went extra miles to learn so that I can catch up with the modules. However, I got into the class through overrides so I came prepared for the extra work.",The class slack community and the readiness from all my instructors and TAs helped a lot!,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,4,"absolutely confident
+5
+",4,"absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5",4,4,4,9,9,a man,,Asian,,High school graduate- high school diploma or the equivalent (e.g. GED),Worker,Document Account Manager,4,Data Science,3rd year,No,,Yes,12/1/2023
+12/1/2023 14:41,12/1/2023 14:47,100,382,TRUE,12/1/2023 14:47,2,R_3HIfSogDxjIYK1L,,,,,34.1452,-118.4581,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1",2,2,5,none,The quiz can be repeated.,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,4,4,4,"absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Chemical,mom,4.2,Biochem,3rd year,Yes,"1.Ethics in AI 
+2. CCLE",Yes,12/1/2023
+12/1/2023 14:53,12/1/2023 15:07,100,889,TRUE,12/1/2023 15:07,2,R_QiBMdJOPLTQghtn,,,,,42.0373,-93.6005,anonymous,EN,Weekly,Weekly,Weekly,Monthly,One or two times,Weekly,Strongly agree,Strongly agree,Somewhat agree,Agree,Strongly agree,Agree,Agree,Strongly agree,Agree,Disagree,Disagree,2,5,"Strongly disagree
+1",2,2,5,4,5,I personally did not feel like the R tutorial in the beginning of the course prepared me for the code we were supposed to come up with for our models.,"I liked being able to draft my own manuscript. I am glad to be able to do this now, rather than doing it for the first time in grad school.",Strongly agree,Strongly agree,Agree,Agree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Considerably,Considerably,Considerably,Moderate,Considerably,Considerably,3,2,4,4,3,3,Very much like me,Very much like me,Very much like me,Very much like me,4,4,4,"Strongly agree
+5","Strongly agree
+5",6,"Definitely will
+10
+",a woman,,"Other, please describe",Mixed Race,Some college,Mortgage Underwriter,Conductor,3.9,Biological Sciences,5th year or more,Yes,Landmarking lizard bones for morphology analysis.,Yes,12/1/2023
+12/1/2023 15:13,12/1/2023 15:20,100,446,TRUE,12/1/2023 15:20,2,R_Zgw7p5uNcmpEWmR,,,,,32.7203,-117.1552,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Agree,Somewhat agree,Agree,Agree,Somewhat agree,Somewhat disagree,Somewhat agree,Somewhat disagree,Somewhat agree,Somewhat disagree,4,6,3,5,5,5,5,5,When asked to use R to code our evidence. It is difficult as I have no prior coding experience. ,Communication with instructors and classmates through Slack ,Agree,Neither agree nor disagree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Very strongly,Very strongly,Very strongly,3,3,3,4,4,3,Very much like me,Very much like me,Like me,Very much like me,4,4,4,4,4,"Definitely will
+10
+","Definitely will
+10
+",a man,,Asian,,"Bachelor's degree (e.g. BA, BS)",Nursing,N/A,3.58,"Biology (Genetics, Cell, and Developmental) ",3rd year,No,,Yes,12/1/2023
+12/1/2023 16:15,12/1/2023 16:25,100,575,TRUE,12/1/2023 16:25,2,R_YWeu1RZiWw92ERb,,,,,33.2505,-111.8581,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Monthly,Weekly,Somewhat agree,Somewhat agree,Somewhat agree,Agree,Somewhat agree,Strongly agree,Somewhat agree,Strongly agree,Strongly agree,Agree,Strongly agree,3,3,2,5,3,6,5,"Strongly agree
+7",I would say learning about both R and cancer research and cancer concepts was challenging and increased anxiousness.,Getting experience working with others on the same project helped lower my anxiety significantly.,Agree,Agree,Neither agree nor disagree,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Agree,Moderate,Considerably,Slightly,Considerably,Considerably,Considerably,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,White/Caucasian,,"Master's degree (e.g. MA, MS)",Schoolteacher,Librarian,3.02,Conservation Biology and Ecology,3rd year,Yes,"We focused on performing transfection on ecoli cells, with the aim of providing a baseline for future tests.",Yes,12/1/2023
+12/1/2023 17:38,12/1/2023 17:42,100,216,TRUE,12/1/2023 17:42,2,R_0ciTMyPLFoTkeQx,,,,,33.4342,-111.8454,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,4,5,2,5,3,"Strongly agree
+7","Strongly agree
+7","Strongly agree
+7",,,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Neither agree nor disagree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Considerably,Very strongly,4,4,3,4,4,"absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5",3,3,"Strongly agree
+5","Definitely will
+10
+",8,a woman,,White/Caucasian,,High school graduate- high school diploma or the equivalent (e.g. GED),None,None,3.4,Neuroscience ,4th year,Yes,,Yes,12/1/2023
+12/1/2023 17:51,12/1/2023 17:56,100,324,TRUE,12/1/2023 17:56,2,R_3IPNgYDpmuGiJst,,,,,28.2365,-82.3289,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,3,3,2,2,2,3,3,3,"The CURE experience definitely triggered anxiety at times when it came to creating products like figures and scripts that actually worked. For the most part it was difficult, but I'm glad it pushed me to learn in new ways",The Slack page and everyone asking questions made me not afraid to ask for help.,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,4,4,4,4,4,Like me,Like me,Very much like me,Like me,3,4,4,3,4,"Definitely will
+10
+","Definitely will
+10
+",a man,,"Hispanic, Latino, or Spanish origin",,"Bachelor's degree (e.g. BA, BS)",Customer Service Representative,Unemployed,3.5,Biochemistry (Medicinal Chemistry),5th year or more,No,,Yes,12/1/2023
+12/1/2023 18:01,12/1/2023 18:05,100,258,TRUE,12/1/2023 18:05,2,R_1etroeA7p9Gg93h,,,,,37.6624,-97.3156,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Somewhat agree,Somewhat disagree,Somewhat agree,Agree,Agree,Somewhat agree,Agree,Agree,Somewhat agree,Agree,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1",4,"Strongly disagree
+1",6,5,6,None,support from amazing PI,Agree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Agree,Strongly agree,Agree,Very strongly,Considerably,Moderate,Slightly,Slightly,Considerably,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will not
+1
+","Definitely will
+10
+",a man,,White/Caucasian,,High school graduate- high school diploma or the equivalent (e.g. GED),retired,deceased,3.5,biological sciences,4th year,Yes,ACE Scholars phylogenetics and reproductive cancers,Yes,12/1/2023
+12/1/2023 18:31,12/1/2023 18:44,100,804,TRUE,12/1/2023 18:44,2,R_21zZ1nJ39u6MtGm,,,,,40.1435,-75.3779,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,Strongly disagree,6,"Strongly agree
+7",6,6,6,"Strongly agree
+7",6,"Strongly agree
+7","being in a online setting when I am unable to attend office hours and I am not comfortable starting a conversation on slack to discuss the research and the potential meanings of certain findings or what code is doing.  Not having a full understanding of what the code was doing and not being able to have a discussion with someone to go line by line until I am comfortable breaking down the code on my own made it challenging to apply the learnings.  Unfortunately, I was overwhelmed with this course by the end of the semester and I had been doing what I need to do to get by in the class.  ","The few times I was able to attend the lab hours or coding hours or office hours to have that interaction.  Maybe I wasn't caught up for the week yet, but I still got to hear how other people's brains where thinking and applying the information and that helped me get a better idea of what I should start to think and do as I go through the research articles, through the code, and through the content on the quizzes.  ",Strongly disagree,Strongly disagree,Disagree,Strongly agree,Strongly disagree,Agree,Neither agree nor disagree,Neither agree nor disagree,Neither agree nor disagree,Neither agree nor disagree,Moderate,Moderate,Moderate,Moderate,Moderate,Moderate,"not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+","not at all confident
+1
+",Somewhat like me,Somewhat like me,Very much like me,Very much like me,2,2,2,2,2,"Definitely will
+10
+",6,a woman,,Decline to state,,Some college,IT,none,3.28,Biological Sciences ,5th year or more,No,,Unsure,1-Dec-23
+12/1/2023 19:02,12/1/2023 19:15,100,790,TRUE,12/1/2023 19:15,2,R_1DPbSni4CUoGAxL,,,,,32.0856,-81.0964,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,"Strongly disagree
+1",4,"Strongly disagree
+1",3,"Strongly disagree
+1",3,5,5,"I felt unsure of how to proceed in certain areas, such as when it came time to write my manuscript, because I felt like I was expected to come up with my own individual hypothesis and I was not expecting it. I felt a bit rushed in that regard and didn’t feel like I handled that section of the class well.",The instructors were incredibly understanding and helpful and made me feel like there were no stupid questions. Sometimes I felt like I knew almost nothing compared to other students but I never felt I was lacking because of it and it’s not a normal feeling for me in this environment but it was definitely welcome!,Strongly agree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Moderate,Very strongly,Considerably,3,4,4,4,"absolutely confident
+5
+",4,Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5",9,"Definitely will
+10
+",a woman,,White/Caucasian,,Some college,Ops Manager,Project manager,3.1,Biological Sciences,5th year or more,Yes,Hashimoto’s Thyroiditis individual research and bee behavior research,Yes,12/1/2023
+12/1/2023 19:16,12/1/2023 19:22,100,339,TRUE,12/1/2023 19:22,2,R_1ImwYuOOJOhKj4u,,,,,29.4227,-98.4927,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Agree,Strongly agree,Somewhat agree,Strongly agree,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,5,5,3,4,4,5,4,5,I think my natural desire to succeed made me most anxious. Dr. Wilson and Dr. Plaisier were both great at facilitating discussion and encouragement to students. My peers were also very encouraging and helpful through the class.,See above. ,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Considerably,Moderate,Considerably,4,2,3,3,3,2,Like me,Like me,Like me,Like me,3,4,3,3,"Strongly agree
+5",9,9,a woman,,Asian,,High school graduate- high school diploma or the equivalent (e.g. GED),Self employed,Yoga teacher,3.44,"Biomedical sciences, minor in data science",2nd year,No,,Yes,12/1/2023
+12/1/2023 19:17,12/1/2023 19:27,100,561,TRUE,12/1/2023 19:27,2,R_10pdP1GwNm70ssj,,,,,33.4689,-111.9155,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Monthly,Weekly,Agree,Agree,Agree,Strongly agree,Agree,Somewhat disagree,Somewhat disagree,Somewhat agree,Somewhat disagree,Disagree,Disagree,2,4,3,5,3,6,5,"Strongly agree
+7",I had increased feelings of anxiousness with the lack of structure in the final portion of the class. I wish ther were more directions because I felt as though I was thrown into the deep end. I was also anxious that I was doing my analysis correct since I was on my own and not sure if things ended up correctly. ,I liked how open the class was with communication. It seemed like a very friendly and conducive environment for research. There was a lot of encouragement which I feel is ery important for new researchers when they are understandably uncomfortable learning something new. ,Neither agree nor disagree,Agree,Agree,Strongly agree,Agree,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Moderate,Very strongly,Moderate,Moderate,Considerably,Moderate,3,3,3,4,4,4,Very much like me,Very much like me,Very much like me,Very much like me,3,4,4,4,"Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",Account Manager ,Sales Rep,4,Non-Degree Seeking ,5th year or more,No,,Yes,12/1/2023
+12/1/2023 20:04,12/1/2023 20:18,100,801,TRUE,12/1/2023 20:18,2,R_1kHR4igFcyqpp01,,,,,48.0132,-122.0679,anonymous,EN,Weekly,Weekly,Weekly,Weekly,One or two times,Weekly,Strongly agree,Strongly agree,Somewhat agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Somewhat agree,Strongly agree,4,4,4,4,4,4,4,4,Struggled to code in R on my own that related to analyzing our data set of interest in relation to the genes of interests we were researching on. ,"The use of Slack to interactively ask questions from which the TAs, Professor, and peers could help. Or many asked questions that I came across from which I could see how they solved their issues.  ",Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Neither agree nor disagree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,3,4,4,"absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,"Hispanic, Latino, or Spanish origin",,High school graduate- high school diploma or the equivalent (e.g. GED),N/A,N/A,3.86,Biology,5th year or more,Yes,"For the California Institute for Regenerative Medicine (CIRM) We studied ovarian cancer, specifically the up-regulation of APOBEC3B. 
+For CURE, we looked at the CCLE database to study sex chromosome genes and aimed to see if we could predict sex chromosomes. ",Yes,12/1/2023
+12/1/2023 20:19,12/1/2023 20:27,100,475,TRUE,12/1/2023 20:27,2,R_1jI1yFPwj8v5Fsu,,,,,47.4448,-122.1194,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Agree,Agree,Agree,Agree,Agree,Somewhat agree,Agree,Agree,Agree,Somewhat agree,3,3,2,5,2,2,6,6,writing a full research manuscript,ability to communicate quickly and efficiently with TAs and the teachers over slack,Agree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Strongly agree,Strongly agree,Agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,4,4,4,4,4,Very much like me,Like me,Very much like me,Very much like me,"Strongly agree
+5",4,2,"Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,Asian,,Some college,Private Registered Nurse,Assembly line worker,3.5,"Biology with a concentration in Genetics, Cellular, and Developmental Biology",4th year,No,,Yes,12/1/2023
+12/1/2023 21:03,12/1/2023 21:11,100,493,TRUE,12/1/2023 21:11,2,R_2TRUuQVmfrBgTfi,,,,,33.6128,-117.6622,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Somewhat agree,Strongly agree,Agree,2,3,"Strongly disagree
+1","Strongly disagree
+1",2,5,5,6,"I am just an anxious person. I don't think any part of the CURE experience contributed to it, and any anxiety I feel about research or the course was due to my fear of being ""wrong.""",Seeing that other people had problems similar to mine was validating and helpful.,Strongly agree,Agree,Strongly agree,Strongly agree,Strongly agree,Neither agree nor disagree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Moderate,Moderate,Very strongly,4,4,4,4,"absolutely confident
+5
+",4,Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5",4,"Strongly agree
+5","Strongly agree
+5",6,"Definitely will
+10
+",a man,,White/Caucasian,,"Master's degree (e.g. MA, MS)",Realtor,Paralegal/office manager,3.61,Biochemistry (Medicinal Chemistry) & Neuroscience,3rd year,Yes,"Currently involved with the Magnetic Resonance Imaging center, have done computational work with protein interaction modeling, developed research questions and gathered data in a neuroscience context.",Yes,12/1/2023
+12/1/2023 21:45,12/1/2023 21:53,100,475,TRUE,12/1/2023 21:53,2,R_1g1qs7X0IMHfWRA,,,,,41.7295,-87.8327,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,4,4,3,5,4,5,5,6,My anxiety increased when I found out I was supposed to have access to SOL which was a misunderstanding and set me back!,The professors were always available but Dr. Plaiser was always quick to respond and was very helpful!,Agree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Considerably,Moderate,Moderate,Moderate,Considerably,Considerably,4,4,4,4,4,4,Somewhat like me,Somewhat like me,Somewhat like me,Somewhat like me,3,3,3,4,4,3,9,a woman,,White/Caucasian,,"Completed no school or some elementary, middle, or high school",Janitor,Contractor,2.74,Biological Sciences,4th year,No,,Unsure,12/1/2023
+12/1/2023 21:56,12/1/2023 22:10,100,836,TRUE,12/1/2023 22:10,2,R_1dhsPfJetxHjktO,,,,,40.7123,-74.0068,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Monthly,Agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Strongly agree,Strongly agree,Somewhat agree,Agree,Agree,2,"Strongly disagree
+1","Strongly disagree
+1",6,4,6,6,"Strongly agree
+7","My own time management skills, or lack there of, really made me stressed!","Meeting with the instructors, seeing their notes and announcements on slack and in the canvas. helped  bring me back down to earth. ",Agree,Agree,Agree,Agree,Strongly agree,Agree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Considerably,Considerably,Very strongly,2,2,2,3,3,"absolutely confident
+5
+",Like me,Like me,Like me,Like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5",,,a woman,,White/Caucasian,,Some college,Unemployed,General Construction manager and QA/QC for solar sites,3.2,Biological Data Sci,5th year or more,No,,Yes,12/1/2023
+12/1/2023 22:31,12/1/2023 22:37,100,368,TRUE,12/1/2023 22:37,2,R_2zMkKyM990yvrAn,,,,,39.9462,-83.1853,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Somewhat agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,"Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly disagree
+1","Strongly agree
+7",5,"Strongly agree
+7",There were no aspects that really made me anxious. The only part that could have made me anxious was learning coding but the instructors were super helpful and not judgmental so I had no anxiety with that.,I feel that the entire structure of the course lends towards decreased anxiety,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Moderate,Moderate,Considerably,4,"absolutely confident
+5
+",4,4,"absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a man,,White/Caucasian,,"Master's degree (e.g. MA, MS)",Teacher,Plumber,3.13,Biochemistry - Medicinal Chemistry,4th year,Yes,"In the Genomics research experience, we worked to analyze CCLE cell line samples and deduce if specific X-degenerate genes were reliable predictors of Y chromosome presence. We were also working on the idea of sex differences in cancer stemming from chromosomal differences rather than just sex hormones differences.",Yes,12/1/2023
+12/1/2023 22:28,12/1/2023 22:40,100,716,TRUE,12/1/2023 22:40,2,R_2Bmv4t8xGveJ8qm,,,,,46.9188,-96.8266,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,"Strongly disagree
+1",2,"Strongly disagree
+1",4,2,"Strongly disagree
+1","Strongly disagree
+1",4,No parts of this research experience made me anxious with the exception of the coding part of the course.,W,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly disagree,Strongly agree,Strongly agree,Very strongly,Considerably,Considerably,Moderate,Moderate,Moderate,4,"absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+","absolutely confident
+5
+",Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,Black or African American,,"Bachelor's degree (e.g. BA, BS)",Professor,Entreperneur ,2.8,Biomedical science,4th year,No,,Yes,12/1/2023
+12/1/2023 23:03,12/1/2023 23:14,100,665,TRUE,12/1/2023 23:14,2,R_7UTAWRr0lB3aYgN,,,,,35.3084,-81.0256,anonymous,EN,Weekly,Weekly,Weekly,Weekly,One or two times,Weekly,Agree,Strongly agree,Somewhat agree,Agree,Agree,Somewhat agree,Somewhat agree,Agree,Somewhat agree,Somewhat disagree,Somewhat agree,2,2,2,2,2,3,3,5,,The lab meeting Zooms helped me look at scientific papers more clearly.  What we talked about in those Zooms helped me understand how to dissect a paper and analyze it critically.,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Strongly agree,Considerably,Considerably,Slightly,Slightly,Moderate,Moderate,3,3,4,4,4,3,Like me,Like me,Like me,Like me,4,4,4,"Strongly agree
+5","Strongly agree
+5",9,9,a man,,White/Caucasian,,Some college,Retired Army,Homemaker,4,Conservation Biology and Ecology,4th year,No,,Yes,12/1/2023
+12/1/2023 23:15,12/1/2023 23:23,100,472,TRUE,12/1/2023 23:23,2,R_2tahbLLd2W82ESK,,,,,33.4532,-112.0748,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Somewhat disagree,Strongly agree,Strongly agree,Somewhat disagree,Strongly agree,Somewhat disagree,"Strongly disagree
+1",3,"Strongly disagree
+1",3,"Strongly disagree
+1",3,3,3,"Nothing, everyone in class is helpful and a lot of support is available",Support is always available and we are encouraged to ask questions and discuss progress,Strongly agree,Strongly agree,Agree,Strongly agree,Agree,Disagree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,3,2,3,3,4,4,Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5","Definitely will
+10
+","Definitely will
+10
+",a woman,,Asian,,"Bachelor's degree (e.g. BA, BS)",Retired military personnel,Housewife,4,Biomedical Science,3rd year,Yes,study the prevalence of dementia among homeless seniors,Yes,12/1/2023
+12/2/2023 0:10,12/2/2023 0:19,100,505,TRUE,12/2/2023 0:19,2,R_2zOoT8AdN6vsidg,,,,,36.1685,-115.1164,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Agree,Agree,Agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,3,3,3,4,3,3,3,5,"I am anxious because I find it hard to balance work, life and school but overall I really find the professors/TAs very supportive of the students taking this course.",The support that was provided by the professors and TAs and knowing that other students are struggling as well like myself.,Agree,Agree,Agree,Strongly agree,Strongly agree,Agree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,4,4,4,4,4,Very much like me,Very much like me,Very much like me,Very much like me,4,4,4,"Strongly agree
+5","Strongly agree
+5",9,9,a man,,Asian,,"Bachelor's degree (e.g. BA, BS)",Professor,Professor,4,"BS Biological Sciences (Genetics, Cells and Developmental Biology)",3rd year,No,,Yes,12/1/2023
+12/2/2023 8:02,12/2/2023 8:14,100,717,TRUE,12/2/2023 8:14,2,R_3lQYAlqZ5AiNj8v,,,,,42.518,-83.1576,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Somewhat agree,Agree,Somewhat agree,Somewhat agree,Somewhat agree,3,3,2,5,2,4,4,"Strongly agree
+7","The amount of material we had to learn within a 7-week period felt overwhelming at times. I also struggled quite a bit with R, though I feel I eventually learned and improved. I have never written a scientific paper previously, so writing one here for the first time felt daunting.  ",Going through scientific papers together as a class and seeing others' commentary and questions felt reassuring. Using/reading through Slack and other communication methods regularly was also helpful. ,Neither agree nor disagree,Neither agree nor disagree,Agree,Agree,Agree,Neither agree nor disagree,Agree,Strongly agree,Strongly agree,Strongly agree,Moderate,Moderate,Moderate,Moderate,Moderate,Moderate,3,3,3,3,4,3,Very much like me,Very much like me,Very much like me,Very much like me,3,"Strongly agree
+
+5",3,3,4,8,"Definitely will
+10
+",a woman,,Asian,,"Professional degree (e.g. MD, DDS, DVM, JD)",Physician,Homemaker,4,Biological Sciences,4th year,No,,Yes,12/2/2023
+12/2/2023 11:30,12/2/2023 12:09,100,2305,TRUE,12/2/2023 12:09,2,R_2b2leddurIShBi2,,,,,25.2925,51.5321,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Somewhat agree,Somewhat agree,Strongly agree,Strongly agree,Somewhat agree,Agree,2,2,2,2,2,2,2,2,"The only aspect of this CURE that increased my feelings of anxiousness was the coding part. It was a little stressful and sometimes confusing navigating the software carpentry program. But the main reason why I felt anxious was because I fell behind due to some personal circumstances and I had a hard time catching up. It made me anxious to not be able to preform as well as I know I could and to not be in sync with my peers. I feel like the coding part would not have been as stressful if it had videos that show how to do some of the tasks, especially when it came to building our code and final manuscript. ","What decreased my feelings of stress was how interactive, vocal, and involved Dr. Wilson and Dr. Plaisier were. It was so easy to ask questions and they were both so nice, helpful, and nurturing. It really made everything so much better. Another thing that decreased my feelings of stress was how interactive the class was. A lot of question asking, helping each other, office hours and writing hours, it was very nice and I really enjoyed this research experience and I'm very grateful that I got to be a part of it. ",Strongly agree,Strongly agree,Neither agree nor disagree,Agree,Strongly agree,Neither agree nor disagree,Strongly agree,Agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,3,3,3,4,4,4,Very much like me,Very much like me,Very much like me,Very much like me,4,"Strongly agree
+
+5",4,4,4,"Definitely will
+10
+","Definitely will
+10
+",a woman,,White/Caucasian,,"Bachelor's degree (e.g. BA, BS)",,,,"Biological Sciences (Genetics, Cell and Developmental Biology)",4th year,No,,Yes,12/2/2023
+12/1/2023 18:24,12/1/2023 18:32,83,498,FALSE,12/8/2023 18:32,2,R_1KdKiBsdhydPxin,,,,,,,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,4,3,3,5,4,6,6,"Strongly agree
+7",,,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,Very strongly,4,3,4,3,3,3,Very much like me,Very much like me,Very much like me,Very much like me,"Strongly agree
+5","Strongly agree
+
+5","Strongly agree
+5","Strongly agree
+5","Strongly agree
+5",7,"Definitely will
+10
+",,,,,,,,,,,,,,
+12/1/2023 20:52,12/1/2023 20:53,30,56,FALSE,12/8/2023 20:53,2,R_1GV2nxFsPDHXCBv,,,,,,,anonymous,EN,Weekly,Weekly,Weekly,Weekly,Weekly,Weekly,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,Strongly agree,"Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7","Strongly agree
+7",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
