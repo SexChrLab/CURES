@@ -127,9 +127,10 @@ opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
 ### Input the data for the Fall 2022B pilot CURE
 ```{r, DataInput}
 
-overall_scores <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/2024-02-09T0919_Grades-2023FallB-X-BIO498-BIO598-91120-91121.csv")
+input_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/"
 
-deltas_overall <- read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/deltas_overall.csv")
+overall_scores <- read.csv(paste0(input_directory,"Grades-2023FallB-X-BIO498-BIO598.csv"))
+deltas_overall <- read.csv(paste0(input_directory,"deltas_overall_deidentified.csv"))
 
 # Reduce the number of decimal places as a global option
 options(digits = 4)
@@ -137,11 +138,13 @@ options(digits = 4)
 # Input the results of both treatments
 combined_scores <- data.frame(deltas_overall)
 
-prescore = data.frame(cbind(overall_scores$ID,overall_scores$Module.0..Pre.Test...4362118.))
+prescore = data.frame(cbind(overall_scores$student,overall_scores$Module.0..Pre.Test...4362118.))
 colnames(prescore) = c("student","score")
+prescore$score = sapply(prescore$score, as.numeric)
 
-postscore = data.frame(cbind(overall_scores$ID,overall_scores$Module.7..Post.Test..4549646.))
+postscore = data.frame(cbind(overall_scores$student,overall_scores$Module.7..Post.Test..4549646.))
 colnames(postscore) = c("student","score")
+postscore$score = sapply(postscore$score, as.numeric)
 
 # remove students with 0 for pre or post test scores
 #check_pre_zero = prescore_table$student[prescore_table$score == 0]
@@ -191,7 +194,7 @@ dp_post <- ggplot(postscore, aes(x=score)) +
   labs(title="Distribution of post-test scores", y ="Number of students")+
   geom_density(data = postscore, fill = "darkorange1", alpha=0.6) + 
   scale_x_continuous(breaks = seq(0, 1, 0.1))
-dp_post + ylim(0,5)
+#dp_post + ylim(0,5)
 
 ```
 
@@ -292,10 +295,11 @@ Biology, coding, professional development
 ```{r ViolinPlots}
 # create the dataframes
 # Import data for prescores by question
-questions_pre <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/pretest_correct_table.csv")
+input_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/"
+questions_pre <- read_csv(paste0(input_directory,"pretest_correct_table_deidentified.csv"))
 
 # Import data for prescores by question
-questions_post <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/posttest_correct_table.csv")
+questions_post <- read_csv(paste0(input_directory,"posttest_correct_table_deidentified.csv"))
 
 questions_all = rbind(questions_pre,questions_post)
 
@@ -369,9 +373,10 @@ for (subt in subtopic_order) {
 
 ```{r ComfortLevels}
 
-comfort_pre <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/pretest_likert_comfort.csv")
+input_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/"
+comfort_pre <- read_csv(paste0(input_directory,"pretest_likert_comfort_deidentified.csv"))
 
-comfort_post <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/posttest_likert_comfort.csv")
+comfort_post <- read_csv(paste0(input_directory,"posttest_likert_comfort_deidentified.csv"))
 
 comfort_all = rbind(comfort_pre,comfort_post)
 
@@ -397,10 +402,11 @@ comfort_plot = ggplot(comfort_all, aes(x = Type, y = Score)) +
   scale_x_discrete(labels=c("prescore" = "pre", "postscore" = "post"), name = element_blank()) +
   geom_line(aes(group = Student), color = "gray", size = 0.4, position = "identity") + 
   geom_point(size = 1) +
-  ylim (-3.5,3.5) +
+  ylim (-4,4) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
 
-ggsave(filename = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/Likert_comfort_overall.pdf", plot = comfort_plot)
+output_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/"
+ggsave(filename = paste0(output_directory,"Likert_comfort_overall.pdf"), plot = comfort_plot)
 
 # cohen's score and ttest p-value by topic
 comfort_post = comfort_all$Score[comfort_all$Type == "postscore"]
@@ -431,7 +437,8 @@ comfort_post = comfort_all$Score[comfort_all$Type == "postscore" & comfort_all$Q
 comfort_pre = comfort_all$Score[comfort_all$Type == "prescore" & comfort_all$Question == "WritingPaper"]
 t.test(comfort_post, comfort_pre, paired = TRUE, alternative = "two.sided")
 
-comfort_deltas <- read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/delta_likert_comfort.csv")
+input_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/CCLE_Fall2023/analysis_grades/"
+comfort_deltas <- read_csv(paste0(input_directory,"delta_likert_comfort_deidentified.csv"))
 
 info = data.frame(table(comfort_deltas$Trend))
 lbls = info$Var1
@@ -509,8 +516,8 @@ title("WritingPaper  with All Students")
 
 ```{r QualmetrixSurveys}
 
-qualsurvey_pre = read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_pre.csv")
-qualsurvey_post = read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_post.csv")
+qualsurvey_pre = read_csv("C:/Users/splaisie/ASU Dropbox/Seema Plaisier/GenomicsCURE/Demographics/QualSurvey_pre_deidentified.csv")
+qualsurvey_post = read_csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_post_deidentified.csv")
 
 # do iteration 1 pre
 pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/pie_charts/iteration1/"
@@ -518,7 +525,7 @@ pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics
 qualsurvey_pre_iteration1 = qualsurvey_pre[qualsurvey_pre$Iteration == 1,]
 colnames(qualsurvey_pre_iteration1)
 
-for (i in 19:60) {
+for (i in 17:50) {
   info = data.frame(table(qualsurvey_pre_iteration1[i]))
   if(nrow(info) > 0) {
     pdf(paste0(pie_chart_directory,"pre",i,".pdf"))
@@ -541,7 +548,7 @@ pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics
 qualsurvey_pre_iteration2 = qualsurvey_pre[qualsurvey_pre$Iteration == 2,]
 colnames(qualsurvey_pre_iteration2)
 
-for (i in 19:60) {
+for (i in 17:50) {
   info = data.frame(table(qualsurvey_pre_iteration2[i]))
   if(nrow(info) > 0) {
     pdf(paste0(pie_chart_directory,"pre",i,".pdf"))
@@ -564,7 +571,7 @@ pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics
 qualsurvey_post_iteration1 = qualsurvey_post[qualsurvey_post$Iteration == 1,]
 colnames(qualsurvey_post_iteration1)
 
-for (i in 19:60) {
+for (i in 17:50) {
   info = data.frame(table(qualsurvey_post_iteration1[i]))
   if(nrow(info) > 0) {
     pdf(paste0(pie_chart_directory,"post",i,".pdf"))
@@ -587,7 +594,7 @@ pie_chart_directory = "C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics
 qualsurvey_post_iteration2 = qualsurvey_post[qualsurvey_post$Iteration == 2,]
 colnames(qualsurvey_post_iteration2)
 
-for (i in 19:60) {
+for (i in 17:50) {
   info = data.frame(table(qualsurvey_post_iteration2[i]))
   if(nrow(info) > 0) {
     pdf(paste0(pie_chart_directory,"post",i,".pdf"))
@@ -608,7 +615,8 @@ for (i in 19:60) {
 
 ```{r ClassMakeupTable}
 
-class_makeup_data = read.csv("C:/Users/splaisie/Dropbox (ASU)/GenomicsCURE/Demographics/QualSurvey_class_makeup_table.csv", check.names = FALSE)
+input_directory = "C:/Users/splaisie/ASU Dropbox/Seema Plaisier/GenomicsCURE/Demographics/"
+class_makeup_data = read.csv(paste0(input_directory,"QualSurvey_class_makeup_table.csv"), check.names = FALSE)
 
 class_makeup_df = data.frame(class_makeup_data)
 
